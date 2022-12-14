@@ -1,0 +1,70 @@
+@import "../view-patient.component.scss";
+.note_box {
+  margin-bottom: 0;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+.panel-body {
+  height: 168px !important;
+  overflow-y: scroll !important;
+}
+.note_box .press_text {
+  padding-bottom: 0;
+}
+.note_box ul {
+  margin-top: 10px;
+}
+.search_input_btn {
+  height: 65px;
+}
+.over_inherit {
+  overflow: inherit;
+}
+
+.add_image {
+  margin-left: 8px;
+}
+.unitss{
+  cursor: pointer;
+}
+
+::ng-deep.p-togglebutton.p-button-icon-only {
+  background: url("../../../../../../assets/images/icons/btn9.svg");
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 30px;
+  position: relative;
+  top: 2px;
+  border: none;
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+::ng-deep.p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
+  background: transparent;
+  border-color: none;
+  color: inherit;
+  background: url("../../../../../../assets/images/icons/btn9.svg");
+  background-repeat: no-repeat;
+}
+::ng-deep.p-togglebutton.p-button.p-highlight {
+  background: url("../../../../../../assets/images/icons/btn10.svg");
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 30px;
+  position: relative;
+  top: 2px;
+  border: none;
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+::ng-deep.p-togglebutton.p-button.p-highlight:hover {
+  background: transparent;
+  border-color: none;
+  color: inherit;
+  background: url("../../../../../../assets/images/icons/btn10.svg");
+  background-repeat: no-repeat;
+}

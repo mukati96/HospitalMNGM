@@ -1,0 +1,57 @@
+<div class="table-responsive pb-3" *ngIf="currentStep === 1">
+  <table class="table table-striped task_table">
+    <thead>
+      <tr>
+        <th>S.no.</th>
+        <th>Goal Name</th>
+        <!-- <th>Type</th> -->
+        <th>Date</th>
+        <!-- <th>Time Spent</th> -->
+        <th>Notes</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="goals && goals.length">
+      <tr *ngFor="let goal of goals; index as i">
+        <td>{{ i + 1 }}</td>
+        <td class="goal">{{ goal.name | optionalField }}</td>
+        <!-- <td [ngClass]="{
+            goal: task.task_type === 'Goal',
+            intervention: task.task_type === 'Intervention'
+          }">
+          {{ task.task_type }}
+        </td> -->
+        <td>{{ goal.goal_date | date: "MM-dd-yyyy, hh:mm a" }}</td>
+        <!-- <td>{{ task.time_spent }} min</td> -->
+        <td class="goal-notes">{{ goal.notes }}</td>
+        <td [ngClass]="{
+            pending: goal.goal_status === 'PENDING',
+            active: goal.goal_status === 'ACTIVE',
+            completed: goal.goal_status === 'COMPLETED'
+          }">
+          {{ goal.goal_status | titlecase }}
+        </td>
+        <td class="edite_td">
+          <img (click)="viewGoalWithIntervention(goal.pk)"
+            src="../../../../assets/images/icons/eye.svg" title="View" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-lg-12 text-end">
+      <button class="btn add_hospital add_goal btn_head ml-auto me-3" (click)="next()">
+        <img src="../../../../assets/images/icons/add6.svg" alt="Image" />Add Goal
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="currentStep === 2">
+  <app-add-goal [patientId]="patientId" (cancel)="openListingPage()"></app-add-goal>
+</ng-container>
+
+<ng-container *ngIf="currentStep === 3">
+  <app-view-goal [goalId]="selectedGoalId" (cancel)="openListingPage()"></app-view-goal>
+</ng-container>

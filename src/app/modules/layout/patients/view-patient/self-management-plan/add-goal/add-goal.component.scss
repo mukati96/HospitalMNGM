@@ -1,0 +1,33 @@
+@import "../self-management-plan.component.scss";
+::ng-deep .dropdown-wrapper {
+    .p-dropdown {
+        width: 100%;
+        height: 38px !important;
+        .p-placeholder {
+            padding: 9px 9px !important;
+        }
+        .p-dropdown-label {
+            padding: 6px 9px !important;
+        }
+        .p-component {
+            width: 100% !important;
+        }
+    }
+}
+.add-new-group {
+    text-align: right;
+    margin-right: -13px;
+    margin-top: 10px;
+    button {
+        height: 35px;
+    }
+}
+.delete {
+    position: absolute;
+    right: 40%;
+    display: flex;
+    width: 40px;
+    img {
+        text-align: center;
+    }
+}

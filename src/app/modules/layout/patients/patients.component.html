@@ -1,0 +1,177 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="page_content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="left_content_page">
+            <h1>patients list</h1>
+            <div class="dropdown pading d-inline-block" style="margin-top: 15px;margin-left: 14px;">
+              <p-checkbox class="checkBox" name="group1" [value]="onShowAllPatient" inputId='all'
+                (onChange)="showAllPatient($event)"></p-checkbox>
+              <label for='all'>
+                Show All Patient
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="right_content_page text-end">
+
+            <div class="dropdown d-inline-block">
+              <button (click)="addOutreach()" class="btn add_hospital btn_head me-2 outreach" data-bs-toggle="modal"
+                data-bs-target="#Outreach">
+                <img src="../../../../assets/images/icons/btn45.svg" alt="Image" />&nbsp; Add Outreach
+              </button>
+              <button class="btn" type="button" (click)="filter.toggle($event)" aria-expanded="false">
+                <img src="../../../../assets/images/icons/sort_by.svg" alt="short" class="mr-1" />
+                Sort By Date
+                <img _ngcontent-yij-c85="" src="../../../../assets/images/icons/short_down.svg" alt="down" />
+              </button>
+            </div>
+            <button pButton class="excel_export" (click)="exportExcel()">
+              <img src="../../../../assets/images/icons/export.svg" alt="export" />
+              &nbsp; Export as Excel
+            </button>
+            <div class="d-inline-block search_bar">
+              <input pInputText type="text" #searchText placeholder="Search" />
+              <button class="btn">
+                <img src="../../../../assets/images/icons/search.png" alt="Image" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="patient_table">
+        <div class="table-responsive">
+          <p-table #dt1 [value]="_patient" [rows]="10" styleClass="p-datatable-sm"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['title', 'first_name', 'last_name']" (onLazyLoad)="customSort($event)" [lazy]="true">
+            <ng-template pTemplate="caption"> </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th></th>
+                <th>S.no.</th>
+                <th pSortableColumn="patient_name" style="width: 20%">
+                  Patient Name <p-sortIcon field="patient_name"> </p-sortIcon>
+                </th>
+                <th style="width: 20%">Risk Score</th>
+                <th style="width: 20%">Review Date</th>
+                <th pSortableColumn="created_at" style="width: 20%">
+                  Joined Date <p-sortIcon field="created_at"> </p-sortIcon>
+                </th>
+                <th style="width: 20%">Provider Assigned</th>
+                <th style="width: 20%">Condition 1</th>
+                <th style="width: 20%">Condition 2</th>
+                <th style="width: 20%">Minutes Completed</th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-patients>
+              <tr>
+                <td>
+                  <p-radioButton name="outreachRadio" [(ngModel)]="outreachRadio" [value]="patients"></p-radioButton>
+                </td>
+                <td>{{((rowIndex + 1) + (Onpage *10))}}</td>
+                <td>{{ patients?.patient_name | optionalField }}</td>
+                <td [style.color]="
+                    patients?.risk_scor <= '50' ? '#F78080' : '#05A902'
+                  ">
+                  {{ patients?.risk_score | optionalField }}%
+                </td>
+                <td>
+                  {{
+                  patients?.review_date | date : "MM-dd-yyyy" | optionalField
+                  }}
+                </td>
+                <td>
+                  {{
+                  patients?.enrolled_date
+                  | date : "MM-dd-yyyy"
+                  | optionalField
+                  }}
+                </td>
+                <td>{{ patients?.provider_assigned | optionalField }}</td>
+                <td>{{ patients?.condition1 | optionalField }}</td>
+                <td>{{ patients?.condition2 | optionalField }}</td>
+                <td class="minutes_complete">
+                  {{ patients?.minutes_completed }}s
+                </td>
+                <td>
+                  <button class="edit_btn btn ms-0 me-0" (click)="viewPatients(patients.patient_id)">
+                    <img src="../../../../assets/images/icons/eye.svg" title="View" alt="" />
+                  </button>
+                  <button class="edit_btn btn ms-2 me-2" (click)="editPatients(patients.patient_id)">
+                    <img src="../../../../assets/images/icons/edit_view.svg" title="Edit" alt="" />
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="row">
+          <div class="col countMsg" [innerHTML]="showCountMsg"></div>
+          <div class="col countMsg1 mt-2" *ngIf="_patient.length">
+            <p-paginator [rows]="10" [pageLinkSize]="3" [totalRecords]="totalRecords" (onPageChange)="paginate($event)" 
+            #p>
+            </p-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-overlayPanel #filter>
+  <ng-template pTemplate>
+    <div class="form-check form-switch">
+      <label *ngIf="show" class="form-check-label">Search by date</label>
+      <input
+        mdbCheckbox
+        class="form-check-input"
+        type="checkbox"
+        [(ngModel)]="show" 
+        (onChange)="sortChange($event)"
+      />
+    </div>
+    <div class="filter-form" >
+      <form [formGroup]="filterGrp" (ngSubmit)="submitFilter($event, filter)" *ngIf="show">
+        <div class="row dashboard-filter" >
+          <div class="p-col-12 p-md-2">
+            <label for="icon">From</label>
+            <p-calendar formControlName="from_date" [showIcon]="true" inputId="icon"
+              [maxDate]="filterGrp.get('to_date')?.value"></p-calendar>
+          </div>
+          <div class="p-col-12 p-md-2">
+            <label for="icon2">To</label>
+            <p-calendar formControlName="to_date" [showIcon]="true" inputId="icon2"
+              [minDate]="filterGrp.get('from_date')?.value"></p-calendar>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <button pButton type="button" label="Reset" class="p-button-danger"
+              (click)="clearFilter($event, filter)"></button>
+          </div>
+          <div class="col-6">
+            <button pButton type="submit" label="Submit"></button>
+          </div>
+        </div>
+      </form>
+
+      <form *ngIf="!show" [formGroup]="inputGrp" (ngSubmit)="onSubmit($event, filter)">
+        <div class="mt-3">
+          <input pInputText formControlName="filter_provider" type="text" placeholder="Search as provider" />
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <button pButton type="button" label="Reset" class="p-button-danger"
+              (click)="clearFilter($event, filter)"></button>
+          </div>
+          <div class="col-6">
+            <button pButton type="submit" label="Submit"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</p-overlayPanel>

@@ -1,0 +1,202 @@
+<div class="collapse navbar-collapse" id="navbarToggler">
+  <div class="navbar-nav navbar-sidenav">
+    <ul class="navbar-sidenav-text ps-md-0" id="accordionExample">
+      <li class="nav-item" [routerLink]="FULL_ROUTES.DASHBOARD" [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active" data-toggle="tooltip" data-placement="right">
+        <a class="nav-link">
+          <img src="../../../../assets/images/icons/1.svg" alt="" />
+          <span class="nav-link-text"> Dashboard</span>
+        </a>
+      </li>
+      <li *ngIf="SIDEBAR.HOSPITAL_MANAGEMENT" routerLinkActive="active" class="nav-item" data-toggle="tooltip"
+        data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+          <img src="../../../../assets/images/icons/8.svg" alt="" />
+          <span class="nav-link-text">Practice</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapse" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li [routerLink]="FULL_ROUTES.HOSPITALS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Practice List</a>
+          </li>
+          <!-- <li [routerLink]="FULL_ROUTES.UPDATE_HOSPITALS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <a>Practice Profile</a>
+          </li> -->
+          <li [routerLink]="FULL_ROUTES.ADD_HOSPITALS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Add Practice</a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="SIDEBAR.PROVIDER_MANAGEMENT" routerLinkActive="active" class="nav-item" data-toggle="tooltip"
+        data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <img src="../../../../assets/images/icons/2.svg" alt="" />
+          <span class="nav-link-text">Providers</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapseOne" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li [routerLink]="FULL_ROUTES.PROVIDERS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Provider List</a>
+          </li>
+          <li [routerLink]="FULL_ROUTES.ADD_PROVIDERS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Add Provider</a>
+          </li>
+        </ul>
+      </li>
+
+      <li *ngIf="SIDEBAR.PATIENT_MANAGEMENT" routerLinkActive="active" class="nav-item" data-toggle="tooltip"
+        data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <img src="../../../../assets/images/icons/3.svg" alt="" />
+          <span class="nav-link-text">Patients</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li [routerLink]="FULL_ROUTES.PATIENTS" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a>Patients List</a>
+          </li>
+          <li [routerLink]="FULL_ROUTES.ADD_PATIENTS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Add Patients</a>
+          </li>
+          <li [routerLink]="FULL_ROUTES.OUTREACH" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a>Outreach List</a>
+          </li>
+          <!-- <li [routerLink]="FULL_ROUTES.ADD_OUTREACH" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Add Outreach</a>
+          </li> -->
+        </ul>
+      </li>
+
+      <li *ngIf="SIDEBAR.HEALTH_TRACKER" class="nav-item" data-toggle="tooltip" data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <img src="../../../../assets/images/icons/4.svg" alt="" />
+          <span class="nav-link-text">Health tracker</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li>
+            <a href="#">1</a>
+          </li>
+          <li>
+            <a href="#">2</a>
+          </li>
+          <li>
+            <a href="#">3</a>
+          </li>
+        </ul>
+      </li>
+      <li *ngIf="SIDEBAR.TREATMENTS" class="nav-item" data-toggle="tooltip" data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
+          <img src="../../../../assets/images/icons/4.svg" alt="" />
+          <span class="nav-link-text">Treatments</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapseTen" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li>
+            <a [routerLink]="FULL_ROUTES.TREATMENT" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">Upcoming Treatment</a>
+          </li>
+          <li>
+            <a href="#">2</a>
+          </li>
+          <li>
+            <a href="#">3</a>
+          </li>
+        </ul>
+      </li>
+      <!-- <li
+        *ngIf="SIDEBAR.DEPARTMENTS"
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="Providers"
+      >
+        <a
+          class="nav-link nav-link-collapse accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFour"
+          aria-expanded="false"
+          aria-controls="collapseFour"
+        >
+          <img src="../../../../assets/images/icons/5.svg" alt="" />
+          <span class="nav-link-text">Departments</span>
+        </a>
+        <ul
+          class="accordion-collapse collapse"
+          id="collapseFour"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <li>
+            <a href="#">1</a>
+          </li>
+          <li>
+            <a href="#">2</a>
+          </li>
+          <li>
+            <a href="#">3</a>
+          </li>
+        </ul>
+      </li> -->
+      <li *ngIf="SIDEBAR.CHRONIC_DISEAS" class="nav-item" data-toggle="tooltip" data-placement="right">
+        <a class="nav-link nav-link-collapse accordion-button" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          <img src="../../../../assets/images/icons/6.svg" alt="" />
+          <span class="nav-link-text">chronic condition</span>
+        </a>
+        <ul class="accordion-collapse collapse" id="collapseFive" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <li [routerLink]="FULL_ROUTES.CHRONIC_DISEAS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Chronic List</a>
+          </li>
+          <li [routerLink]="FULL_ROUTES.ADD_CHRONIC_DISEAS" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <a>Chronic Details</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right">
+        <a class="nav-link" href="#">
+          <img src="../../../../assets/images/icons/7.svg" alt="" />
+          <span class="nav-link-text">Notifications</span>
+        </a>
+      </li>
+      <div class="who_login"
+      [ngClass]="{
+        SuperAdmin: userInfo?.user_type_non_caps === 'Super Admin',
+        CareManager: userInfo?.user_type_non_caps === 'Care Manager'
+      }">
+      <div *ngIf="userInfo?.user_type_non_caps == 'Super Admin'" style="margin-top:-4px"> 
+          <span>Logged In As</span>
+        <h3 >
+          {{userInfo?.user_type_non_caps | titlecase}}</h3>
+          </div>
+          <div *ngIf="userInfo?.user_type_non_caps == 'Care Manager'" style="margin-top:-4px">
+            <span class="">{{userInfo?.name | titlecase}}, as</span>
+            <h3 >
+              {{userInfo?.user_type_non_caps | titlecase}}</h3>
+          </div>
+  
+      </div>
+      <div class="ps-3 footer_side">
+        <p class="mb-0">Version : 01.00.002</p>
+        <p class="power_para">Powered by <span> Reinvision</span></p>
+      </div>
+    </ul>
+  </div>
+</div>

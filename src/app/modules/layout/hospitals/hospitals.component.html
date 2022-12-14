@@ -1,0 +1,97 @@
+<div class="container-fluid client_list">
+  <div class="page_content">
+    <!-- <ng-template pTemplate="caption"> -->
+    <div class="row">
+      <div class="col-md-4">
+        <h1 class="client_head">Client List </h1>
+      </div>
+      <div class="col-md-8">
+        <div class="right_content_page text-end">
+          <div class="d-inline-block search_bar">
+            <div>
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #searchText placeholder="Search" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </ng-template> -->
+
+    <div class="patient_table">
+      <div class="profile_box table-responsive table_box">
+        <p-table #dt1 dataKey="id" [value]="_hospitals" [rows]="10" [showCurrentPageReport]="true"
+          styleClass="p-datatable-sm p-datatable-striped" [resizableColumns]="true"
+          [globalFilterFields]="['hospital_name', 'address_1', 'status']">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>S.no</th>
+              <th pSortableColumn="hospital_name">
+                Practice Name<p-sortIcon field="hospital_name">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="id">
+                Practice ID<p-sortIcon field="id">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="npi_id">
+                Group NPI ID<p-sortIcon field="npi_id">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="address_1">
+                Location<p-sortIcon field="address_1">
+                </p-sortIcon>
+              </th>
+              <th>Start Date</th>
+              <th>Status</th>
+              <th>Action</th>  
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowIndex="rowIndex" let-hospital>
+            <tr>
+              <td>{{((rowIndex + 1) + (Onpage *10))}}</td>
+              <td class="add-color">{{ hospital.hospital_name }}</td>
+              <td>{{ hospital.id }}</td>
+              <td>{{ hospital.npi_id }}</td>
+              <td>{{ hospital.address_1 }}</td>
+              <td>
+                {{
+                hospital.internal_hospital_data.created_date
+                | date : "MM-dd-yyyy"
+                }}
+              </td>
+              <td
+              [ngClass]="{
+                ACTIVE: hospital?.hospital_status === 'ACTIVE',
+                INACTIVE: hospital?.hospital_status === 'INACTIVE',
+                SUSPENDED: hospital?.hospital_status === 'SUSPENDED'
+              }">
+              {{ hospital?.hospital_status === 'INACTIVE' ? 'In-Active' : hospital?.hospital_status  | titlecase }}
+              </td>
+              <td class="pointer">
+                <img src="../../../../assets/images/icons/eye.svg" (click)="viewHosital(hospital.id)" title="View" />
+
+                <img src="../../../../assets/images/icons/edit_view.svg" (click)="editHosital(hospital.id)" title="Edit"
+                  class="ms-1" />
+              </td>
+
+              <!-- <td>
+                  <button pButton pRipple label="Delete" icon="pi pi-trash" class="delete_btn"
+                    (click)="deleteHosital(hospital.id)"></button>
+                </td> -->
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="row">
+        <div class="col countMsg" [innerHTML]="showCountMsg"></div>
+        <div class="col countMsg1 mt-2">
+          <p-paginator [rows]="10" [pageLinkSize]="3" [totalRecords]="totalRecords" (onPageChange)="paginate($event)">
+          </p-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.p-input-icon-right {
+    width: 100% !important;
+}
+.p-input-icon-right > .p-inputtext {
+    width: 100%;
+}
+.country-item-value {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+form {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.active {
+    background: #EFF6FF;
+}
+.dropdown-menu {
+    padding: 0;
+}
+.form-select {
+    padding: 12px 26px 12px 12px;
+    line-height: 160.5%;
+    color: #6c757d;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+}
+.input-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: inherit;
+}
+.scroll-dropdown {
+    max-height: 350px;
+    overflow: auto;
+    padding: 0;
+    li {
+        padding: 10px;
+        width: 330px;
+        color: #6d6d6d;
+    }
+    li:hover {
+        background: #EFF6FF;
+    }
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }
+
+  .card__header {
+    padding: 10px;
+    margin: 0;
+  }
+  
+  .skeleton-text {
+    width: 100%;
+    height: 0.7rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }

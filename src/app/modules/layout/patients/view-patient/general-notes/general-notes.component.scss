@@ -1,0 +1,31 @@
+@import "../view-patient.component.scss";
+.note_box {
+  margin-bottom: 0;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+.panel-body {
+  height: 168px !important;
+  overflow-y: scroll !important;
+}
+.note_box .press_text {
+  padding-bottom: 0;
+}
+.note_box ul {
+  margin-top: 10px;
+}
+.search_input_btn {
+  height: 65px;
+}
+.over_inherit {
+  overflow: inherit;
+}
+
+.add_image {
+  margin-left: 8px;
+}
+.unitss{
+  cursor: pointer;
+}

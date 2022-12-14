@@ -1,0 +1,19 @@
+<ng-container *ngIf="currentRole === ROLES.SUPERADMIN">
+  <app-super-admin></app-super-admin>
+</ng-container>
+
+<ng-container *ngIf="currentRole === ROLES.CAREMANAGER">
+  <app-care-manager></app-care-manager>
+</ng-container>
+
+<ng-container *ngIf="currentRole === ROLES.PRACTICEADMIN">
+  <app-practice-admin></app-practice-admin>
+</ng-container>
+
+<ng-container *ngIf="currentRole === ROLES.PROVIDER">
+  <app-provider></app-provider>
+</ng-container>
+
+<ng-container *ngIf="currentRole === ROLES.PATIENT">
+  <app-patient></app-patient>
+</ng-container>

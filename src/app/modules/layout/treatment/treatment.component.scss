@@ -1,0 +1,151 @@
+.content-wrapper {
+  border-radius: 10px;
+  padding: 13px;
+}
+.tak_box .card {
+  height: 90px !important;
+  border-radius: 20px;
+  border: none;
+}
+.tak_box .media img {
+  width: 40px;
+  margin-top: 7px;
+}
+.media p{
+  margin-bottom: 0;
+  font-size: 14px;
+}
+.patients_status {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 15px 0;
+}
+.heading {
+  font-size: 20px;
+  color: #5f5bfe;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.patient_list {
+  display: flex;
+  margin-bottom: 15px;
+}
+.patient_list span{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 100px;
+  border: 3px solid #5fb1df;
+  margin-right: 7px;
+}
+.tak_box {
+  padding: 0 5px;
+}
+.tak_box .col-md-3{
+  padding: 0 7px;
+}
+.tak_box .card-body {
+padding: 21px 13px;
+}
+.duration_stats {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+.duration_text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.duration_text select{
+  width: 120px;
+  border: none;
+  background-color: #dee7f0;
+  color: #4b7ead;
+  font-size: 15px;
+  font-weight: 600;
+}
+.task_table {
+  background-color: #fff;
+  padding: 30px 0px;
+  border-radius: 20px;
+}
+.edite_td a{
+  color: #4076a9;
+  font-size: 14px;
+  margin-right: 20px;
+
+}
+// .task_table .table > :not(caption) > * > *{
+//     box-shadow: inset 0 0 0 9999px #f9f9ff;
+// }
+
+
+.nav-pills .nav-link{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #454545;
+  border-radius: 0;
+  padding-left: 0;
+  margin-right: 15px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: transparent;
+  color: #5F5BFE;
+  border-bottom: 2px solid #5F5BFE;
+  border-radius: 0;
+}
+.task_table ul{
+  margin: 0 15px;
+  // border-bottom: 2px solid rgba(199, 199, 199, 0.51);
+}
+.nav-item{
+  border-bottom: 2px solid rgba(199, 199, 199, 0.51);
+}
+.task_table tr{
+  padding: 0 15px;
+}
+.diseases {
+  display: flex;
+  align-items: center;
+}
+.diseases span{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #5F5BFE;
+  margin-right: 5px;
+}
+.diseases p{
+font-weight: 400;
+font-size: 14px;
+line-height: 160.5%;
+color: #454545;
+width: 25%;
+ margin-bottom: 19px;
+}
+
+.treatment .duration_text select {
+  width: 110px;
+
+}
+.duration_text p{
+margin-bottom: 0;
+font-weight: 400;
+font-size: 14px;
+line-height: 160.5%;
+color: #454545;
+margin: 0 5px;
+}
+.duration_text p span{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #5F5BFE;
+  margin-right: 5px;
+}

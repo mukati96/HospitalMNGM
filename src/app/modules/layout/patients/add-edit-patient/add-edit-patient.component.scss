@@ -1,0 +1,258 @@
+.content-wrapper {
+  overflow-x: hidden;
+  background: white;
+  min-height: calc(100vh - 56px);
+  border-radius: 10px;
+  padding: 13px;
+  margin-right: 20px;
+}
+
+.page_content {
+  h1 {
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .box_head {
+    background: #f7f3f3;
+    width: 100%;
+    height: 60px;
+    display: block;
+    border-radius: 10px;
+    margin: 13px 0px;
+  }
+  .left_content_page {
+    position: relative;
+  }
+  .left_content_page:before {
+    position: absolute;
+    content: "";
+    right: -25px;
+    height: 100%;
+    border-left: 1px solid #eee;
+  }
+  .upload_img {
+    border-radius: 100px;
+    margin: auto;
+  }
+
+  .file {
+    position: relative;
+  }
+
+  .file > input[type="file"] {
+    display: none;
+  }
+
+  .file > label {
+    font-size: 1rem;
+    font-weight: 300;
+    cursor: pointer;
+    outline: 0;
+    user-select: none;
+    border: 2px solid #c7ffc9;
+    color: #008000;
+    background-color: #c7ffc9;
+    padding: 6px 25px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .file--upload > label {
+    color: #008000;
+  }
+  .tab_patient .nav-tabs {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+  .tab_patient .nav-tabs li {
+    display: inline-block;
+    // width: 33%;
+    border-bottom: 1px solid #eee;
+  }
+  .nav-tabs .nav-link {
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #454545;
+  }
+  .nav-tabs .nav-link.active {
+    border-bottom: 2px solid #7288ff;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #5f5bfe;
+    padding: 0px 20px 8px 5px;
+  }
+  .btn.btn_skyehr {
+    height: 34px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #4aaec5;
+    background: rgba(74, 174, 197, 0.17);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-top: 6px;
+  }
+  .btn_skyehr img {
+    margin-right: 5px;
+  }
+  .select_div {
+    position: relative;
+  }
+  .btn.btn_provider {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #5f5bfe;
+    padding-left: 0;
+  }
+  .btn_provider img {
+    margin-right: 5px;
+    width: 14%;
+  }
+  .btn.btn_provider:focus,
+  .btn.btn_provider:active {
+    border: 1px solid transparent;
+    outline: none;
+  }
+  .btn_reset {
+    color: #333;
+    font-size: 14px;
+  }
+  .btn.btn_reset:focus,
+  .btn.btn_reset:active {
+    border: 1px solid transparent;
+    outline: none;
+  }
+  .btn_next {
+    color: #fff;
+    font-size: 14px;
+    background-color: #6c6e74;
+    border-radius: 100px;
+    padding: 8px 18px;
+  }
+  .btn.btn_next:focus,
+  .btn.btn_next:active {
+    border: 1px solid transparent;
+    outline: none;
+  }
+  .content-form label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    color: #454545;
+    overflow: hidden;
+    line-height: 16px;
+    margin-bottom: 1px;
+  }
+  // .content-form .form-control {
+  //   font-size: 12px;
+  //   border: 1px solid #c7c7c7;
+  //   border-radius: 8px;
+  //   min-height: 50px;
+  // }
+  .content-form .col-md-3,
+  .content-form .col-md-4 {
+    padding: 0px 5px 0px 5px;
+  }
+  .form_heading {
+    border-bottom: 2px solid #7288ff;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 160.5%;
+    color: #5f5bfe;
+  }
+}
+
+.img-sec {
+  .attach-img {
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 100%;
+      cursor: pointer;
+      object-fit: cover;
+    }
+  }
+}
+:host ::ng-deep .multiselect-custom {
+  .p-multiselect-label {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .country-item-value {
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    display: inline-flex;
+    margin-right: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
+
+    img.flag {
+      width: 17px;
+    }
+  }
+
+  .country-placeholder {
+    padding: 0.25rem;
+  }
+}
+::ng-deep p-calendar .p-datepicker {
+  padding: 0px;
+  .p-datepicker-header {
+    padding: 0px;
+  }
+  table td {
+    padding: 0px;
+  }
+}
+:host ::ng-deep {
+  @media screen and (max-width: 640px) {
+    .p-multiselect {
+      width: 100%;
+    }
+  }
+}
+
+::ng-deep .dropdown-provider {
+  .p-dropdown-panel {
+    width: 87%;
+    z-index: 9999;
+    position: fixed;
+  }
+}
+.p-dropdown-label {
+  font-size: 12px;
+}
+
+::ng-deep .select_div .p-multiselect.p-component {
+  width: 100%;
+}
+
+::ng-deep .p-datepicker {
+  width: 320px !important;
+}
+::ng-deep .p-datepicker table th {
+  padding: 0px 9px !important;
+  width: 10px;
+}
+::ng-deep .p-datepicker table td {
+  padding: 6px 7px !important;
+}
+::ng-deep .p-datepicker table td > span {
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+  margin: 0px;
+}

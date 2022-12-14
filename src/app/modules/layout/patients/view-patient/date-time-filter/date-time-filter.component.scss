@@ -1,0 +1,26 @@
+@import "../view-patient.component.scss";
+.form_field{
+    padding: 0 25px;
+  
+}
+.without::-webkit-datetime-edit-ampm-field {
+    display: none;
+  }
+.without::-webkit-datetime-edit-hour-field {
+   display: none;
+  }
+
+ .spentTime{
+  position: relative;
+ }
+ .edit_btn{
+  position: absolute;
+  top: -4px;
+  right: -12px;
+ }
+ .invalide{
+  color: rgba(230, 29, 29, 0.616);
+ }
+ ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  color: blue;
+}

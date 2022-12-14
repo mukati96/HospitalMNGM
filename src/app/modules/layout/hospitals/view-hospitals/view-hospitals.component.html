@@ -1,0 +1,1572 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="hospital_profile">
+      <div class="row">
+        <div class="col-lg-4">
+          <h1>Practice Profile</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="profile_top">
+        <div class="row">
+          <div class="col-lg-3 attach-img">
+            <img
+              *ngIf="!imgURL"
+              src="../../../../../assets/images/user_img.png"
+              alt="user_img"
+            />
+            <img
+              [src]="imgURL | safeUrl"
+              *ngIf="
+                otherImgPath == 'png' ||
+                otherImgPath == 'jpg' ||
+                otherImgPath == 'jpeg'
+              "
+              alt="uploaded doc user_img"
+            />
+          </div>
+          <div class="col-lg-9">
+            <div class="profile_right">
+              <h2>{{ _hospDetails.hospital_name }}</h2>
+              <div class="tax_id">
+                <p>NPI ID :</p>
+                <span>{{ _hospDetails.npi_id }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Hospital Tax ID :</p>
+                <span>{{ _hospDetails.hospital_tax_id }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Website URL :</p>
+                <span>{{ _hospDetails.website_url }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Main Location :</p>
+                <span>{{ _hospDetails.city }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile_box">
+        <form [formGroup]="hospitalForm">
+          <div class="row mb-5">
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Contact Person Name </label>
+              <input
+                type=""
+                pInputText
+                formControlName="contact_person_name"
+                required
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Email ID</label>
+              <input
+                type="email"
+                pInputText
+                required
+                appLowerCase
+                formControlName="email_id"
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Contact Number</label>
+              <input
+                type="text"
+                pInputText
+                required
+                maxlength="10"
+                formControlName="contact_number"
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Street</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="street"
+                required
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">City</label>
+              <input
+                type="text"
+                pInputText
+                required
+                formControlName="city"
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">State/province/area</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="state_province_area"
+                required
+                class="form-control"
+                readonly="true"
+              />
+              <div
+                *ngIf="
+                  H['state_province_area'].invalid &&
+                  (H['state_province_area'].dirty ||
+                    H['state_province_area'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="H['state_province_area'].errors?.['required']">
+                  State/province/area name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Zip Code</label>
+              <input
+                type="text"
+                pInputText
+                required
+                formControlName="zip_code"
+                maxlength="6"
+                class="form-control"
+                mask="00000-0000"
+                readonly="true"
+              />
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+              <label class="form-label">Status</label>
+              <input
+                type="text"
+                pInputText
+                required
+                formControlName="hospital_status"
+                class="form-control"
+                readonly="true"
+              />
+            </div>
+          </div>
+        </form>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="hospital_profile text-end">
+                <!-- <p-splitButton
+              label="ADD"
+              icon="pi pi-plus"
+              [model]="items"
+              styleClass="p-button-rounded p-button-danger mr-2 mb-2"
+            ></p-splitButton> -->
+                <!-- <button class="btn btn11 btn-sm" (click)="showBranchDialog()">
+                  <img
+                    src="../../../../../assets/images/icons/btn2.svg"
+                    alt=""
+                  />
+                  <span>Add Location</span>
+                </button>
+
+                <button class="btn btn22 btn-sm" (click)="showAdminDialog()">
+                  <img
+                    src="../../../../../assets/images/icons/btn3.svg"
+                    alt=""
+                  />
+                  Add Admin
+                </button>
+
+                <button class="btn btn33 btn-sm" (click)="showProviderDialog()">
+                  <img
+                    src="../../../../../assets/images/icons/add3.svg"
+                    alt=""
+                  />
+                  Add Provider
+                </button>
+
+                <button
+                  class="btn btn44 btn-sm ml-2 ms-2"
+                  (click)="showCareManagerDialog()"
+                >
+                  <img
+                    src="../../../../../assets/images/icons/btn1.svg"
+                    alt=""
+                  />
+                  Care Manager
+                </button> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 text-start">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected="true"
+                    [class.active]="selectTab === 'user'"
+                    (click)="changeTab('user')"
+                  >
+                    Users
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation" >
+                  <button
+                    class="nav-link"
+                    id="pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected="false"
+                    [class.active]="selectTab === 'location'"
+                    (click)="changeTab('location')"
+                  >
+                    Location
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="col-1 offset-4">
+              <button
+                type="button"
+                model="items"
+                (click)="showAddDialog()"
+                class="btn btn-primary btn-sm careManagerButton"
+              >
+                ADD
+              </button>
+              <!-- <p-splitButton
+              label="ADD"
+              styleClass="p-button-rounded p-button-danger mr-2 mb-2"
+              [model]="items"
+              (click)="showAddDialog()"
+            ></p-splitButton> -->
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" >
+          <div
+          
+           *ngIf="this.selectTab == 'user'"
+          >
+            <div class="table-responsive">
+              <p-table
+                #dt1
+                [value]="_users"
+                [rows]="5"
+                [showCurrentPageReport]="true"
+                styleClass="p-datatable-sm"
+                [columns]="userCols"
+                [resizableColumns]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              >
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th>S No.</th>
+                    <th
+                      *ngFor="let col of columns"
+                      [ngStyle]="{ width: col.width }"
+                      pResizableColumn
+                    >
+                      {{ col.header }}
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  pTemplate="body"
+                  let-rowIndex="rowIndex"
+                  let-rowData
+                  let-columns="columns"
+                >
+                  <tr>
+                    <td>{{ rowIndex + 1 }}</td>
+                    <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                      <span>
+                        <span *ngSwitchCase="'user_type'">
+                          <span
+                            [ngClass]="{
+                              Admin: rowData[col.field] === 'Practice Admin',
+                              Provider: rowData[col.field] === 'Provider',
+                              Care_Manager:
+                                rowData[col.field] === 'Care Manager'
+                            }"
+                          >
+                            {{ rowData[col.field] }}
+                          </span>
+                        </span>
+                        <span *ngSwitchCase="'user_status'">
+                          <span [ngClass]="{
+                            ACTIVE: rowData[col.field] === 'Active',
+                            INACTIVE: rowData[col.field] === 'In-active',
+                            SUSPENDED: rowData[col.field] === 'Suspended'
+                          }">
+                            {{ rowData[col.field] | titlecase }}
+                          </span>
+                        </span>
+                        <span *ngSwitchDefault>
+                          {{ rowData[col.field] }}
+                        </span>
+                      </span>
+                    </td>
+                    <td>
+                      <!-- <span class="pl-1">
+                        <a href="javascript:;">
+                          <span>View</span>
+                        </a>
+                      </span> -->
+                      <!-- <button class="edit_btn btn" (click)="openUserPopUp(rowData)">
+                        <img src="../../../../assets/images/icons/edit.svg" alt="edit" />
+                        Edit
+                      </button> -->
+                      <img
+                        src="../../../../assets/images/icons/edit_view.svg"
+                        (click)="openUserPopUp(rowData)"
+                        class="ms-1"
+                        title="Edit"
+                      />
+                      <!-- <button class="delete_btn btn">
+                        <img
+                          src="../../../../assets/images/icons/delete.svg"
+                          alt="delete"
+                        />
+                        Delete
+                      </button> -->
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          <div
+            *ngIf="this.selectTab == 'location'"
+          >
+            <div class="table-responsive">
+              <p-table
+                #dt1
+                [value]="_branch"
+                [rows]="5"
+                [showCurrentPageReport]="true"
+                styleClass="p-datatable-sm"
+                [columns]="locationcols"
+                [resizableColumns]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              >
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th>S No.</th>
+                    <th
+                      *ngFor="let col of columns"
+                      [ngStyle]="{ width: col.width }"
+                      pResizableColumn
+                    >
+                      {{ col.header }}
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  pTemplate="body"
+                  let-rowIndex="rowIndex"
+                  let-rowData
+                  let-columns="columns"
+                >
+                  <tr>
+                    <td>{{ rowIndex + 1 }}</td>
+                    <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                      <span>
+                        <span *ngSwitchCase="'hospital_branch_status'">
+                          <span
+                            [ngStyle]="{
+                              color:
+                                rowData[col.field] === 'ACTIVE'
+                                  ? '#1EA955'
+                                  : '#FF6B3A'
+                            }"
+                          >
+                            {{ rowData[col.field] | titlecase }}
+                          </span>
+                        </span>
+                        <span *ngSwitchDefault>
+                          {{ rowData[col.field] }}
+                        </span>
+                      </span>
+                    </td>
+                    <td>
+                      <!-- <span class="pl-1">
+                        <a href="javascript:;">
+                          <span>View</span>
+                        </a>
+                      </span> -->
+                      <!-- <button class="edit_btn btn ms-2" (click)="openLocationPopUp(rowData)">
+                        <img src="../../../../assets/images/icons/edit.svg" alt="edit" />
+                        Edit
+                      </button> -->
+                      <!-- <button class="delete_btn btn">
+                        <img
+                          src="../../../../assets/images/icons/delete.svg"
+                          alt="delete"
+                        />
+                        Delete
+                      </button> -->
+
+                      <img
+                        src="../../../../assets/images/icons/edit_view.svg"
+                        (click)="openLocationPopUp(rowData)"
+                        class="ms-1"
+                        title="Edit"
+                      />
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="pills-contact"
+            role="tabpanel"
+            aria-labelledby="pills-contact-tab"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="profile_right_box">
+        <h1 class="heading">Key Stats</h1>
+        <p>Created Date</p>
+        <h3>
+          {{
+            _hospDetails?.internal_hospital_data?.created_date
+              | date : "MM-dd-yyyy"
+          }}
+        </h3>
+        <p>Total Admins</p>
+        <h3>
+          {{ _hospDetails?.internal_hospital_data?.total_practice_admin }}
+        </h3>
+        <p>Active Providers</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.active_provider }}</h3>
+        <p>Inactive Providers</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.inactive_provider }}</h3>
+        <p>Total Patients</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.total_patients }}</h3>
+        <p>Active Patients</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.active_patient }}</h3>
+        <p>Inactive Patients</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.inactive_patient }}</h3>
+        <p>Care Manager</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.care_manager_count }}</h3>
+        <p>Total Diseases</p>
+        <h3>{{ _hospDetails?.internal_hospital_data?.total_disease }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Branch PopUp Code start -->
+
+<p-dialog
+  [(visible)]="displayBranch"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '30vw' }"
+  (onHide)="closeBranchDialog()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="true"
+  [baseZIndex]="10000"
+>
+  <ng-template pTemplate="header">
+    <span
+      style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #00a040;
+      "
+      >{{ _branchPopUpName }}</span
+    >
+  </ng-template>
+  <div class="branch_content">
+    <div class="row">
+      <div class="col-md-12" style="padding-bottom: 120px">
+        <form [formGroup]="BranchForm" (ngSubmit)="initBranchForm()">
+          <div>
+            <div>
+              <label class="form-label">Branch Name</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="branch_name"
+                class="form-control"
+                [class.is-invalid]="
+                  B['branch_name'].invalid &&
+                  (B['branch_name'].dirty || B['branch_name'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  B['branch_name'].invalid &&
+                  (B['branch_name'].dirty || B['branch_name'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="B['branch_name'].errors?.['required']">
+                  Branch name is required.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Location</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="location"
+                class="form-control"
+                [class.is-invalid]="
+                  B['location'].invalid &&
+                  (B['location'].dirty || B['location'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  B['location'].invalid &&
+                  (B['location'].dirty || B['location'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="B['location'].errors?.['required']">
+                  Location is required.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Contact Email ID</label>
+              <input
+                type="email"
+                pInputText
+                appLowerCase
+                autocomplete="new-email"
+                formControlName="contact_email"
+                class="form-control"
+                [class.is-invalid]="
+                  B['contact_email'].invalid &&
+                  (B['contact_email'].dirty || B['contact_email'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  B['contact_email'].invalid &&
+                  (B['contact_email'].dirty || B['contact_email'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="B['contact_email'].errors?.['required']">
+                  Email address is required.
+                </div>
+                <div
+                  *ngIf="!B['contact_email'].errors?.['required'] && B['contact_email'].errors?.['isEmail']"
+                >
+                  Invalid email format.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Contact No</label>
+              <div class="select_div">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="contact_number"
+                  maxlength="10"
+                  class="form-control"
+                  [class.is-invalid]="
+                    B['contact_number'].invalid &&
+                    (B['contact_number'].dirty || B['contact_number'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    B['contact_number'].invalid &&
+                    (B['contact_number'].dirty || B['contact_number'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="B['contact_number'].errors?.['required']">
+                    Contact no. is required.
+                  </div>
+                  <div
+                    *ngIf="!B['contact_number'].errors?.['required']
+                          && B['contact_number'].errors?.['isMobile']"
+                  >
+                    Invalid Contact number.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Status*</label>
+              <div class="select_div">
+                <p-dropdown
+                  [(ngModel)]="defaultStatus"
+                  [options]="branchStutusArry"
+                  placeholder="Select"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="hospital_branch_status"
+                  [class.is-invalid]="
+                    B['hospital_branch_status'].invalid &&
+                    (B['hospital_branch_status'].dirty ||
+                      B['hospital_branch_status'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    B['hospital_branch_status'].invalid &&
+                    (B['hospital_branch_status'].dirty ||
+                      B['hospital_branch_status'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="B['hospital_branch_status'].errors?.['required']">
+                    Please select status.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <!-- <a
+      style="color: rgba(0, 0, 0, 0.66); margin-right: 265px"
+      (click)="closeBranchDialog()"
+      ><u>Go Back</u></a
+    > -->
+    <button
+      type="button"
+      (click)="closeBranchDialog()"
+      class="btn btn-danger btn-sm cancleButton"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      [disabled]="submittingBranchData"
+      (click)="validateBranchForm()"
+      class="btn btn-primary btn-sm branchButton"
+    >
+      Save
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Add Branch PopUp Code end -->
+
+<!-- Add Admin PopUp Code start -->
+<p-dialog
+  [(visible)]="displayAdminForm"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '30vw' }"
+  (onHide)="closeAdminDialog()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  [showHeader]="true"
+  [baseZIndex]="10000"
+>
+  <ng-template pTemplate="header">
+    <span
+      style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #ff6b3a;
+      "
+      >{{ _adminDetailPopUpName }}</span
+    >
+  </ng-template>
+  <div class="branch_content">
+    <div class="row">
+      <div class="col-md-12" style="padding-bottom: 120px">
+        <form
+          [formGroup]="AdminForm"
+          (ngSubmit)="initAdminForm()"
+          autocomplete="off"
+        >
+          <div>
+            <div>
+              <label class="form-label">First Name</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="first_name"
+                class="form-control"
+                [class.is-invalid]="
+                  A['first_name'].invalid &&
+                  (A['first_name'].dirty || A['first_name'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  A['first_name'].invalid &&
+                  (A['first_name'].dirty || A['first_name'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="A['first_name'].errors?.['required']">
+                  First name is required.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Last Name</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="last_name"
+                class="form-control"
+                [class.is-invalid]="
+                  A['last_name'].invalid &&
+                  (A['last_name'].dirty || A['last_name'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  A['last_name'].invalid &&
+                  (A['last_name'].dirty || A['last_name'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="A['last_name'].errors?.['required']">
+                  Last name is required.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Email</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="email"
+                name="email"
+                autocomplete="new-email"
+                class="form-control"
+                [class.is-invalid]="
+                  A['email'].invalid && (A['email'].dirty || A['email'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  A['email'].invalid && (A['email'].dirty || A['email'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="A['email'].errors?.['required']">
+                  Email is required.
+                </div>
+                <div
+                  *ngIf="!A['email'].errors?.['required'] && A['email'].errors?.['isEmail']"
+                >
+                  Invalid email format.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Contact No</label>
+              <input
+                type="text"
+                pInputText
+                maxlength="10"
+                name="contact_number"
+                formControlName="contact_number"
+                autocomplete="disabled"
+                class="form-control"
+                [class.is-invalid]="
+                  A['contact_number'].invalid &&
+                  (A['contact_number'].dirty || A['contact_number'].touched)
+                "
+              />
+              <div
+                *ngIf="
+                  A['contact_number'].invalid &&
+                  (A['contact_number'].dirty || A['contact_number'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="A['contact_number'].errors?.['required']">
+                  Contact No is required.
+                </div>
+                <div
+                  *ngIf="!A['contact_number'].errors?.['required']
+                          && A['contact_number'].errors?.['isMobile']"
+                >
+                  Invalid Contact number.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Password</label>
+              <div class="select_div">
+                <input
+                  type="password"
+                  pInputText
+                  formControlName="password"
+                  autocomplete="new-password"
+                  name="password"
+                  class="form-control"
+                  [class.is-invalid]="
+                    A['password'].invalid &&
+                    (A['password'].dirty || A['password'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    A['password'].invalid &&
+                    (A['password'].dirty || A['password'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="A['password'].errors?.['required']">
+                    Password is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Status*</label>
+              <div class="select_div">
+                <p-dropdown
+                  [options]="branchStutusArry"
+                  [(ngModel)]="defaultStatus"
+                  placeholder="Select"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="practice_admin_status"
+                  [class.is-invalid]="
+                    A['practice_admin_status'].invalid &&
+                    (A['practice_admin_status'].dirty ||
+                      A['practice_admin_status'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    A['practice_admin_status'].invalid &&
+                    (A['practice_admin_status'].dirty ||
+                      A['practice_admin_status'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="A['practice_admin_status'].errors?.['required']">
+                    Please select status.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      (click)="closeAdminDialog()"
+      class="btn btn-danger btn-sm cancleButton"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      [disabled]="submittingPracticeAdminData"
+      (click)="validateAdminsForm()"
+      class="btn btn-primary btn-sm adminButton"
+    >
+      Save
+    </button>
+  </ng-template>
+</p-dialog>
+<!-- Add Admin PopUp Code end -->
+
+<!-- Add Provider PopUp Code start -->
+<p-dialog
+  [(visible)]="displayProvider"
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '40vw' }"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeProviderDialog()"
+  [closable]="true"
+  [showHeader]="true"
+  [baseZIndex]="10000"
+>
+  <ng-template pTemplate="header">
+    <span
+      style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #5566ff;
+      "
+      >{{ _providerDetailPopUpName }}</span
+    >
+  </ng-template>
+  <div>
+    <form [formGroup]="providerForm" (ngSubmit)="initProviderForm()">
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">NPI ID</label>
+          <app-select-with-search
+            [form]="providerForm"
+            controlName="npi_data"
+            [list]="npiIdData"
+            bindKey="name"
+            (applySearch)="getProviderNPIData($event)"
+            (itemSelected)="patchNpiData($event)"
+            [isLoading]="isLoadingNPIData"
+          >
+          </app-select-with-search>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Location ID</label>
+          <!-- <app-select-with-search [form]="providerForm" controlName="hospital_branch" [list]="_branch"
+            bindKey="branch_name" [isLoading]="isLoadingNPIData">
+          </app-select-with-search> -->
+          <select class="form-select" formControlName="hospital_branch">
+            <option [value]="data.branch_id" *ngFor="let data of _branch">
+              {{ data.branch_name | titlecase }},
+              {{ data.location | titlecase }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">First Name </label>
+          <input
+            type="text"
+            pInputText
+            formControlName="first_name"
+            class="form-control"
+            [class.is-invalid]="
+              U['first_name'].invalid &&
+              (U['first_name'].dirty || U['first_name'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['first_name'].invalid &&
+              (U['first_name'].dirty || U['first_name'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['first_name'].errors?.['required']">
+              First Name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Last Name </label>
+          <input
+            type="text"
+            pInputText
+            formControlName="last_name"
+            class="form-control"
+            [class.is-invalid]="
+              U['last_name'].invalid &&
+              (U['last_name'].dirty || U['last_name'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['last_name'].invalid &&
+              (U['last_name'].dirty || U['last_name'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['last_name'].errors?.['required']">
+              Last Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Email</label>
+          <input
+            type="text"
+            pInputText
+            formControlName="email"
+            autocomplete="new-email"
+            class="form-control"
+            [class.is-invalid]="
+              U['email'].invalid && (U['email'].dirty || U['email'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['email'].invalid && (U['email'].dirty || U['email'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['email'].errors?.['required']">
+              Email is required.
+            </div>
+            <div
+              *ngIf="!U['email'].errors?.['required'] && U['email'].errors?.['isEmail']"
+            >
+              Invalid email format.
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            pInputText
+            autocomplete="new-password"
+            formControlName="password"
+            class="form-control"
+            [class.is-invalid]="
+              U['password'].invalid &&
+              (U['password'].dirty || U['password'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['password'].invalid &&
+              (U['password'].dirty || U['password'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['password'].errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Contact no* </label>
+          <input
+            type="text"
+            pInputText
+            maxlength="10"
+            formControlName="contact_number"
+            class="form-control"
+            [class.is-invalid]="
+              U['contact_number'].invalid &&
+              (U['contact_number'].dirty || U['contact_number'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['contact_number'].invalid &&
+              (U['contact_number'].dirty || U['contact_number'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['contact_number'].errors?.['required']">
+              Contact No. is required.
+            </div>
+            <div
+              *ngIf="!U['contact_number'].errors?.['required']
+                          && U['contact_number'].errors?.['isMobile']"
+            >
+              Invalid Contact number.
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label">Status*</label>
+          <div class="select_div">
+            <p-dropdown
+              [options]="branchStutusArry"
+              [(ngModel)]="defaultStatus"
+              placeholder="Select"
+              optionLabel="label"
+              optionValue="value"
+              formControlName="provider_status"
+              [class.is-invalid]="
+                U['provider_status'].invalid &&
+                (U['provider_status'].dirty || U['provider_status'].touched)
+              "
+            ></p-dropdown>
+            <div
+              *ngIf="
+                U['provider_status'].invalid &&
+                (U['provider_status'].dirty || U['provider_status'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="U['provider_status'].errors?.['required']">
+                Please select status.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Zip Code</label>
+          <input
+            type="text"
+            pInputText
+            maxlength="10"
+            formControlName="zip_code"
+            class="form-control"
+            [class.is-invalid]="
+              U['zip_code'].invalid &&
+              (U['zip_code'].dirty || U['zip_code'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              U['zip_code'].invalid &&
+              (U['zip_code'].dirty || U['zip_code'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="U['zip_code'].errors?.['required']">
+              Zip Code is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      (click)="closeProviderDialog()"
+      class="btn btn-danger btn-sm cancleButton"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      [disabled]="submittingProviderData"
+      (click)="validateProviderForm()"
+      class="btn btn-primary btn-sm providerButton"
+    >
+      Save
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Add Provider PopUp Code end -->
+
+<!-- Add Care manager PopUp Code start -->
+<p-dialog
+  [(visible)]="displayCaremanager "
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '35vw' }"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeCareManagerDialog()"
+  [closable]="true"
+  [showHeader]="true"
+  [baseZIndex]="10000"
+>
+  <ng-template pTemplate="header">
+    <span
+      style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #f36a6a;
+      "
+      >{{ _careManagerPopUpName }}</span
+    >
+  </ng-template>
+  <div>
+    <form [formGroup]="careManagerForm" (ngSubmit)="initCareManagerForm()">
+      <div>
+        <div class="row" style="padding-bottom: 120px">
+          <div class="col-6">
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="first_name"
+              required
+              class="form-control"
+              [class.is-invalid]="
+                C['first_name'].invalid &&
+                (C['first_name'].dirty || C['first_name'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['first_name'].invalid &&
+                (C['first_name'].dirty || C['first_name'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['first_name'].errors?.['required']">
+                First name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="last_name"
+              required
+              class="form-control"
+              [class.is-invalid]="
+                C['last_name'].invalid &&
+                (C['last_name'].dirty || C['last_name'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['last_name'].invalid &&
+                (C['last_name'].dirty || C['last_name'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['last_name'].errors?.['required']">
+                Last name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              pInputText
+              required
+              appLowerCase
+              autocomplete="new-email"
+              formControlName="email"
+              class="form-control"
+              [class.is-invalid]="
+                C['email'].invalid && (C['email'].dirty || C['email'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['email'].invalid && (C['email'].dirty || C['email'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['email'].errors?.['required']">
+                Email address is required.
+              </div>
+              <div
+                *ngIf="!C['email'].errors?.['required'] && C['email'].errors?.['isEmail']"
+              >
+                Invalid email format.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Contact no* </label>
+            <input
+              type="text"
+              pInputText
+              maxlength="10"
+              formControlName="contact"
+              required
+              class="form-control"
+              [class.is-invalid]="
+                C['contact'].invalid &&
+                (C['contact'].dirty || C['contact'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['contact'].invalid &&
+                (C['contact'].dirty || C['contact'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['contact'].errors?.['required']">
+                Contact No. is required.
+              </div>
+
+              <div
+                *ngIf="!C['contact'].errors?.['required']
+                        && C['contact'].errors?.['isMobile']"
+              >
+                Invalid Contact number.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Address</label>
+            <input
+              type="text"
+              pInputText
+              formControlName="address"
+              required
+              class="form-control"
+              [class.is-invalid]="
+                C['address'].invalid &&
+                (C['address'].dirty || C['address'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['address'].invalid &&
+                (C['address'].dirty || C['address'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['address'].errors?.['required']">
+                Address is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              pInputText
+              formControlName="password"
+              autocomplete="new-password"
+              required
+              class="form-control"
+              [class.is-invalid]="
+                C['password'].invalid &&
+                (C['password'].dirty || C['password'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                C['password'].invalid &&
+                (C['password'].dirty || C['password'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="C['password'].errors?.['required']">
+                Password is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Status*</label>
+            <div class="select_div">
+              <p-dropdown
+                [options]="branchStutusArry"
+                [(ngModel)]="defaultStatus"
+                placeholder="Select"
+                optionLabel="label"
+                optionValue="value"
+                formControlName="care_manager_status"
+                [class.is-invalid]="
+                  C['care_manager_status'].invalid &&
+                  (C['care_manager_status'].dirty ||
+                    C['care_manager_status'].touched)
+                "
+              ></p-dropdown>
+              <div
+                *ngIf="
+                  C['care_manager_status'].invalid &&
+                  (C['care_manager_status'].dirty ||
+                    C['care_manager_status'].touched)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="C['care_manager_status'].errors?.['required']">
+                  Please select status.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Location</label>
+            <!-- <select class="form-select" formControlName="hospital_branch"
+            >
+              <option [value]="data.branch_id" *ngFor="let data of _branch">
+                {{ data.branch_name | titlecase  }},{{ data.location | titlecase  }}
+              </option>
+            </select> -->
+
+            <div class="select_div">
+              <p-multiSelect
+                [options]="_branch"
+                #receiveAlert
+                formControlName="hospital_branch"
+                defaultLabel="Select"
+                optionLabel="branch_name"
+                optionValue="branch_id"
+                [showHeader]="false"
+                [class.is-invalid]="
+                C['hospital_branch'].invalid &&
+                (C['hospital_branch'].dirty ||
+                  C['hospital_branch'].touched)
+              "
+            >
+            </p-multiSelect>
+            <app-error
+              [errLabel]="
+              careManagerForm
+                  | inputError
+                    : 'hospital_branch'
+                    : 'Location'
+              "
+            >
+            </app-error>
+              </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      (click)="closeCareManagerDialog()"
+      class="btn btn-danger btn-sm cancleButton"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      [disabled]="submitButton"
+      (click)="validateCaremanagerForm()"
+      class="btn btn-primary btn-sm careManagerButton"
+    >
+      Save
+    </button>
+  </ng-template>
+</p-dialog>
+<!-- Add Care manager  PopUp Code end -->
+
+<!--Add POPUP code start-->
+<p-dialog
+  [(visible)]="displayAddPopup"
+  [style]="{ width: '20vw'}"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="true"
+  [closable]="true"
+  [baseZIndex]="10000"
+  [dismissableMask]="true"
+>
+  <ng-template pTemplate="header">
+    <span
+      style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #f36a6a;
+      "
+      >Add</span
+    >
+  </ng-template>
+  <div class="branch_content">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngFor="let add of addFields" class="p-field-checkbox allfields">
+          <p-radioButton
+            [inputId]="add.key"
+            name="add"
+            [value]="add"
+            [(ngModel)]="selectedCategory"
+          ></p-radioButton>
+          <label class="label" [for]="add.key">{{ add.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      (click)="onAddSubmit()"
+      class="btn btn-primary btn-sm addButton"
+    >
+      Add
+    </button>
+  </ng-template>
+</p-dialog>
+<!--Add POPUP code end-->
+
+<!-- Sucess Pop-Up -->
+<section>
+  <p-dialog
+    [modal]="true"
+    [(visible)]="displaySucessPopup"
+    [style]="{ width: '471px' }"
+    [baseZIndex]="10000"
+    position="center"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="branchPopUp"
+  >
+    <div class="sucessContainer">
+      <div class="container">
+        <div class="col-lg-12">
+          <section>
+            <img [src]="_popUpImage" alt="" />
+            <br />
+            <p [innerHTML]="_popUpText"></p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        [style.background-color]="_popUpBtnColour"
+        (click)="displaySucessPopup = false"
+        class="btn btn-primary btn-sm brPopButton"
+      >
+        Ok
+      </button>
+    </ng-template>
+  </p-dialog>
+</section>

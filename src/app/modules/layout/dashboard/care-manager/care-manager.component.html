@@ -1,0 +1,261 @@
+<div class="content-wrapper dashboard">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="row tak_box">
+        <div class="col-md-3 col-sm-3 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>Tasks</p>
+                  <h3>{{ _patientTask.tasks }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user1.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>New Patients</p>
+                  <h3>{{ _patientTask.new_patients }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user2.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>Enrolled</p>
+                  <h3>
+                    {{ _patientTask.enrolled }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media select_drop " style="cursor:pointer ;">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user3.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2 position-relative">
+                  <select class="form-select">
+                    <option value="monthly">0-10mins</option>
+                    <option value="quaterly">10-20mins</option>
+                    <option value="yearly">20mins & above</option>
+                  </select>
+                  <h3 (click)="stateChange()">
+                    + {{ _patientTask.completed_20_min }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="patients_status" *ngIf="!showCompleted">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="heading">Patients Stats</h1>
+            <div class="key_status">
+              <p><span></span> Total Patients</p>
+              <p><span></span> Enrolled Patients</p>
+              <p><span></span> Inactive Patients</p>
+              <p><span></span> Unreachable Patients</p>
+            </div>
+          </div>
+          <div class="col-lg-4 doughnut_chart">
+            <app-doughnut-chart [chartData]="_patientStats"></app-doughnut-chart>
+          </div>
+        </div>
+      </div>
+      <div class="patients_status" *ngIf="showCompleted">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="heading">Completed Minutes</h1>
+            <div class="key_status">
+              <p><span></span> 0-10mins</p>
+              <p><span></span> 10-20mins</p>
+              <p><span></span> 20mins & above</p>
+            </div>
+          </div>
+          <div class="col-lg-4 doughnut_chart">
+            <app-doughnut-chart [chartData]="mappdataa"></app-doughnut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 duration_stats">
+      <app-chart></app-chart>
+    </div>
+  </div>
+
+  <div class="task_table">
+    <div class="row">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active">
+          <p-table #dt1 [value]="_taskArray" [rows]="10" styleClass="p-datatable-sm"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['title', 'first_name', 'last_name']">
+            <ng-template pTemplate="caption">
+              <div class="row top_head">
+                <div class="col-lg-10">
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-overdue-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-overdue" type="button" role="tab" aria-controls="pills-overdue"
+                        aria-selected="true" (click)="changeTab('Overdue')" [class.active]="selectTab === 'Overdue'">
+                        Overdue ({{ taskCountObj.overdue_tasksCount }})
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                        aria-selected="false" (click)="changeTab('Today')" [class.active]="selectTab === 'Today'">
+                        Today’s Tasks ({{ taskCountObj.todays_tasksCount }})
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-tomorrow-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-tomorrow" type="button" role="tab" aria-controls="pills-tomorrow"
+                        aria-selected="false" (click)="changeTab('Tomorrow')" [class.active]="selectTab === 'Tomorrow'">
+                        Tomorrow's Tasks({{ taskCountObj.tomorrow_tasksCount }})
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-nesWeek-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-nesWeek" type="button" role="tab" aria-controls="pills-nesWeek"
+                        aria-selected="false" (click)="changeTab('NextWeek')" [class.active]="selectTab === 'NextWeek'">
+                        Due Future ({{
+                        taskCountObj.next_week_tasksCount
+                        }})
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                        aria-selected="false" (click)="changeTab('Completed')"
+                        [class.active]="selectTab === 'Completed'">
+                        Completed Tasks ({{
+                        taskCountObj.completed_tasksCount
+                        }})
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-2 search_select">
+                  <!-- <div class="search_bar">
+                    <input
+                      pInputText
+                      type="text"
+                      #event
+                      (input)="seachCareMangerLists(event.value)"
+                      placeholder="Search"
+                    />
+                    <button class="btn">
+                      <img src="../../../../assets/images/icons/search.png" alt="Image" />
+                    </button>
+                  </div> -->
+                </div>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>S.No.</th>
+                <th>
+                  Task Name
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Created Date
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Due Date
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Updated Date
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Patient Name
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Age
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>
+                  Status
+                  <!-- <img src="../../../../../assets/images/icons/down.svg" alt="">
+                  <img src="../../../../../assets/images/icons/down2.svg" alt=""> -->
+                </th>
+                <th>Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-providers >
+              <tr>
+                <td>{{ rowIndex + 1 }}</td>
+                <td>{{ providers?.task_name }}</td>
+                <td>{{ providers?.created_at | date : "MM-dd-yyyy" }}</td>
+                <td>{{ providers?.due_date | date : "MM-dd-yyyy" }}</td>
+                <td>{{ providers?.updated_at | date : "MM-dd-yyyy" }}</td>
+                <td>{{ providers?.patient_name }}</td>
+                <td>{{ providers?.patient_age }}</td>
+                <td [style.color]="
+                    providers?.task_status == 'ACTIVE' ? '#05A902' : '#F78080'
+                  ">
+                  {{ providers?.task_status | optionalField }}
+                </td>
+                <td>
+                  <button class="edit_btn btn ms-0 me-0" (click)="viewProviders(providers.id)">
+                    <img src="../../../../assets/images/icons/eye.svg" title="View" alt="" />
+                  </button>
+                  <button class="edit_btn btn ms-2 me-2" (click)="editproviders(providers.id)">
+                    <img src="../../../../assets/images/icons/edit_view.svg" title="Edit" alt="" />
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <!-- <div class="row">
+          <div class="col countMsg" [innerHTML]="showCountMsg"> </div>
+          <div class="col countMsg1 mt-2" *ngIf="_taskArray.length">
+            <p-paginator [rows]="10" [pageLinkSize]="4" [totalRecords]="totalRecords"
+              (onPageChange)="paginate($event)"></p-paginator>
+          </div>
+        </div> -->
+        <div *ngIf="!_taskArray.length" class="noDataText py-4">
+          <span>Data Not Found</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

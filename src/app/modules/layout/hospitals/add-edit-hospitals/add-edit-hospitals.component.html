@@ -1,0 +1,449 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="page_content">
+      <div class="row">
+        <div class="col-md-8 left_content_page">
+          <h1>{{ customText }}</h1>
+          <form [formGroup]="hospitalForm" (ngSubmit)="validateHospitalForm()">
+            <div class="row mb-5">
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">NPI ID *</label>
+                <div class="select_div">
+                  <app-select-with-search
+                    [form]="hospitalForm"
+                    controlName="npi_id"
+                    [list]="npiIdData"
+                    bindKey="name"
+                    (applySearch)="getNPIData($event)"
+                    (itemSelected)="patchNpiData($event)"
+                    [isLoading]="isLoadingNPIData"
+                    label="Select"
+                  ></app-select-with-search>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Practice Name *</label>
+                <input
+                  type="text"
+                  pInputText
+                  appInputRestriction="noSpecialChars"
+                  formControlName="hospital_name"
+                  characterOnly
+                  required
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['hospital_name'].invalid &&
+                    (H['hospital_name'].dirty || H['hospital_name'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['hospital_name'].invalid &&
+                    (H['hospital_name'].dirty || H['hospital_name'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['hospital_name'].errors?.['required']">
+                    Hospital name is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Practice Tax Id *</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="hospital_tax_id"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['hospital_tax_id'].invalid &&
+                    (H['hospital_tax_id'].dirty || H['hospital_tax_id'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['hospital_tax_id'].invalid &&
+                    (H['hospital_tax_id'].dirty || H['hospital_tax_id'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['hospital_tax_id'].errors?.['required']">
+                    Hospital tax id is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Contact Person Name *</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="contact_person_name"
+                  characterOnly
+                  required
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['contact_person_name'].invalid &&
+                    (H['contact_person_name'].dirty ||
+                      H['contact_person_name'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['contact_person_name'].invalid &&
+                    (H['contact_person_name'].dirty ||
+                      H['contact_person_name'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['contact_person_name'].errors?.['required']">
+                    Contact person name is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Email Id *</label>
+                <input
+                  type="email"
+                  pInputText
+                  required
+                  appLowerCase
+                  formControlName="email_id"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['email_id'].invalid &&
+                    (H['email_id'].dirty || H['email_id'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['email_id'].invalid &&
+                    (H['email_id'].dirty || H['email_id'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['email_id'].errors?.['required']">
+                    Email address is required.
+                  </div>
+                  <div
+                    *ngIf="!H['email_id'].errors?.['required'] && H['email_id'].errors?.['isEmail']"
+                  >
+                    Invalid email format.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Contact Number *</label>
+                <input
+                  type="text"
+                  pInputText
+                  required
+                  maxlength="10"
+                  numbersOnly
+                  formControlName="contact_number"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['contact_number'].invalid &&
+                    (H['contact_number'].dirty || H['contact_number'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['contact_number'].invalid &&
+                    (H['contact_number'].dirty || H['contact_number'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['contact_number'].errors?.['required']">
+                    Contact number is required.
+                  </div>
+                  <div
+                    *ngIf="!H['contact_number'].errors?.['required']
+                            && H['contact_number'].errors?.['isMobile']"
+                  >
+                    Invalid Contact number.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Address 1 *</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="address_1"
+                  required
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['address_1'].invalid &&
+                    (H['address_1'].dirty || H['address_1'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['address_1'].invalid &&
+                    (H['address_1'].dirty || H['address_1'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['address_1'].errors?.['required']">
+                    First Address is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Address 2(Optional)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  formControlName="address_2"
+                />
+                <!-- <div
+                  *ngIf="
+                    H['address_2'].invalid &&
+                    (H['address_2'].dirty || H['address_2'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['address_2'].errors?.['required']">
+                    Second Address is required.
+                  </div>
+                </div> -->
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">State/province/area *</label>
+                <input
+                  type="text"
+                  pInputText
+                  characterOnly
+                  formControlName="state_province_area"
+                  required
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['state_province_area'].invalid &&
+                    (H['state_province_area'].dirty ||
+                      H['state_province_area'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['state_province_area'].invalid &&
+                    (H['state_province_area'].dirty ||
+                      H['state_province_area'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['state_province_area'].errors?.['required']">
+                    State/province/area name is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Zip Code *</label>
+                <input
+                  type="text"
+                  pInputText
+                  required
+                  appInputRestriction="noSpecialChars"
+                  formControlName="zip_code"
+                  mask="00000-0000"
+                  minlength="4"
+                  maxlength="11"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['zip_code'].invalid &&
+                    (H['zip_code'].dirty || H['zip_code'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['zip_code'].invalid &&
+                    (H['zip_code'].dirty || H['zip_code'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['zip_code'].errors?.['required']">
+                    Zip code is required.
+                  </div>
+                  <!-- <div
+                    *ngIf="!H['zip_code'].errors?.['required'] && H['zip_code'].errors?.['isSecurityNumber']"
+                  >
+                    Invalid zip code.
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">City *</label>
+                <input
+                  type="text"
+                  pInputText
+                  required
+                  characterOnly
+                  formControlName="city"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['city'].invalid && (H['city'].dirty || H['city'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['city'].invalid && (H['city'].dirty || H['city'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['city'].errors?.['required']">
+                    City is required.
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-xl-4 col-lg-4 col-md-4 mt-md-4">
+                <label class="form-label">Multiple Branches*</label>
+                <div class="select_div">
+                  <p-dropdown
+                    [options]="multiBranchesArry"
+                    placeholder="Select"
+                    optionLabel="label"
+                    [showClear]="true"
+                    formControlName="multiBranches"
+                    [class.is-invalid]="
+                      H['multiBranches'].invalid &&
+                      (H['multiBranches'].dirty || H['multiBranches'].touched)
+                    "
+                  ></p-dropdown>
+                  <div
+                    *ngIf="
+                      H['multiBranches'].invalid &&
+                      (H['multiBranches'].dirty || H['multiBranches'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="H['multiBranches'].errors?.['required']">
+                      Please select Branches.
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Website URL</label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="website_url"
+                  class="form-control"
+                  [class.is-invalid]="
+                    H['website_url'].invalid &&
+                    (H['website_url'].dirty || H['website_url'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    H['website_url'].invalid &&
+                    (H['website_url'].dirty || H['website_url'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="H['website_url'].errors?.['required']">
+                    Website URL is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                <label class="form-label">Status *</label>
+                <div class="select_div">
+                  <p-dropdown
+                    placeholder="Select"
+                    [options]="stutusArry"
+                    [(ngModel)]="defaultStatus"
+                    optionLabel="label"
+                    optionValue="value"
+                    formControlName="hospital_status"
+                    [class.is-invalid]="
+                      H['hospital_status'].invalid &&
+                      (H['hospital_status'].dirty ||
+                        H['hospital_status'].touched)
+                    "
+                  ></p-dropdown>
+                  <div
+                    *ngIf="
+                      H['hospital_status'].invalid &&
+                      (H['hospital_status'].dirty ||
+                        H['hospital_status'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="H['hospital_status'].errors?.['required']">
+                      Please select hospital status.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-8 mt-md-3">
+                <div class="form_reset_option">
+                  <button
+                    type="button"
+                    class="btn btn_reset me-md-3"
+                    (click)="resethospitalForm()"
+                    [disabled]="this._hospId ? true : false"
+                  >
+                    Reset
+                  </button>
+                  <button class="btn btn_next" type="submit">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <div class="upload_image mt-md-5 text-center img-sec">
+            <div class="upload_img attach-img">
+              <img
+                *ngIf="!imgURL"
+                src="../../../../../assets/images/user_img.png"
+                alt="user_img"
+              />
+              <img
+                [src]="imgURL"
+                *ngIf="
+                  otherImgPath == 'png' ||
+                  otherImgPath == 'jpg' ||
+                  otherImgPath == 'jpeg'
+                "
+                alt="uploaded doc"
+              />
+            </div>
+            <div class="file file--upload mt-5">
+              <label for="uploadLead-1">
+                <img
+                  src="../../../../../assets/images/icons/up_arrow.svg"
+                  alt=""
+                />
+                Upload Image
+              </label>
+              <input
+                #file1
+                id="uploadLead-1"
+                type="file"
+                (change)="fileChange($event)"
+                multiple
+                accept="image/jpg, image/png, image/jpeg, application/pdf, application/msword, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .cgm"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<div class="d-block w-100 ps-md-3 pe-md-3 nav_head">
+  <a class="navbar-brand" href="#" *ngIf="cuurentRole === ROLES.SUPERADMIN">
+    <img src="../../../../assets/images/icons/logo.svg" alt="" />
+  </a>
+
+  <a *ngIf="cuurentRole === ROLES.CAREMANAGER" class="navbar-brand" href="#">
+    <img src="../../../../assets/images/Group 10758 1.png" class="mt-0" alt="" />
+  </a>
+  <!-- <div class="search_bar">
+    <input pinputtext="" type="search" placeholder="Search here..."
+      class="p-inputtext p-component p-element form-control">
+    <button class="btn"><img src="../../../../assets/images/top_search.svg" alt="Image"></button>
+  </div> -->
+  <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <ul class="navbar-nav ml-auto d-inline-block list_right_head">
+    <!-- <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li> -->
+    <!-- <button class="btn btn-pink btn_head me-3">
+      <img src="../../../../assets/images/icons/plus.svg" alt="Image" /> Add chronic disease
+    </button>
+    <button class="btn btn-skyblue btn_head me-3" [routerLink]="FULL_ROUTES.ADD_PROVIDERS" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact:true}">
+      <img src="../../../../assets/images/icons/plus.svg" alt="Image" /> Add doctor
+    </button>
+    <button class="btn btn-purple btn_head me-2" [routerLink]="FULL_ROUTES.ADD_PATIENTS" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact:true}">
+      <img src="../../../../assets/images/icons/plus.svg" alt="Image" /> Add patient
+    </button> -->
+
+    <button class="btn add_hospital btn_head me-2" [routerLink]="FULL_ROUTES.ADD_HOSPITALS"
+      *ngIf="cuurentRole === ROLES.SUPERADMIN">
+      <img src="../../../../assets/images/icons/addPatient.svg" alt="Image" />&nbsp;
+      Add Practice
+    </button>
+    <button class="btn  add_hospital add_outreach me-2" data-bs-toggle="modal" data-bs-target="#addOutreach">
+      <img src="../../../../assets/images/icons/btn8.svg" alt="Image" />&nbsp;Add Outreach
+    </button>
+    <button *ngIf="cuurentRole === ROLES.CAREMANAGER" class="btn  add_hospital add_appointmentl me-2"
+      data-bs-toggle="modal" data-bs-target="#addAppointment">
+      <img src="../../../../assets/images/icons/btn6.svg" alt="Image" />&nbsp; Add Appointment
+    </button>
+    <button class="btn add-patient btn_head me-2" [routerLink]="FULL_ROUTES.ADD_PATIENTS"
+      *ngIf="cuurentRole === ROLES.CAREMANAGER">
+      <img src="../../../../assets/images/icons/add9.svg" alt="Image" />&nbsp;
+      Add Patient
+    </button>
+
+    <span class="ms-2 me-2 bell_icon">
+      <img src="../../../../assets/images/icons/bell.svg" alt="Image" />
+    </span>
+    <div class="dropdown user_drop d-inline-block">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <img src="../../../../assets/images/user.png" alt="Image" />
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class="dropdown-item" [routerLink]="FULL_ROUTES.PROFILE" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">Profile
+
+        </li>
+        <!-- <li><a class="dropdown-item" href="#">Setting</a></li> -->
+        <li>
+          <button class="dropdown-item" (click)="logOut()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </ul>
+</div>
+
+
+
+<div class="modal fade header_modal" id="addOutreach" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form>
+        <div class="add_goal_header">
+          <h5 class="modal-title">
+            Outreach Details
+          </h5>
+          <p class="edit_btn"></p>
+          <div class="goal_text">
+            <p class="mt-3">Patient Name :<span>Eugene J. Delgado</span> </p>
+            <p>Provider Name :<span>Eugene J. Delgado</span> </p>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Contact Date</label>
+              <input type="date" class="form-control" placeholder="Intervention" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Schedule Follow-Up Date</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Resolution/Action</label>
+              <input type="text" class="form-control" placeholder="Callback-Later" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Contact Type</label>
+              <input type="text" class="form-control" placeholder="Whatsapp-Messenger" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Outcome</label>
+              <input type="text" class="form-control" placeholder="Voice-Mail" />
+            </div>
+
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Time Spent</label>
+              <input type="text" class="form-control" placeholder="00:02:02" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Status</label>
+              <input type="text" class="form-control" placeholder="Active" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Notes</label>
+              <textarea class="form-control"
+                placeholder="It is a long established fact that a reader will be distracted by the readable content. It is a long established fact that a reader will be distracted by the readable content."></textarea>
+            </div>
+
+          </div>
+          <div class="col-lg-12 text-end">
+            <button type="button" class="btn">
+              <img src="../../../../assets/images/icons/edit_view2.svg" alt=""> Edit Details
+            </button>
+            <button type="button" class="btn add_close">
+              Close
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade header_modal" id="addAppointment" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form>
+        <div class="add_goal_header">
+          <h5 class="modal-title">
+            Task Details
+          </h5>
+          <p class="edit_btn"></p>
+          <div class="goal_text">
+            <p class="mt-3">Patient Name :<span>Eugene J. Delgado</span> </p>
+            <p>Chronic Condition :<span>Eugene J. Delgado</span> </p>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Task Name</label>
+              <input type="text" class="form-control" placeholder="Intervention" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Created Date</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Due Date</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Updated Date</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Patient ID</label>
+              <input type="date" class="form-control" placeholder="#119 18819881" />
+            </div>
+            <div class="col-lg-6 mb-4">
+              <label class="form-label">Status</label>
+              <input type="date" class="form-control" placeholder="Active" />
+            </div>
+            <div class="col-lg-12 mb-4">
+              <label class="form-label">Description</label>
+              <textarea class="form-control"
+                placeholder="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum"></textarea>
+            </div>
+
+          </div>
+          <div class="col-lg-12 text-end">
+            <button type="button" class="btn">
+              <img src="../../../../assets/images/icons/edit_view2.svg" alt=""> Edit Details
+            </button>
+            <button type="button" class="btn add_close">
+              Close
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

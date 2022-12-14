@@ -1,0 +1,189 @@
+.nav_head {
+  .search_bar {
+    margin: auto;
+    position: absolute;
+    top: 12px;
+    left: 14%;
+    width: 307px;
+    .btn {
+      position: absolute;
+      top: 2px;
+      right: 0px;
+    }
+    input {
+      border: 2.5px solid #c5d2ff;
+      border-radius: 500px;
+      height: 46px;
+    }
+  }
+  .navbar-brand {
+    color: #000;
+  }
+
+  .list_right_head {
+    float: right;
+  }
+
+  .list_right_head .user_drop .btn:active,
+  .list_right_head .user_drop .btn:focus {
+    outline: none;
+    border: 1px solid transparent !important;
+  }
+
+  .list_right_head .user_drop .btn.dropdown-toggle::after {
+    display: none;
+  }
+
+  .list_right_head .user_drop .btn img {
+    height: 44px;
+    width: 44px;
+    border-radius: 100px;
+  }
+
+  .list_right_head .user_drop .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+  }
+
+  .btn_head {
+    color: #fff;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+
+  .btn-pink {
+    border-radius: 100px;
+    background-color: #e91e63;
+    padding: 8px 14px;
+
+    img {
+      color: #e91e63;
+      background: #fff;
+      border-radius: 100px;
+      margin: -1px 7px;
+    }
+  }
+
+  .btn-skyblue {
+    border-radius: 100px;
+    background-color: #1e9388;
+    padding: 8px 14px;
+
+    img {
+      color: #1e9388;
+      background: #fff;
+      border-radius: 100px;
+      margin: -1px 7px;
+    }
+  }
+
+  .btn-purple {
+    border-radius: 100px;
+    background-color: #9c27b0;
+    padding: 8px 14px;
+
+    img {
+      color: #9c27b0;
+      background: #fff;
+      border-radius: 100px;
+      margin: -1px 7px;
+    }
+  }
+
+  .bell_icon {
+    cursor: pointer;
+  }
+
+  @media (min-width: 992px) {
+    .navbar-brand {
+      width: 250px;
+    }
+  }
+}
+.add_hospital,
+.add_hospital:hover {
+  background: #3ab287;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  height: 46px;
+}
+.add_outreach,
+.add_outreach:hover {
+  background: #1393bb;
+}
+.add_appointmentl,
+.add_appointmentl:hover {
+  background: #5f5bfe;
+}
+// .btn_head img{
+//  margin-right: 10px;
+// }
+.add-patient,
+.add-patient:hover {
+  background: #e979e4;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  height: 42px;
+}
+.outreach {
+  background-color: #1393bb !important;
+}
+::ng-deep .modal-backdrop {
+  z-index: 999 !important;
+}
+.add_goal_header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  .goal_text p {
+    font-size: 14px;
+    line-height: 160.5%;
+    color: #5f5bfe;
+    margin-bottom: 0;
+    font-family: "Poppins-SemiBold";
+    span {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 160.5%;
+      color: #5e5e5e;
+      margin-left: 40px;
+    }
+  }
+}
+.add_goal_header .modal-title {
+  font-family: "Poppins-SemiBold";
+  font-size: 28px;
+  line-height: 160.5%;
+  color: #5f5bfe;
+}
+.header_modal .modal-dialog {
+  max-width: 769px;
+}
+.header_modal .modal-content {
+  padding: 25px;
+  .add_close {
+    background: #5f5bfe;
+    font-family: "Poppins-SemiBold";
+    font-size: 14px;
+    line-height: 160.5%;
+    color: #ffffff;
+    border-radius: 500px;
+  }
+}
+.header_modal .form-control {
+  background: #f2f2f2;
+  border: none;
+}
+@media (max-width: 1440px) {
+  .nav_head .search_bar {
+    left: 17%;
+    width: 220px;
+  }
+}

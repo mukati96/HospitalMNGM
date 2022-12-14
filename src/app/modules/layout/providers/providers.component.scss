@@ -1,0 +1,170 @@
+.provider_page .dropdown .btn {
+  font-size: 13px;
+  color: #7288ff;
+  font-weight: 600;
+  position: relative;
+  padding: 5px 32px;
+  background-color: #e4e8ff;
+}
+
+.provider_page .dropdown .dropdown-toggle::after {
+  position: absolute;
+  content: "";
+  // background-image: url(left_arrow.svg);
+  height: 24px;
+  width: 8px;
+  top: 3px;
+  right: 15px;
+  transform: rotate(-90deg);
+  background-repeat: no-repeat;
+  border: none;
+}
+.excel_export {
+  color: #6c2020;
+  font-size: 13px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 5px 14px;
+  background: #f7f7f7;
+  margin-bottom: 3px;
+}
+.provider_page .search_bar {
+  position: relative;
+}
+.provider_page input {
+  height: 40px;
+  border-radius: 100px;
+}
+.provider_page .search_bar .btn {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.left_content_page h1 {
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #7288ff;
+  margin: 6px 0px 0px;
+}
+.right_content_page {
+  font-size: 13px;
+  color: #7288ff;
+  font-weight: 600;
+  position: relative;
+  background-color: #e4e8ff;
+}
+.provider_page td .btn.delete_btn {
+  background-color: #eb1000;
+  color: #fff;
+  padding: 2px 11px;
+  font-size: 13px;
+}
+.provider_page td .btn.edit_btn {
+  background-color: transparent;
+  color: #fff;
+  padding: 0px;
+  font-size: 13px;
+}
+@media screen and (max-device-width: 1440px) {
+}
+
+.countMsg {
+  width: 191px;
+  height: 39px;
+  left: 389px;
+  top: 984px;
+  padding-top: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6b6b6b;
+}
+.paginator {
+  width: 191px;
+  height: 39px;
+  left: 389px;
+  top: 984px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6b6b6b;
+}
+.filter-form {
+  button {
+    height: 40px;
+  }
+  .row {
+    margin-top: 10px;
+    width: 250px;
+  }
+}
+tr.ng-star-inserted {
+  font-size: 12px !important;
+}
+.provider_page th {
+  color: #000;
+
+  border: none;
+}
+.provider_page td {
+  vertical-align: middle;
+  border: none;
+}
+::ng-deep .p-datepicker table th {
+  padding: 0px 9px !important;
+  width: 10px;
+}
+::ng-deep .p-datepicker {
+  width: 300px !important;
+}
+::ng-deep .p-datepicker table th {
+  padding: 0px 9px !important;
+  width: 10px;
+}
+::ng-deep .p-datepicker table td {
+  padding: 6px 7px !important;
+}
+::ng-deep .p-datepicker table td > span {
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+  margin: 0px;
+}
+
+::ng-deep i.p-sortable-column-icon.pi.pi-fw.pi-sort-alt {
+  margin-top: -8px;
+  margin-left: -1px;
+}
+::ng-deep .pi-sort-alt:before {
+  font-size: 8px;
+  content: "\e99e";
+}
+::ng-deep .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: #1d4ed8;
+  font-size: 10px;
+}
+::ng-deep.p-datatable .p-sortable-column:focus {
+  box-shadow: none;
+  outline: 0 none;
+}
+
+::ng-deep .provider_page tbody tr td:nth-child(1) {
+  width: 60px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+::ng-deep .provider_page tbody tr td:nth-child(2) {
+  width: 150px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+

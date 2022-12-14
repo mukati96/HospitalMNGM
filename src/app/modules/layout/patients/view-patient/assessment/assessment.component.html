@@ -1,0 +1,154 @@
+
+
+<div class="row m-3">
+  <div class="col-lg-6" >
+    <div class="assesment_box" *ngIf="_assmentment && _assmentment.length">
+      <h1>Assessment for Session 1</h1>
+      <h5>Assessment Tools</h5>
+      <div class="form-check" *ngFor="let ques of _assmentment">
+        <label class="form-check-label" for="{{ ques?.id }}">
+          <input
+            type="radio"
+            id="{{ ques?.id }}"
+            [value]="ques"
+            class="form-check-input"
+            [(ngModel)]="selectedValue"
+          />
+          {{ ques.question_category }}
+        </label>
+      </div>
+      <div class="text-end">
+        <button [disabled]="!selectedValue"
+          class="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#assessmentModal"
+          (click)="startAssessment(selectedValue)"
+        >
+          Start Assessment
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6" *ngIf="_assmentment && _assmentment.length">
+    <div class="assesment_box">
+      <h1>Select Assessment Tools</h1>
+      <!-- (click)="getAssessmentDetails(ques)" -->
+      <div class="assesment_tool" *ngFor="let ques of _assmentment">
+        <p>
+          {{ ques.question_category }}
+          <!-- data-bs-toggle="modal"
+            data-bs-target="#assessmentModal" -->
+          <button type="button" class="btn">Total Questions : 10</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="profile_box table-responsive table_box m-3">
+  <h1 class="heading">Self Assessment Plan</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>S.no.</th>
+        <th>Assessment Name</th>
+        <th>Date</th>
+        <th>Time Spent</th>
+        <th>Score</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="_assessmentList && _assessmentList.length">
+      <tr *ngFor="let assessment of _assessmentList; let i = index" data-bs-target="#assessmentModal"  data-bs-toggle="modal" (click)="getAssessmentDetails(assessment)">
+        <td>{{ i + 1 }}</td>
+        <td>{{ assessment.question_category }}</td>
+        <td>{{ assessment.start_date | date }}</td>
+        <td>{{ assessment.time_spent ? assessment.time_spent : 0 }}</td>
+        <td>{{ assessment.score ? assessment.score : "N/A" }}</td>
+        <td>
+        <span [ngStyle]="assessment.assessment_status == 'PENDING' ? {color: '#e9e50e'} : assessment.assessment_status == 'COMPLETED' ? {color: '#27bd38'}: {}">
+          {{ assessment.assessment_status }}
+        </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="assessmentModal"
+  tabindex="-1"
+  aria-labelledby="assessmentModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="assessmentModalLabel">
+          {{ questionCategory }} {{editAssesPlan == true ? '(Edit)' : ''}}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <!-- <p class="body_para">
+            If patients has any of the following conditions, check the box and
+            apply Fall Risk Interventions as indicated.
+          </p> -->
+
+          <ng-container formArrayName="assessment">
+            <ng-container
+              *ngFor="let control of assesment.controls; index as i"
+            >
+              <div class="modal-body-content" [formGroupName]="i">
+                <h4>
+                  {{ control.value.questionName }}
+                </h4>
+                <p>
+                  <input
+                    type="radio"
+                    [id]="'yes' + i"
+                    formControlName="answer"
+                    value="Yes"
+                    (change)="onChangeAns(control.value)"
+                  />
+                  <label [for]="'yes' + i">Yes</label>
+                </p>
+                <p>
+                  <input
+                    type="radio"
+                    [id]="'no' + i"
+                    formControlName="answer"
+                    value="No"
+                    (change)="onChangeAns(control.value)"
+                  />
+                  <label [for]="'no' + i">No</label>
+                </p>
+                <div *ngIf="getGroupControl(i, 'answer')?.touched && getGroupControl(i, 'answer')?.invalid" >
+                   <span class="btnColor">
+                    Plase select answer
+                   </span>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="modal-footer" *ngIf="!onlyReadData">
+          <button type="button" class="btn-close" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button *ngIf="editAssesPlan" type="button" class="btn btn-primary" (click)="updateAssesPlan()" >Edit</button>
+          <button *ngIf="!editAssesPlan" type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

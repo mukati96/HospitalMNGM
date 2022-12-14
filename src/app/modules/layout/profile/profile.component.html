@@ -1,0 +1,47 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="hospital_profile">
+      <div class="row">
+        <div class="col-lg-4 mt-5 ">
+          <h1>{{data.user_type}} PROFILE</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 mt-5">
+      <div class="profile_top">
+        <div class="row">
+          <div class="col-lg-3">
+            <img [src]="data.image!=null ? data.image : myImgUrl" alt="user_img" />
+          </div>
+          <div class="col-lg-9">
+            <div class="profile_right">
+              <h2>{{data.first_name}} </h2>
+              <div class="tax_id">
+                <p>First Name :</p>
+                <span>{{data.first_name}}</span>
+              </div>
+              <div class="tax_id">
+                <p>Last Name :</p>
+                <span>{{data.last_name}}</span>
+              </div>
+              <div class="tax_id">
+                <p>Email:</p>
+                <span>{{data.email}}</span>
+              </div>
+              <div class="tax_id">
+                <p>Type:</p>
+                <span>{{data.user_type}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 text-end">
+            <button class="btn resetPassword  btn3" [routerLink]="FULL_ROUTES.FORGOT_PASSWORD" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+              Reset password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

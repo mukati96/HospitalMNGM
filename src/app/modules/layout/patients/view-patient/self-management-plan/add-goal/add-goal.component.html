@@ -1,0 +1,223 @@
+<form [formGroup]="goalForm" class="px-4" (ngSubmit)="onSubmitGoal()">
+    <div class="row mb-3">
+      <div class="col-lg-4 col-md-4 mt-md-3">
+        <label class="form-label">Goal* </label>
+        <input type="text" class="form-control" formControlName="name" [class.is-invalid]="
+            f['name'].invalid && (f['name'].dirty || f['name'].touched)
+          " />
+        <app-error [errLabel]="goalForm | inputError: 'name':'Name'"></app-error>
+      </div>
+      <div class="col-lg-4 col-md-4 mt-md-3">
+        <label class="form-label">Chronic Condition</label>
+        <div class="dropdown-wrapper">
+          <app-search-with-select-dropdown
+          [form]="goalForm"  controlName="chronic_condition"
+          [list]="filteredChronics" bindKey="id"
+          displayKey="disease_name" (applySearch)="getDefaultChronicConditions($event)"
+          label="Select" [isLoading]="fetchingChronics"></app-search-with-select-dropdown>
+          <app-error [errLabel]="goalForm | inputError: 'chronic_condition':'Chronic Condition'"></app-error>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 mt-md-3">
+        <label class="form-label">Goal Date* </label>
+        <div class="seach_btn">
+          <input type="date" [ngModel]="currentStringDate" class="form-control" formControlName="goal_date"
+            [class.is-invalid]="
+              f['goal_date'].invalid &&
+              (f['goal_date'].dirty || f['goal_date'].touched)
+            " />
+        </div>
+        <app-error [errLabel]="goalForm | inputError: 'goal_date':'Date'"></app-error>
+      </div>
+      <div class="col-lg-4 col-md-4 mt-md-3">
+        <label class="form-label">Goal Status</label>
+        <select formControlName="goal_status" class="form-select custom-select form-control" id="inputGroupSelect01">
+          <option value="PENDING">Pending</option>
+          <option value="COMPLETED">Completed</option>
+        </select>
+        <app-error [errLabel]="goalForm | inputError: 'goal_status':'Status'"></app-error>
+
+      </div>
+      <div class="col-lg-8 mt-md-3">
+        <label class="form-label">Notes* </label>
+        <input type="text" class="form-control" formControlName="notes" [class.is-invalid]="
+            f['notes'].invalid && (f['notes'].dirty || f['notes'].touched)
+          " />
+        <app-error [errLabel]="goalForm | inputError: 'notes':'Notes'"></app-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="accordion accordion-flush" id="flushAccordionRobots">
+          <div class="accordion-item">
+            <h2 id="flushHeadingFirst" class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flushCollapseFirst" aria-expanded="true" aria-controls="flushCollapseFirst">
+                Steps to Achieve Goal
+              </button>
+            </h2>
+            <div id="flushCollapseFirst" class="accordion-collapse collapse show" aria-labelledby="flushHeadingFirst"
+              data-bs-parent="#flushAccordionRobots">
+              <div class="accordion-body">
+                <ng-container formArrayName="steps_to_achieve_goals">
+                  <ng-container *ngFor="let control of steps_to_achieve_goals.controls;let i = index">
+                    <div class="row mb-3" [formGroupName]="i">
+                      <div class="col-lg-6">
+                        <label class="form-label">Goal Plan* </label>
+                        <input type="text" class="form-control" formControlName="goal_plan"
+                        [class.is-invalid]="control.get('goal_plan')?.invalid && (control.dirty ||control.touched)"
+                        />
+                        <app-error [errLabel]="control | inputError: 'goal_plan':'Goal'"></app-error>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label">Score*</label>
+                        <select class="custom-select form-control" id="inputGroupSelect01" formControlName="score"
+                        [class.is-invalid]="control.get('score')?.invalid && (control.dirty ||control.touched)">
+                          <option value="" disabled selected>Select (1-10)</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <app-error [errLabel]="control | inputError: 'score':'Score'"></app-error>
+                      </div>
+                      <div class="delete pointer" *ngIf="steps_to_achieve_goals.controls.length > 1">
+                        <img src="./assets/images/icons/remove.svg" alt="" (click)="removeStepsToAchieveGoals(i)">
+                      </div>
+                    </div>
+                  </ng-container>
+                  <div class="add-new-group">
+                    <button type="button" class="btn add_hospital add_goal btn_head me-2"
+                    (click)="addStepsToAchieveGoalsFormGroup()">
+                      Add
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flushHeadingSecond">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flushCollapseSecond" aria-expanded="false" aria-controls="flushCollapseSecond">
+                Goal Challenges
+              </button>
+            </h2>
+            <div id="flushCollapseSecond" class="accordion-collapse collapse" aria-labelledby="flushHeadingSecond"
+              data-bs-parent="#flushAccordionRobots">
+              <div class="accordion-body">
+                <ng-container formArrayName="goal_challenges">
+                  <ng-container *ngFor="let control of goal_challenges.controls;let i = index">
+                    <div class="row" [formGroupName]="i">
+                      <div class="col-lg-6">
+                        <label class="form-label">Issues/Challenges* </label>
+                        <input type="text" class="form-control" formControlName="challenges"
+                        [class.is-invalid]="control.get('challenges')?.invalid && (control.dirty ||control.touched)"
+                        />
+                        <app-error [errLabel]="control | inputError: 'challenges':'Goal Challenge'"></app-error>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label">Score*</label>
+                        <select class="custom-select form-control" id="inputGroupSelect01" formControlName="score"
+                        [class.is-invalid]="control.get('score')?.invalid && (control.dirty ||control.touched)">
+                          <option value="" disabled selected>Select (1-10)</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <app-error [errLabel]="control | inputError: 'score':'Score'"></app-error>
+                      </div>
+                      <div class="delete pointer" *ngIf="goal_challenges.controls.length > 1">
+                        <img src="./assets/images/icons/remove.svg" alt="" (click)="removeGoalChallenges(i)">
+                      </div>
+                    </div>
+                  </ng-container>
+                  <div class="add-new-group">
+                    <button type="button" class="btn add_hospital add_goal btn_head me-2"
+                    (click)="addGoalChallengesFormGroup()">
+                      Add
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flushHeadingThird">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flushCollapseThird" aria-expanded="false" aria-controls="flushCollapseThird">
+                Support / Assistance
+              </button>
+            </h2>
+            <div id="flushCollapseThird" class="accordion-collapse collapse" aria-labelledby="flushHeadingThird"
+              data-bs-parent="#flushAccordionRobots">
+              <div class="accordion-body">
+                <ng-container formArrayName="goal_assistance">
+                  <ng-container *ngFor="let control of goal_assistance.controls;let i = index">
+                    <div class="row" [formGroupName]="i">
+                      <div class="col-lg-6">
+                        <label class="form-label">Support Type* </label>
+                        <input type="text" class="form-control" formControlName="support_type"
+                        [class.is-invalid]="control.get('support_type')?.invalid && (control.dirty ||control.touched)"
+                        />
+                        <app-error [errLabel]="control | inputError: 'support_type':'Support Type'"></app-error>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label">Score*</label>
+                        <select class="custom-select form-control" id="inputGroupSelect01" formControlName="score"
+                        [class.is-invalid]="control.get('score')?.invalid && (control.dirty ||control.touched)">
+                          <option value="" disabled selected>Select (1-10)</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <app-error [errLabel]="control | inputError: 'score':'Score'"></app-error>
+                      </div>
+                      <div class="delete pointer" *ngIf="goal_assistance.controls.length > 1">
+                        <img src="./assets/images/icons/remove.svg" alt="" (click)="removeGoalAssistance(i)">
+                      </div>
+                    </div>
+                  </ng-container>
+                  <div class="add-new-group">
+                    <button type="button" class="btn add_hospital add_goal btn_head me-2"
+                    (click)="addGoalAssistanceFormGroup()">
+                      Add
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 go_back_box">
+        <div class="go_back_textg">
+          <a class="go_back pointer" (click)="cancel.emit(true)">Cancel</a>
+          <button type="submit" class="btn add_hospital add_goal btn_head me-2">
+            Save Goal
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>

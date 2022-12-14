@@ -1,0 +1,104 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="page_content">
+            <div class="inner_div outreach">
+                <div class="row top_head">
+                    <div class="col-md-3">
+                        <div class="left_content_page">
+                            <h1>Patient Outreach</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="text-end">
+                            <div class="d-inline-block search_bar">
+                                <input pInputText #searchText type="text" placeholder="Search"
+                                    class="p-inputtext p-component p-element" />
+                                <button class="btn">
+                                    <img src="../../../../assets/images/icons/search.png" alt="Image" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <p-table #dt1 [value]="outreachData" [rows]="10" styleClass="p-datatable-sm"
+                        (sortFunction)="customSort($event)" [customSort]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['title', 'first_name', 'last_name']">
+                        <ng-template pTemplate="caption"> </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>S.no.</th>
+                                <th pSortableColumn="patient_name">
+                                    Patient Name
+                                    <p-sortIcon field="patient_name"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="contact_date">
+                                    Contact Date
+                                    <p-sortIcon field="contact_date"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="schedule_follow_up_date">
+                                    Followup Date
+                                    <p-sortIcon field="schedule_follow_up_date"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="contact_type">
+                                    Contact Type
+                                    <p-sortIcon field="Contact Type"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="resolution_action">
+                                    Resolution
+                                    <p-sortIcon field="resolution_action"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="outcome">
+                                    Outcome
+                                    <p-sortIcon field="outcome"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="time_spent">
+                                    Time Spent
+                                    <p-sortIcon field="time_spent"></p-sortIcon>
+                                </th>
+                                <th>Action</th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowIndex="rowIndex" let-data>
+                            <tr>
+                                <td>{{ rowIndex + 1 + Onpage * 10 }}</td>
+                                <td>{{ data?.patient_name | titlecase }}</td>
+                                <td>
+                                    {{ data?.contact_date | date : "MM-dd-yyyy" | titlecase }}
+                                </td>
+                                <td>
+                                    {{ data?.schedule_follow_up_date | date : "MM-dd-yyyy" | titlecase }}
+                                </td>
+                                <td>
+                                    {{ data?.contact_type | titlecase }}
+                                </td>
+                                <td>{{ data?.resolution_action | titlecase }}</td>
+                                <td>{{ data?.outcome | titlecase }}</td>
+                                <td>
+                                    {{ data?.time_spent }}
+                                </td>
+                                <td>
+                                    <button class="view">
+                                        <img src="../../../../assets/images/icons/eye.svg" title="View" alt="" />
+                                    </button>
+                                    <button class="edit_btn">
+                                        <img src="../../../../assets/images/icons/edit_view.svg" title="Edit" alt="" />
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="row">
+                    <div class="col countMsg" [innerHTML]="showCountMsg"></div>
+                    <div class="col countMsg1 mt-2">
+                        <p-paginator [rows]="10" [pageLinkSize]="3" [totalRecords]="totalRecords"
+                            (onPageChange)="paginate($event)"></p-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

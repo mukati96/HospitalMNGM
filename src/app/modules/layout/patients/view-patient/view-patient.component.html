@@ -1,0 +1,865 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="hospital_profile">
+      <div class="row mt-2">
+        <div class="col-lg-4">
+          <h1>
+            Patient Profile
+            <img *ngIf="!disableViewClient" src="../../../../../assets/images/view.svg" alt="" />
+            <img *ngIf="disableViewClient" src="../../../../../assets/images/view1.svg" alt="" />
+          </h1>
+        </div>
+        <div class="col-lg-8 text-end">
+          <button [ngClass]="{ disabled: disableViewClient }" class="btn add_hospital btn_head me-2"
+            data-bs-toggle="modal" data-bs-target="#addTask">
+            <img src="../../../../assets/images/icons/btn6.svg" alt="Image" />Add Task
+          </button>
+          <button [ngClass]="{ disabled: disableViewClient }" type="button" class="btn btn5 me-2"
+            (click)="openCallModal()">
+            <img src="../../../../../assets/images/icons/call2.svg" alt="" />
+            Call Patient
+          </button>
+
+          <button *ngIf="disableViewClient" class="btn btn4" (click)="editPatients('edit')">
+            <img src="../../../../../assets/images/icons/btn4.svg" alt="" />
+            Edit Document
+          </button>
+          <button *ngIf="!disableViewClient" class="btn btn4" (click)="editPatients('view')">
+            <img src="../../../../../assets/images/icons/btn4.svg" alt="" />
+            Commit Changes
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="profile_top">
+        <div class="row">
+          <div class="col-lg-2">
+            <img *ngIf="_patientDetail.profile_pic" [src]="_patientDetail.profile_pic | safeUrl" alt=""
+              alt="user_img" />
+            <img *ngIf="!_patientDetail.profile_pic" src="../../../../../assets/images/user_img.png" alt="user_img" />
+          </div>
+          <div class="col-lg-5">
+            <div class="profile_right position-relative">
+              <h2>{{ _patientDetail?.name | optionalField }}</h2>
+              <div class="tax_id">
+                <p>Patient ID :</p>
+                <span>{{ _patientDetail?.id | optionalField }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Age :</p>
+                <span>{{ _patientDetail?.age }} years,
+                  {{ _patientDetail?.gender | optionalField }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Provider :</p>
+                <span>{{ _patientDetail?.provider_name | optionalField }}</span>
+              </div>
+              <div class="tax_id">
+                <p>Mobile no :</p>
+                <span>{{
+                  _patientDetail?.contact_number | optionalField
+                  }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5" [ngClass]="{ disabled: disableViewClient }">
+            <div class="call_box">
+              <div class="program_info">
+                <h1 class="heading">Program Information</h1>
+                <p class="edit_btn" (click)="openProgramInfoPopUp()">
+                  <img src="../../../../../assets/images/icons/btn5.svg" alt="" data-bs-toggle="modal"
+                    data-bs-target="#ProEdit" />
+                </p>
+              </div>
+
+              <div class="">
+                <table class="table table-striped task_table">
+                  <thead>
+                    <tr>
+                      <td> Program Name </td>
+                      <td> Date Enrolled </td>
+                      <td> Status </td>
+                    </tr>
+                  </thead>
+                  <tbody style="cursor: pointer">
+                    <tr *ngFor="let x of patientProgramList" data-bs-target="#ProEdit" data-bs-toggle="modal"
+                      (click)="editProgramInfo(x)">
+                      <td>
+                        <span>
+                          {{ x?.program_type | optionalField }}
+                        </span>
+                      </td>
+                      <td>
+                        <span>
+                          {{ x.date | date : "MM-dd-yyyy" | optionalField }}
+                        </span>
+                      </td>
+                      <td>
+                        <span [style.color]="
+                            x?.program_status == 'ACTIVE'
+                              ? '#05A902'
+                              : '#F78080'
+                          ">{{ x?.program_status | titlecase }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="profile_box mb-3 pb-3">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation" (click)="changeTab(TABS.VITALS)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.VITALS">
+              Vitals
+            </button>
+          </li>
+
+          <li class="nav-item" (click)="changeTab(TABS.MEDICAL_CONDITIONS)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.MEDICAL_CONDITIONS">
+              Clinical Profile
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.ASSESSMENT)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.ASSESSMENT">
+              Assessment
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.AWV)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.AWV">
+              Care Gap
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.SELF_MANAGEMENT_PLAN)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.SELF_MANAGEMENT_PLAN">
+              Self Management Plan
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.PATIENT_SUMMARY)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.PATIENT_SUMMARY">
+              Care Plan(Active Ones)
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" (click)="changeTab(TABS.MONTHLY_CARE_REPORT)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.MONTHLY_CARE_REPORT">
+              Care Report
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.CALL_LOGS)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.CALL_LOGS">
+              Call Logs
+            </button>
+          </li>
+          <li class="nav-item" (click)="changeTab(TABS.GENERAL_NOTES)">
+            <button class="nav-link" [class.active]="selectedTab === TABS.GENERAL_NOTES">
+              General Notes
+            </button>
+          </li>
+        </ul>
+        <ng-container *ngIf="
+            selectedTab === TABS.ASSESSMENT ||
+            selectedTab === TABS.VITALS ||
+            selectedTab === TABS.MEDICAL_CONDITIONS ||
+            selectedTab === TABS.AWV ||
+            selectedTab === TABS.SELF_MANAGEMENT_PLAN ||
+            selectedTab === TABS.CALL_LOGS || 
+            selectedTab === TABS.MONTHLY_CARE_REPORT ||
+            selectedTab === TABS.GENERAL_NOTES 
+          ">
+          <app-date-time-filter [patientId]="patientId" [selectedTab]="selectedTab"
+            [ngClass]="{ disabled: disableViewClient }"></app-date-time-filter>
+        </ng-container>
+
+        <ng-container *ngIf="
+            selectedTab === TABS.PATIENT_SUMMARY ||
+            selectedTab === TABS.MONTHLY_CARE_REPORT
+          ">
+          <app-summary-filter [patientId]="patientId" [selectedTab]="selectedTab" (downloadPDF)="onDownloadpdf($event)"
+            (print)="onPrint($event)" (sendEmail)="onSendMail($event)" [ngClass]="{ disabled: disableViewClient }">
+          </app-summary-filter>
+        </ng-container>
+
+        <div class="tab-content">
+          <!-- Assessment -->
+          <ng-container *ngIf="selectedTab === TABS.ASSESSMENT">
+            <app-assessment [patientId]="patientId" [ngClass]="{ disabled: disableViewClient }"></app-assessment>
+          </ng-container>
+
+          <!-- Patient-Summary -->
+          <ng-container *ngIf="selectedTab === TABS.PATIENT_SUMMARY">
+            <app-patient-summary [patientId]="patientId" [ngClass]="{ disabled: disableViewClient }">
+            </app-patient-summary>
+          </ng-container>
+
+          <!-- Call-Logs -->
+          <ng-container *ngIf="selectedTab === TABS.CALL_LOGS">
+            <app-call-logs [patientId]="patientId" [ngClass]="{ disabled: disableViewClient }"
+              (openPatientSummaryPage)="selectedTab = TABS.PATIENT_SUMMARY" (startCall)="startCallWithAgenda($event)">
+            </app-call-logs>
+          </ng-container>
+
+          <!--Monthly Care Report -->
+          <ng-container *ngIf="selectedTab === TABS.MONTHLY_CARE_REPORT">
+            <app-monthly-care-report [selectedTab]="selectedTab" [patientId]="patientId"
+              [ngClass]="{ disabled: disableViewClient }"></app-monthly-care-report>
+          </ng-container>
+
+          <!-- Self Management Plan -->
+          <ng-container *ngIf="selectedTab === TABS.SELF_MANAGEMENT_PLAN">
+            <app-self-management-plan [ngClass]="{ disabled: disableViewClient }">
+            </app-self-management-plan>
+          </ng-container>
+
+          <!-- AWV -->
+          <ng-container *ngIf="selectedTab === TABS.AWV">
+            <app-awv [patientId]="patientId" [ngClass]="{ disabled: disableViewClient }"></app-awv>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Vitals -->
+      <div class="blood_pressure" [ngClass]="{ disabled: disableViewClient }">
+        <ng-container *ngIf="selectedTab === TABS.VITALS">
+          <app-vitals [ngClass]="{ disabled: disableViewClient }"></app-vitals>
+        </ng-container>
+
+        <!-- Medical Conditions -->
+        <ng-container *ngIf="selectedTab === TABS.MEDICAL_CONDITIONS">
+          <app-medical-conditions #referenceVariable [patientId]="patientId" [patientData]="_patientDetail"
+            [ngClass]="{ disabled: disableViewClient }"></app-medical-conditions>
+        </ng-container>
+        <!--  GENERAL_NOTES-->
+        <ng-container *ngIf="selectedTab === TABS.GENERAL_NOTES">
+          <app-general-notes [ngClass]="{ disabled: disableViewClient }">
+          </app-general-notes>
+        </ng-container>
+      </div>
+      <div class="audite_log">
+        <ul>
+          <li class="audit_log" data-bs-toggle="modal" data-bs-target="#auditLog"> <img
+              src="../../../../../assets/images/icons/audit.svg" alt=""> Audit log</li>
+          <li><span>Last updated date :</span>
+            <span class="dete">12-01-2022</span>
+          </li>
+          <li><span>Last updated by :</span>
+            <span class="dete">Dr. Shirley J. Casias</span>
+
+          </li>
+          <li><span>Created date :</span>
+            <span class="dete">12-01-2022</span>
+          </li>
+          <li><span>Created by :</span>
+            <span class="dete">Dr. Shirley J. Casias</span>
+          </li>
+          <li> <span class="view_log" data-bs-toggle="modal" data-bs-target="#viewLog"> <img
+                src="../../../../../assets/images/icons/view_log.svg" alt=""> viewer Log
+            </span> </li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- General Notes -->
+
+    <!-- Chronic Disease & Key Stats -->
+    <div class="col-lg-2" [ngClass]="{ disabled: disableViewClient }">
+      <div class="profile_right_box">
+        <div class="chro_con">
+          <h1 class="heading p-0">Chronic Conditions</h1>
+          <button class="btn btn_add" (click)="openChronicPopUp()">
+            <img src="../../../../../assets/images/icons/add33.svg" alt="" />
+          </button>
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <tbody>
+                <tr class="chronic" *ngFor="let chronical of selectedChronicalDiseases">
+                  <td>{{ chronical.disease_name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile_right_box remaining">
+        <p>
+          {{ _patientTotalTime.created_at | date : "MM-dd-yyyy" }}
+          <br />
+          Total Time {{ _patientTotalTime?.total_time }} <br />
+          (Remaining Days: {{ _patientTotalTime?.remaining_days }})
+        </p>
+        <button class="btn btn_view" (click)="openCallLogPopUp()">View</button>
+      </div>
+
+      <div class="profile_right_box">
+        <h1 class="heading p-0 mb-4">Key Stats</h1>
+        <p>Joined Date</p>
+        <h3>{{ _patientKeyStats?.date_joined | date : "MM-dd-yyyy" }}</h3>
+        <p>SYS</p>
+        <h3>
+          {{ _patientKeyStatsSystolic?.Sys | optionalField
+          }}{{ _patientKeyStatsSystolic?.unit }}
+        </h3>
+        <p>DIA</p>
+        <h3>{{ _patientKeyStatsHbaic?.HbA1C | optionalField }}</h3>
+        <p>Weight</p>
+        <h3>
+          {{ _patientKeyStatsWeight?.Weight | optionalField
+          }}{{ _patientKeyStatsWeight?.unit }}
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="displayChronicForm" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: 'auto', height: 'auto' }" (onHide)="closeChronicPopUp()" [modal]="true" [draggable]="false"
+  [resizable]="false" [showHeader]="true" [baseZIndex]="10000" [closable]="true">
+  <ng-template pTemplate="header">
+    <strong style="
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        color: #5f5bfe;
+      ">Add Chronic Condition</strong>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="p-field-checkbox" *ngFor="let chronical of chronic_diseases; let i = index">
+      <p-checkbox name="group1" [disabled]="chronical.has_disease === true ? true : false" [value]="chronical.id"
+        inputId="{{ chronical.id }}" [(ngModel)]="selectedPK"></p-checkbox>
+      <label for="{{ chronical.id }}">{{ chronical.disease_name }}</label>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" (click)="closeChronicPopUp()" class="btn add_goal">
+      Cancel
+    </button>
+    <button type="button" (click)="onSubmitChronicForm()" style="background: blue !important" class="btn add_goal">
+      Assign
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Add Goal -->
+<div class="modal" id="addGoal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="add_goal_header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Goal</h5>
+
+          <div class="goal_text">
+            <p>Goal :</p>
+            <p>Chronic Condition :</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Goal*</label>
+              <input type="text" placeholder="Albert Paul " class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Chronic Condition</label>
+              <select class="form-select">
+                <option>1</option>
+                <option>2</option>
+              </select>
+            </div>
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Goal Date*</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Goal Status</label>
+              <select class="form-select">
+                <option>1</option>
+                <option>2</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+            </div>
+
+            <div class="col-lg-12 intervention">
+              <button class="btn add_hospital add_goal btn_head me-2">
+                <img src="../../../../assets/images/icons/add6.svg" alt="Image" />Intervention
+              </button>
+
+              <div class="hide_intervetion">
+                <form>
+                  <div class="row">
+                    <div class="col-lg-6 mb-2">
+                      <label class="form-label">Title</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                      <label class="form-label">Free text</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                      <label class="form-label">Date</label>
+                      <input type="date" class="form-control" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <input type="checkbox" class="form-check-input me-2" id="" />
+              <label class="form-check-label">Patient Refused</label>
+            </div>
+            <div class="col-lg-6 text-end">
+              <button type="button" class="btn add_goal">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Not Of Use -->
+<!-- <div
+  class="modal fade addActivity"
+  id="
+addActivity"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">Add Activity</h5>
+      <div class="modal-body">
+        <form>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Task
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Goal
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Intervention
+            </label>
+          </div>
+
+          <button
+            type="button"
+            class="btn add_hospital btn_head add_goal float-end w-50 m-auto"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="startCall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="add_goal_header">
+          <h5 class="modal-title" id="exampleModalLabel">Agenda for meeting</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="startCall()">
+          <input type="text" [(ngModel)]="agenda" [ngModelOptions]="{ standalone: true }"
+            class="form-control form_blue" />
+          <button [disabled]="!agenda" type="submit" class="btn btn_head add_goal add-agenda float-end m-auto">
+            Start
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade addActivity addWidth" id="ProEdit">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{
+        IsEditProgramInfo == true
+        ? "Edit Program Information"
+        : "Program Information"
+        }}
+      </h5>
+      <div class="modal-body">
+        <form [formGroup]="patientForm">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Select Program*</label>
+              <select class="form-select" required formControlName="program_type" [class.is-invalid]="
+                  a['program_type'].invalid &&
+                  (a['program_type'].dirty || a['program_type'].touched)
+                ">
+                <option *ngFor="let item of patientProgram_name" [value]="item.id">
+                  {{ item.program_name }}
+                </option>
+              </select>
+              <div *ngIf="
+                  a['program_type'].invalid &&
+                  (a['program_type'].dirty || a['program_type'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="a['program_type'].errors?.['required']">
+                  Please select program.
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input type="date" class="form-control" required formControlName="date" [class.is-invalid]="
+                  a['date'].invalid && (a['date'].dirty || a['date'].touched)
+                " />
+              <div *ngIf="
+                  a['date'].invalid && (a['date'].dirty || a['date'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="a['date'].errors?.['required']">
+                  Date is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Status*</label>
+              <select class="form-select" required formControlName="program_status" [class.is-invalid]="
+                  a['program_status'].invalid &&
+                  (a['program_status'].dirty || a['program_status'].touched)
+                ">
+                <option *ngFor="let x of programInformation" [value]="x.value">
+                  {{ x.label }}
+                </option>
+              </select>
+              <div *ngIf="
+                  a['program_status'].invalid &&
+                  (a['program_status'].dirty || a['program_status'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="a['program_status'].errors?.['required']">
+                  Please select status.
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button *ngIf="IsEditProgramInfo == false" type="button"
+        class="btn add_hospital btn_head add_goal float-end m-auto" (click)="validatePatientProgramForm()">
+        Add
+      </button>
+      <button *ngIf="IsEditProgramInfo == true" type="button"
+        class="btn add_hospital btn_head add_goal float-end m-auto" (click)="UpdateProgramInfo()">
+        Update
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade addActivity addWidth" id="addTask">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">Add Task</h5>
+      <div class="modal-body">
+        <form [formGroup]="taksForm">
+          <div class="row">
+            <!-- gole_lookUp hide show code -->
+            <!-- <div class="radio_select">
+              <div class="form-check">
+                <p-radioButton name="groupname" label="Individual"  value="individual" [(ngModel)]="selectedValue"  [ngModelOptions]="{standalone: true}" (onClick) ="showGoleFiled($event)" ></p-radioButton>
+              </div>
+              <div class="form-check">
+                <p-radioButton name="groupname" label="Add Goal" value="gole" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}"  (onClick) ="showGoleFiled($event)" ></p-radioButton>
+              </div>
+              </div> -->
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Task Name *</label>
+              <input type="text" pInputText formControlName="task_name" required class="form-control"
+                [class.is-invalid]="
+                  T['task_name'].invalid &&
+                  (T['task_name'].dirty || T['task_name'].touched)
+                " />
+              <div *ngIf="
+                  T['task_name'].invalid &&
+                  (T['task_name'].dirty || T['task_name'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="T['task_name'].errors?.['required']">
+                  Task name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes *</label>
+              <input type="text" pInputText formControlName="notes" required class="form-control" [class.is-invalid]="
+                  T['notes'].invalid && (T['notes'].dirty || T['notes'].touched)
+                " />
+              <div *ngIf="
+                  T['notes'].invalid && (T['notes'].dirty || T['notes'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="T['notes'].errors?.['required']">
+                  Notes are required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 mb-3 position-relative">
+              <label class="form-label">Goal Look Up *</label>
+              <div class="select_div">
+                <input type="text" pInputText formControlName="gole_lookUp" required class="form-control"
+                  [class.is-invalid]="
+                  T['gole_lookUp'].invalid &&
+                  (T['gole_lookUp'].dirty || T['gole_lookUp'].touched)
+                " />
+                <div *ngIf="
+                    T['gole_lookUp'].invalid &&
+                    (T['gole_lookUp'].dirty || T['gole_lookUp'].touched)
+                  " class="invalid-feedback">
+                  <div *ngIf="T['gole_lookUp'].errors?.['required']">
+                    Please select goal look up.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date *</label>
+              <p-calendar inputId="basic" formControlName="date" [class.is-invalid]="
+                  T['date'].invalid && (T['date'].dirty || T['date'].touched)
+                "></p-calendar>
+              <div *ngIf="
+                  T['date'].invalid && (T['date'].dirty || T['date'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="T['date'].errors?.['required']">
+                  Please select date.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Status *</label>
+              <div class="select_div">
+                <p-dropdown [options]="stutusArry" placeholder="Select" optionLabel="label" formControlName="status"
+                  [class.is-invalid]="
+                    T['status'].invalid &&
+                    (T['status'].dirty || T['status'].touched)
+                  "></p-dropdown>
+                <div *ngIf="
+                    T['status'].invalid &&
+                    (T['status'].dirty || T['status'].touched)
+                  " class="invalid-feedback">
+                  <div *ngIf="T['status'].errors?.['required']">
+                    Please select status.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" (click)="onSubmitTask()" class="btn add_hospital btn_head add_goal float-end m-auto">
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade addActivity addWidth" id="viewLog">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">Viewer Log</h5>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Viewed By</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Brenda D. Bourget</td>
+              <td>16:30, 10/24/2022 </td>
+            </tr>
+            <tr>
+              <td>Brenda D. Bourget</td>
+              <td>16:30, 10/24/2022 </td>
+            </tr>
+            <tr>
+              <td>Brenda D. Bourget</td>
+              <td>16:30, 10/24/2022 </td>
+            </tr>
+            <tr>
+              <td>Brenda D. Bourget</td>
+              <td>16:30, 10/24/2022 </td>
+            </tr>
+            <tr>
+              <td>Brenda D. Bourget</td>
+              <td>16:30, 10/24/2022 </td>
+            </tr>
+
+
+
+          </tbody>
+        </table>
+        <button type="button" class="btn add_hospital btn_head add_goal float-end m-auto">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade addActivity addWidth" id="auditLog">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">Audit Logs</h5>
+      <div class="modal-body">
+        <p><span class="update">Last updated by :</span> <span class="dete">Dr. Shirley J. Casias</span></p>
+        <p><span class="update">Last updated date :</span> <span class="dete">12-01-2022</span></p>
+        <p><span class="update">Created by :</span> <span class="dete">Dr. Shirley J. Casias</span></p>
+        <p><span class="update">Created date :</span> <span class="dete">12-01-2022</span></p>
+        <button type="button" class="btn add_hospital btn_head add_goal float-end m-auto">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="call-log">
+  <p-dialog [(visible)]="displayCallLogForm" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: 'auto', height: 'auto' }" (onHide)="closeCallLogPopUp()" [modal]="true" [draggable]="false"
+    [resizable]="false" [closable]="true" [showHeader]="true" [baseZIndex]="10000">
+    <p-table #dt1 [value]="_totalCallLogs" [rows]="10" styleClass="p-datatable-sm"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['title', 'first_name', 'last_name']">
+      <ng-template pTemplate="caption">
+        <div class="row select_patient">
+          <div class="col-lg-6 ps-4">
+            <h5 class="title mt-2">Total Time</h5>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>S.no</th>
+          <th>User Email</th>
+          <th>Type</th>
+          <th>Total Time</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowIndex="rowIndex" let-logs>
+        <tr>
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ logs?.user_email | optionalField }}</td>
+          <td>{{ logs?.type | optionalField }}</td>
+          <td>
+            {{ logs?.time_spent | optionalField }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- <div class="row">
+      <div class="col-4 countMsg" [innerHTML]="showCountMsg"></div>
+      <div class="col-8 countMsg1 mt-2" *ngIf="_patient.length">
+        <p-paginator
+          [rows]="10"
+          [pageLinkSize]="4"
+          [totalRecords]="totalRecords"
+          (onPageChange)="paginate($event)"
+        ></p-paginator>
+      </div>
+    </div> -->
+    <ng-template pTemplate="footer">
+      <div class="col-lg-12 text-end mt-3">
+        <button class class="btn btn-primary adminButton btnColor" type="button" (click)="closeCallLogPopUp()">
+          Close
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</section>
+
+<!-- <section>
+  <p-dialog [(visible)]="displayChronicForm" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: '30vw' }" (onHide)="closeCallLogPopUp()" [modal]="true" [draggable]="false" [resizable]="false"
+    [closable]="true" [showHeader]="true" [baseZIndex]="10000">
+    <div class="chronic-form">
+      <form [formGroup]="ChronicForm"
+      (ngSubmit)="onSubmitChronicForm()"
+      >
+        <div class="row" >
+          <div class="col-md-12 pe-1">
+            <label class="form-label"> Chronic Disease</label>
+            <input type="text" pInputText minlength="1" maxlength="250" required
+              formControlName="chronic_dic" class="form-control" [class.is-invalid]="
+                  c['chronic_dic'].invalid &&
+                  (c['chronic_dic'].dirty || c['chronic_dic'].touched)
+                " />
+            <div *ngIf="
+                  c['chronic_dic'].invalid &&
+                  (c['chronic_dic'].dirty || c['chronic_dic'].touched)
+                " class="invalid-feedback">
+              <div *ngIf="c['chronic_dic'].errors?.['required']">
+                Chronic Disease is required.
+              </div>
+              <div *ngIf="c['chronic_dic'].errors?.['minlength']">
+                This field must have at least 1 character.
+              </div>
+              <div *ngIf="c['chronic_dic'].errors?.['maxlength']">
+                This field must have at most 250 characters.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-end">
+            <div class="form_reset_option">
+              <button type="submit" class="btn btn_reset me-md-3" (click)="resetchronicForm()">
+                Reset
+              </button>
+              <button class="btn btn_next">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="col-lg-12 text-end">
+        <button class class="btn btn-primary adminButton btnColor" type="button" (click)="closeChronicPopUp()">
+          Close
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</section> -->

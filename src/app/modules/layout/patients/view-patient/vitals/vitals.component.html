@@ -1,0 +1,769 @@
+
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>BMI</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showbmi"
+            (onChange)="bmiChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            (click)="openPopup('addBMI')"
+            alt=""
+          />
+        </p>
+      </div>
+      <div *ngIf="showbmi">
+        <h6
+          *ngFor="let item of trackerDetails?.bmi;index as i"
+          (click)="onUpdateBMI(item)"
+        >
+        <h4>Session {{i+1}}</h4>
+          Height : {{ item?.height_ft | optionalField }}, Weight :
+          {{ item?.weight | optionalField }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showbmi">
+        <app-vitals-graph label="Weight" [data]="getGraphData(trackerDetails?.bmi,'BMI')"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>Blood Pressure</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showbloodpressure"
+            (onChange)="bloodpressureChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            (click)="openPopup('BloodPressure')"
+          />
+        </p>
+      </div>
+      <div *ngIf="showbloodpressure">
+        <h6
+          *ngFor="let item of trackerDetails?.blood_pressure;index as i"
+          (click)="onUpdateBP(item)"
+        >
+        <h4>Session {{i+1}}</h4>
+          SBP : {{ item?.systolic }}, DBP : {{ item?.diastolic }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showbloodpressure">
+        <app-vitals-graph label="Pulse" [data]="getGraphData(trackerDetails?.blood_pressure,'BP')"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>Blood Glucose</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showbloodglucose"
+            (onChange)="bloodGlucoseChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            (click)="openPopup('BloodGlucose')"
+            alt=""
+          />
+        </p>
+      </div>
+      <div *ngIf="showbloodglucose">
+       
+        <h6
+          *ngFor="let item of trackerDetails?.blood_glucose;index as i"
+          (click)="onUpdateGlucose(item)"
+        >
+        <h4>Session {{i+1}}</h4>
+          SUGAR : {{ item?.blood_sugar }}, TYPE : {{ item?.test_type }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showbloodglucose">
+        <app-vitals-graph label="Blood Sugar" [data]="getGraphData(trackerDetails?.blood_glucose,'BG')"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>Cholesterol</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showcholestrol"
+            (onChange)="cholesterolChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            alt=""
+            (click)="openPopup('BloodCholesterol')"
+          />
+        </p>
+      </div>
+      <div *ngIf="showcholestrol">
+       
+        <h6
+          *ngFor="let item of trackerDetails?.colestrol; index as i"
+          (click)="onUpdateCholesterol(item)"
+        >
+        <h4>Session {{i+1}}</h4>
+          LDL : {{ item?.ldl }}, HDL : {{ item?.hdl }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showcholestrol">
+        <app-vitals-graph label="Total Colestrol" [data]="getGraphData(trackerDetails?.colestrol,'CH')"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>Pulse Ox</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showpulseox"
+            (onChange)="pulseOxChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            (click)="openPopup('PulseOx')"
+            alt=""
+          />
+        </p>
+      </div>
+      <div *ngIf="showpulseox">
+        
+        <h6
+          *ngFor="let item of trackerDetails?.pulseOx; index as i"
+          (click)="onUpdatepulseOx(item)"
+        >
+        <h4>Session {{i+1}}</h4>
+          SpO2 : {{ item?.spo2 }}, PULSE : {{ item?.pulse_rate }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showpulseox">
+        <app-vitals-graph label="Pulse Rate" [data]="getGraphData(trackerDetails?.pulseOx,'PO')"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="pressure">
+      <div class="press_text">
+        <h5>HBA1C</h5>
+        <p>
+          <img src="../../../../../assets/images/icons/add4.svg" alt="search" />
+          <p-toggleButton
+            onIcon="myCustomOnIcon1"
+            offIcon="myCustomOnIcon2"
+            [(ngModel)]="showhba1c"
+            (onChange)="hba1cChange($event)"
+          ></p-toggleButton>
+          &nbsp;
+          <img
+            src="../../../../../assets/images/icons/add5.svg"
+            (click)="openPopup('Hba1c')"
+            alt=""
+          />
+        </p>
+      </div>
+      <div *ngIf="showhba1c">
+        <h4></h4>
+        <h6
+          *ngFor="let item of trackerDetails?.hba1c; index as i"
+          (click)="onUpdateHBA1C(item)"
+        >
+          <h4>Session {{i+1}}</h4>
+          HBA1C : {{ item?.hbaic }}
+          <span>/ {{ item?.date | date : "MM-dd-yyyy" }}</span>
+        </h6>
+      </div>
+      <div *ngIf="!showhba1c">
+        <app-vitals-graph [data]="getGraphData(trackerDetails?.hba1c,'HB')" label="HBA1C"></app-vitals-graph>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- POP-UP'S -->
+<div
+  class="modal fade addActivity addWidth"
+  id="addBMI"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedbmiData?.id ? "Edit BMI" : "Add BMI" }}
+      </h5>
+      <div class="modal-body">
+        <form [formGroup]="bmiForm" (ngSubmit)="onSubmitBMIForm()">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                formControlName="date"
+                class="form-control"
+                [class.is-invalid]="
+                  bmiForm.controls['date'].touched &&
+                  bmiForm.controls['date'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-9 mb-3">
+              <label class="form-label">Weight*</label>
+              <input
+                type="text"
+                numbersOnly
+                formControlName="weight"
+                class="form-control"
+                [class.is-invalid]="
+                  bmiForm.controls['weight'].touched &&
+                  bmiForm.controls['weight'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-3 px-0 pt-1">
+              <label class="form-label"></label>
+              <div class="form-check mb-1">
+                <input
+                  class="form-check-input unitss"
+                  type="radio"
+                  value="kgs"
+                  formControlName="unit"
+                  id="flexCheckDefault1"
+                  name="unit"
+                />
+                <label class="form-check-label ms-0" for="flexCheckDefault1">
+                  kgs
+                </label>
+              </div>
+              <div class="form-check mb-0">
+                <input
+                  class="form-check-input unitss"
+                  type="radio"
+                  value="lbs"
+                  id="flexCheckDefault2"
+                  formControlName="unit"
+                  name="unit"
+                />
+                <label class="form-check-label ms-0" for="flexCheckDefault2">
+                  lbs
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Height*</label>
+              <input
+                type="text"
+                numbersOnly
+                formControlName="height_ft"
+                class="form-control form_blue"
+                placeholder="ft"
+                [class.is-invalid]="
+                  bmiForm.controls['height_ft'].touched &&
+                  bmiForm.controls['height_ft'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-6 mb-3 pt-2">
+              <label class="form-label"></label>
+              <input
+                type="text"
+                numbersOnly
+                formControlName="height_inch"
+                class="form-control form_blue"
+                placeholder="In"
+                [class.is-invalid]="
+                  bmiForm.controls['height_inch'].touched &&
+                  bmiForm.controls['height_inch'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+          [disabled]="submitted"
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade addActivity addWidth"
+  id="BloodPressure"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedBP?.id ? "Edit Blood Pressure" : "Add Blood Pressure" }}
+      </h5>
+      <div class="modal-body">
+        <form
+          [formGroup]="bloodPressureForm"
+          (ngSubmit)="onSubmitBloodPressureForm()"
+        >
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                [ngModel]="currentStringDate"
+                formControlName="date"
+                class="form-control"
+                [class.is-invalid]="
+                  bloodPressureForm.controls['date'].touched &&
+                  bloodPressureForm.controls['date'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Pulse*</label>
+              <input
+                type="text"
+                numbersOnly
+                formControlName="pulse"
+                class="form-control form_blue"
+                placeholder="bpm"
+                [class.is-invalid]="
+                  bloodPressureForm.controls['pulse'].touched &&
+                  bloodPressureForm.controls['pulse'].errors
+                "
+              />
+            </div>
+
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Systolic* </label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mmHg"
+                formControlName="systolic"
+                [class.is-invalid]="
+                  bloodPressureForm.controls['systolic'].touched &&
+                  bloodPressureForm.controls['systolic'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Diastolic* </label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mmHg"
+                formControlName="diastolic"
+                [class.is-invalid]="
+                  bloodPressureForm.controls['diastolic'].touched &&
+                  bloodPressureForm.controls['diastolic'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="notes"
+                [class.is-invalid]="
+                  bloodPressureForm.controls['notes'].touched &&
+                  bloodPressureForm.controls['notes'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade addActivity addWidth"
+  id="BloodGlucose"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedGlucose?.id ? "Edit Blood Glucose" : "Add Blood Glucose" }}
+      </h5>
+      <div class="modal-body">
+        <form
+          [formGroup]="bloodGlucoseForm"
+          (ngSubmit)="onSubmitBloodGlucoseForm()"
+        >
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                class="form-control"
+                [ngModel]="currentStringDate"
+                formControlName="date"
+                [class.is-invalid]="
+                  glucose['date'].touched && glucose['date'].errors
+                "
+              />
+            </div>
+
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Test Type* </label>
+              <select
+                class="form-select"
+                formControlName="test_type"
+                [class.is-invalid]="
+                  glucose['test_type'].touched && glucose['test_type'].errors
+                "
+              >
+                <option value="" selected disabled>Select</option>
+                <option value="REACTIVEPROTEIN">Reactive Protein</option>
+                <option value="BLOODTEST">Blood Test</option>
+              </select>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Blood Sugar</label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mg/dL"
+                formControlName="blood_sugar"
+                [class.is-invalid]="
+                  glucose['blood_sugar'].touched &&
+                  glucose['blood_sugar'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="notes"
+                [class.is-invalid]="
+                  glucose['notes'].touched && glucose['notes'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade addActivity addWidth"
+  id="BloodCholesterol"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedCholesterol?.id ? "Edit Cholesterol" : "Add Cholesterol" }}
+      </h5>
+      <div class="modal-body">
+        <form [formGroup]="colestrolForm" (ngSubmit)="onSubmitColestrolForm()">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                [ngModel]="currentStringDate"
+                class="form-control"
+                formControlName="date"
+                [class.is-invalid]="
+                  colestrolForm.controls['date'].touched &&
+                  colestrolForm.controls['date'].errors
+                "
+              />
+            </div>
+
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Total Cholosterol*</label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mg/dL"
+                formControlName="total_cholesterol"
+                [class.is-invalid]="
+                  colestrolForm.controls['total_cholesterol'].touched &&
+                  colestrolForm.controls['total_cholesterol'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Triglycerides* </label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mg/dL"
+                formControlName="triglycerides"
+                [class.is-invalid]="
+                  colestrolForm.controls['triglycerides'].touched &&
+                  colestrolForm.controls['triglycerides'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">HDL* </label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mg/dL"
+                formControlName="hdl"
+                [class.is-invalid]="
+                  colestrolForm.controls['hdl'].touched &&
+                  colestrolForm.controls['hdl'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">LDL* </label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="mg/dL"
+                formControlName="ldl"
+                [class.is-invalid]="
+                  colestrolForm.controls['ldl'].touched &&
+                  colestrolForm.controls['ldl'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="notes"
+                [class.is-invalid]="
+                  colestrolForm.controls['notes'].touched &&
+                  colestrolForm.controls['notes'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade addActivity addWidth"
+  id="PulseOx"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedpulseOx ? "Edit Pulse Ox" : "Add Pulse Ox" }}
+      </h5>
+      <div class="modal-body">
+        <form [formGroup]="pulseOxForm" (ngSubmit)="onSubmitPulseOxForm()">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                class="form-control"
+                [ngModel]="currentStringDate"
+                formControlName="date"
+                [class.is-invalid]="
+                  pulse['date'].touched && pulse['date'].errors
+                "
+              />
+            </div>
+
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">SpO2* </label>
+              <select
+                class="form-select"
+                formControlName="spo2"
+                [class.is-invalid]="
+                  pulse['spo2'].touched && pulse['spo2'].errors
+                "
+              >
+                <option disabled selected>Select one</option>
+                <option value="ONE">1</option>
+                <option value="TWO">2</option>
+              </select>
+            </div>
+            <div class="col-lg-6 mb-3">
+              <label class="form-label">Pulse Rate*</label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="Bpm"
+                formControlName="pulse_rate"
+                [class.is-invalid]="
+                  pulse['pulse_rate'].touched && pulse['pulse_rate'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="notes"
+                [class.is-invalid]="
+                  pulse['notes'].touched && pulse['notes'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade addActivity addWidth"
+  id="Hba1c"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ckeck_box">
+      <h5 class="heading">
+        {{ selectedHBA1C?.id ? "Edit HbA1c" : "Add HbA1c" }}
+      </h5>
+      <div class="modal-body">
+        <form [formGroup]="hba1cForm" (ngSubmit)="onSubmitHba1cForm()">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Date*</label>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="date"
+                [ngModel]="currentStringDate"
+                [class.is-invalid]="
+                  hba1c['date'].touched && hba1c['date'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">HbA1c*</label>
+              <input
+                type="text"
+                numbersOnly
+                class="form-control form_blue"
+                placeholder="%"
+                formControlName="hbaic"
+                [class.is-invalid]="
+                  hba1c['hbaic'].touched && hba1c['hbaic'].errors
+                "
+              />
+            </div>
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Notes </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="notes"
+                [class.is-invalid]="
+                  hba1c['notes'].touched && hba1c['notes'].errors
+                "
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn add_hospital btn_head add_goal float-end m-auto"
+          >
+            {{ actionButton }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

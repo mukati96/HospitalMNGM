@@ -1,0 +1,202 @@
+<div *ngIf="goalsData && goalsData.length">
+  <div class="col-lg-12 text-end">
+    <a (click)="cancel.emit()" class="go_back">Go Back</a>
+    <button class="btn add_hospital add_goal btn_head me-2" data-bs-toggle="modal" data-bs-target="#addIntervention">
+      <img src="../../../../assets/images/icons/add6.svg" alt="Image" />Add
+      Task
+    </button>
+  </div>
+<ng-container *ngFor="let item of goalsData;index as i">
+  <div class="goal-name-wrapper">
+      <ng-container *ngIf="item?.name">
+        <p class="goal_name">Goal Name</p>
+        <h1 class="heading">{{ item?.name }}</h1>
+      </ng-container>
+  </div>
+
+  
+  <ng-container>
+    <div class="row goal_div">
+      <div class="col-lg-2">
+        <p>Goal Date</p>
+        <h5 class="mb-4">
+          {{ item?.goal_date | date: "MM-dd-yyyy" }}
+        </h5>
+      </div>
+      <div class="col-lg-3"></div>
+      <div class="col-lg-5">
+        <p>Goal Notes</p>
+        <p class="text_area">
+          {{ item?.notes | optionalField }}
+        </p>
+      </div>
+      <div class="col-lg-2">
+        <p>Goal Status</p>
+        <h4>
+          <select aria-label="Default select example" class="form-select">
+            <option>{{ item?.goal_status }}</option>
+          </select>
+        </h4>
+      </div>
+    </div>
+    <h1 class="heading border_heading">Steps to Acheive Goal</h1>
+    <div class="goal_div">
+      <div class="row">
+        <div class="col-lg-5" *ngFor="let challengeItem of item?.steps_to_achieve_goal;index as i">
+          <p>Goal Plan - {{i+1}}</p>
+          <p class="text_area">
+            {{challengeItem?.goal_plan}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <h1 class="heading border_heading">Goal Challenges</h1>
+    <div class="goal_div">
+      <div class="row">
+        <div class="col-lg-5" *ngFor="let challengeGoal of item?.challenge_goal;index as i">
+          <p>Issues/Challenges - {{i+1}}</p>
+          <p class="text_area">
+            {{challengeGoal.challenges}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <h1 class="heading border_heading">Support / Assistance</h1>
+    <div class="goal_div">
+      <div class="row">
+        <div class="col-lg-5" *ngFor="let goalAst of item?.assistance_goal;index as i">
+          <p>Support Type - {{i+1}}</p>
+          <p class="text_area">
+            {{goalAst.support_type}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="item.goal_tasks.length">
+    <ng-container *ngFor="let task of item.goal_tasks;index as j">
+      <h1 class="heading border_heading">Task - {{j+1}}</h1>
+      <div class="goal_div" >
+        <div class="row">
+          <div class="col-lg-2">
+            <p>From Date</p>
+            <h5 class="mb-4">
+              {{ task?.from_date | date: "MM-dd-yyyy" }}
+            </h5>
+            <p>To Date</p>
+            <h5>{{ task?.to_date | date: "MM-dd-yyyy" }}</h5>
+          </div>
+          <div class="col-lg-3">
+            <p>Recurrence Pattern</p>
+            <h5 class="mb-4">
+              <ng-container *ngFor="let rec of task?.reccurance_pattern">
+                {{ rec }},
+              </ng-container>
+              <ng-container *ngIf="!task?.reccurance_pattern?.length">N/A</ng-container>
+            </h5>
+            <p>Task Date</p>
+            <h5 class="mb-4">
+              {{task?.date | date: "MM-dd-yyyy"}} 
+           </h5>
+          </div>
+          <div class="col-lg-5">
+            <p>Task Notes</p>
+            <p class="text_area">
+              {{ task?.notes | optionalField }}
+            </p>
+          </div>
+          <div class="col-lg-2">
+            <p>Task Status</p>
+            <h4>
+              <select aria-label="Default select example" class="form-select">
+                <option>{{ task?.status }}</option>
+              </select>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+</div>
+​
+<!-- Add Intervention Pop-UP -->
+<div class="modal fade" id="addIntervention" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="">
+        <div class="add_goal_header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="interventionForm" (ngSubmit)="onSubmitIntervention()">
+          <div class="row">
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-control" formControlName="date" [ngModel]="currentStringDate" />
+              <app-error [errLabel]="interventionForm | inputError: 'date':'Date'"></app-error>
+            </div>
+​
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Notes</label>
+              <input type="text" class="form-control" formControlName="notes" />
+            </div>
+            <div class="col-lg-6 mb-2">
+              <label class="form-label">Status</label>
+              <select class="form-select" formControlName="status">
+                <option value="PENDING">Pending</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
+              <app-error [errLabel]="interventionForm | inputError: 'status':'Status'"></app-error>
+            </div>
+​
+            <div class="col-12 recurrence">
+              <h5>Recurrence Pattern : <span>
+                  <p-toggleButton onLabel="OFF" offLabel="ON" (click)="showRecurrence=!showRecurrence"></p-toggleButton>
+                </span>
+              </h5>
+              <div class="ckeck_box"  *ngIf="showRecurrence">
+                <div class="form-check" *ngFor="let item of recurrencePatterns; index as i">
+                   <div class="ckeck_box" class="ui-g-12">
+                  <p-radioButton [value]="item" [label]="item" formControlName="reccurance_pattern" inputId="opt + i"></p-radioButton>
+                </div>
+                </div>
+              </div>
+              <div *ngIf="interventionForm.get('reccurance_pattern')?.value === 'Daily' && showRecurrence">
+                <label class="form-check form-check-label ckeck_box" *ngFor="let item of dailyField">
+                  <p-checkbox  value="{{item}}" [(ngModel)]="selectedValues" [ngModelOptions]="{standalone: true}"></p-checkbox>{{ item }}
+                </label>
+              </div>
+              <div *ngIf="interventionForm.get('reccurance_pattern')?.value === 'Daily' && selectedValues.length == 0" style="color:#dc3545; text-align: center">Atleast one day should be selected</div>
+              <h5 class="mt-2">Date Range</h5>
+              <div class="row">
+                <div class="col-lg-6 mb-2">
+                  <label class="form-label">From Date</label>
+                  <input type="date" class="form-control" formControlName="from_date" [ngModel]="currentStringDate" />
+                  <app-error [errLabel]="
+                      interventionForm | inputError: 'from_date':'From Date'
+                    "></app-error>
+                </div>
+                <div class="col-lg-6 mb-2">
+                  <label class="form-label">To Date</label>
+                  <input type="date" class="form-control" formControlName="to_date" [ngModel]="currentStringDate" />
+                  <app-error [errLabel]="
+                      interventionForm | inputError: 'to_date':'To Date'
+                    "></app-error>
+                </div>
+              </div>
+            </div>
+​
+            <div class="col-lg-12 text-end mt-2">
+              <button type="button" class="btn reset" (click)="reset()">
+                Reset
+              </button>
+              <button type="submit" class="btn add_goal">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

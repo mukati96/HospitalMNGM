@@ -1,0 +1,168 @@
+<div class="row mb-3">
+    <div class="col-lg-6">
+        <h1 class="heading">Annual Wellness Visit</h1>
+    </div>
+    <div class="col-lg-6 text-end">
+        <button class="btn add_hospital btn_head me-2" data-bs-toggle="modal" data-bs-target="#screening" (click)="openScreeningInfoPopUp()">
+      <img src="../../../../assets/images/icons/add3.svg" alt="Image" />Add New
+      Screening
+    </button>
+    </div>
+</div>
+
+<div class="table-responsive pb-3">
+    <table class="table table-striped task_table">
+        <thead>
+            <tr>
+                <th>S.no.</th>
+                <th>Services & Screenings</th>
+                <th>Date Of Last Service</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of _awvList; let i = index" data-bs-target="#screening" data-bs-toggle="modal" (click)="editScreeningInfo(x)">
+                <td>{{ i }}</td>
+                <td>{{ x.services_and_Screening_name }}</td>
+                <td>{{ x.date_of_last_services | date : "MM-dd-yyyy" }}</td>
+                <td>
+                    <span [ngStyle]="
+              x.annual_wellness_status == 'Met'
+                ? { color: '#44ca3f' }
+                : x.annual_wellness_status == 'Not-Met'
+                ? { color: '#ce152e' }
+                : x.annual_wellness_status == 'Excluded'
+                ? { color: '#d2c82d' }
+                : {}
+            ">
+            {{ x.annual_wellness_status }}
+          </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="screening" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <h5 class="heading">
+                {{ IsEditScreeningInfo == true ? "Edit New Screening" : "Add New Screening" }}
+            </h5>
+            <div class="modal-body">
+                <form [formGroup]="avwForm">
+                    <div class="mb-3">
+                        <label for="services_and_Screening_name" class="col-form-label">Services & Screening Name</label
+            >
+            <select
+              class="form-select"
+              id="services_and_Screening_name"
+              formControlName="services_and_Screening_name"
+              [class.is-invalid]="
+                a['services_and_Screening_name'].invalid &&
+                (a['services_and_Screening_name'].dirty ||
+                  a['services_and_Screening_name'].touched)
+              "
+            >
+              <option *ngFor="let x of _screenList" [value]="x.id">
+                {{ x.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                a['services_and_Screening_name'].invalid &&
+                (a['services_and_Screening_name'].dirty ||
+                  a['services_and_Screening_name'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div
+                *ngIf="a['services_and_Screening_name'].errors?.['required']"
+              >
+                Services and screening name is required.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="date_of_last_services" class="col-form-label"
+              >Date Of Last Service</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="date_of_last_services"
+              required
+              formControlName="date_of_last_services"
+              [class.is-invalid]="
+                a['date_of_last_services'].invalid &&
+                (a['date_of_last_services'].dirty ||
+                  a['date_of_last_services'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                a['date_of_last_services'].invalid &&
+                (a['date_of_last_services'].dirty ||
+                  a['date_of_last_services'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="a['date_of_last_services'].errors?.['required']">
+                Date of last service is required.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="annual_wellness_status" class="col-form-label"
+              >Status</label
+            >
+            <select
+              class="form-select"
+              formControlName="annual_wellness_status"
+              [class.is-invalid]="
+                a['annual_wellness_status'].invalid &&
+                (a['annual_wellness_status'].dirty ||
+                  a['annual_wellness_status'].touched)
+              "
+            >
+              <option *ngFor="let x of _hospitalStatus" [value]="x.value">
+                {{ x.label }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                a['annual_wellness_status'].invalid &&
+                (a['annual_wellness_status'].dirty ||
+                  a['annual_wellness_status'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="a['annual_wellness_status'].errors?.['required']">
+                Please select status.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="notes" class="col-form-label">Notes</label>
+                        <input type="text" class="form-control" id="notes" required formControlName="notes" [class.is-invalid]="
+                a['notes'].invalid && (a['notes'].dirty || a['notes'].touched)
+              " />
+                        <div *ngIf="
+                a['notes'].invalid && (a['notes'].dirty || a['notes'].touched)
+              " class="invalid-feedback">
+                            <div *ngIf="a['notes'].errors?.['required']">
+                                Please enter notes.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <button *ngIf="IsEditScreeningInfo == false" type="button" class="btn add_hospital btn_head me-2 w-50 m-auto" (click)="validatepAwvForm()">
+        Add
+      </button>
+            <button *ngIf="IsEditScreeningInfo == true" type="button" class="btn add_hospital btn_head me-2 w-50 m-auto" (click)="UpdateScreeningInfo()">
+        Update
+      </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,346 @@
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="page_content">
+            <form [formGroup]="providersForm" (ngSubmit)="validatepProvidersForm()">
+                <div class="row">
+                    <div class="col-md-8 left_content_page">
+                        <h1>{{ customText }}</h1>
+                        <div class="row mb-5">
+                            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                                <label class="form-label">NPI ID *</label>
+                                <div class="select_div">
+                                    <!-- <app-search-with-pagination
+                  [form]="providersForm" controlName="npi_id" [list]="npiIdData"
+                  bindKey="npi" displayKey="name" (applySearch)="onApplySearch($event)"
+                  (pageChange)="onScrollToBottom($event)"
+                  (itemSelected)="patchNpiData($event)" [isLoading]="isLoadingNPIData">
+                  </app-search-with-pagination> -->
+                                    <app-search-with-select-dropdown [form]="providersForm" controlName="npi_id" [list]="npiIdData" bindKey="npi" displayKey="name" (applySearch)="onApplySearch($event)" (itemSelected)="patchNpiData($event)" [isLoading]="isLoadingNPIData">
+                                    </app-search-with-select-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                                <label class="form-label">Taxonomy Code Set *</label>
+                                <input type="text" pInputText class="form-control" required formControlName="taxonomy_code_set" [class.is-invalid]="
+                    p['taxonomy_code_set'].invalid &&
+                    (p['taxonomy_code_set'].dirty ||
+                      p['taxonomy_code_set'].touched)
+                  " />
+                                <div *ngIf="
+                    p['taxonomy_code_set'].invalid &&
+                    (p['taxonomy_code_set'].dirty ||
+                      p['taxonomy_code_set'].touched)
+                  " class="invalid-feedback">
+                                    <div *ngIf="p['taxonomy_code_set'].errors?.['required']">
+                                        Taxonomy code set is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                                <label class="form-label">Taxonomy Code *</label>
+                                <input type="text" pInputText class="form-control" required formControlName="taxonomy_code" [class.is-invalid]="
+                    p['taxonomy_code'].invalid &&
+                    (p['taxonomy_code'].dirty || p['taxonomy_code'].touched)
+                  " />
+                                <div *ngIf="
+                    p['taxonomy_code'].invalid &&
+                    (p['taxonomy_code'].dirty || p['taxonomy_code'].touched)
+                  " class="invalid-feedback">
+                                    <div *ngIf="p['taxonomy_code'].errors?.['required']">
+                                        Taxonomy code is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 mt-md-3">
+                                <label class="form-label">Taxonomy Description *</label>
+                                <input type="text" pInputText class="form-control" required formControlName="taxonomy_description" [class.is-invalid]="
+                    p['taxonomy_description'].invalid &&
+                    (p['taxonomy_description'].dirty ||
+                      p['taxonomy_description'].touched)
+                  " />
+                                <div *ngIf="
+                    p['taxonomy_description'].invalid &&
+                    (p['taxonomy_description'].dirty ||
+                      p['taxonomy_description'].touched)
+                  " class="invalid-feedback">
+                                    <div *ngIf="p['taxonomy_description'].errors?.['required']">
+                                        Taxonomy description is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact_information">
+                            <a href="">Address & Contact Information</a>
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" pInputText formControlName="first_name" required class="form-control" [class.is-invalid]="
+                      p['first_name'].invalid &&
+                      (p['first_name'].dirty || p['first_name'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['first_name'].invalid &&
+                      (p['first_name'].dirty || p['first_name'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['first_name'].errors?.['required']">
+                                            First name is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                                    <label class="form-label">Middle Name</label>
+                                    <input type="text" pInputText formControlName="middle_name" class="form-control" />
+                                    <!-- [class.is-invalid]="
+                  p['middle_name'].invalid &&
+                  (p['middle_name'].dirty || p['middle_name'].touched)
+                " -->
+
+                                    <!-- <div
+                    *ngIf="
+                      p['middle_name'].invalid &&
+                      (p['middle_name'].dirty || p['middle_name'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="p['middle_name'].errors?.['required']">
+                      Middle name is required.
+                    </div>
+                  </div> -->
+                                </div>
+
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" pInputText formControlName="last_name" required class="form-control" [class.is-invalid]="
+                      p['last_name'].invalid &&
+                      (p['last_name'].dirty || p['last_name'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['last_name'].invalid &&
+                      (p['last_name'].dirty || p['last_name'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['last_name'].errors?.['required']">
+                                            Last name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                                    <label class="form-label">Gender *</label>
+                                    <div class="select_div gender_div">
+                                        <p-dropdown [options]="userGender" placeholder="Select" optionLabel="label" optionValue="value" formControlName="gender" [class.is-invalid]="
+                        p['gender'].invalid &&
+                        (p['gender'].dirty || p['gender'].touched)
+                      "></p-dropdown>
+                                        <div *ngIf="
+                        p['gender'].invalid &&
+                        (p['gender'].dirty || p['gender'].touched)
+                      " class="invalid-feedback">
+                                            <div *ngIf="p['gender'].errors?.['required']">
+                                                Please select gender.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Email ID *</label>
+                                    <input type="text" pInputText appLowerCase formControlName="email" required class="form-control" [class.is-invalid]="
+                      p['email'].invalid &&
+                      (p['email'].dirty || p['email'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['email'].invalid &&
+                      (p['email'].dirty || p['email'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['email'].errors?.['required']">
+                                            Email Id is required.
+                                        </div>
+                                        <div *ngIf="!p['email'].errors?.['required'] && p['email'].errors?.['isEmail']">
+                                            Invalid email format.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Phone 1 *</label>
+                                    <input type="text" pInputText formControlName="contact_number" required maxlength="10" class="form-control" [class.is-invalid]="
+                      p['contact_number'].invalid &&
+                      (p['contact_number'].dirty || p['contact_number'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['contact_number'].invalid &&
+                      (p['contact_number'].dirty || p['contact_number'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['contact_number'].errors?.['required']">
+                                            Phone No. 1 is required.
+                                        </div>
+                                        <div *ngIf="!p['contact_number'].errors?.['required']
+                && p['contact_number'].errors?.['isMobile']">
+                                            Invalid phone number.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Phone 2 *</label>
+                                    <input type="text" pInputText formControlName="contact_number_two" maxlength="10" class="form-control" [class.is-invalid]="
+                      p['contact_number_two'].invalid &&
+                      (p['contact_number_two'].dirty ||
+                        p['contact_number_two'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['contact_number_two'].invalid &&
+                      (p['contact_number_two'].dirty ||
+                        p['contact_number_two'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['contact_number_two'].errors?.['required']">
+                                            Phone No. 2 is required.
+                                        </div>
+                                        <div *ngIf="!p['contact_number_two'].errors?.['required']
+                  && p['contact_number_two'].errors?.['isMobile']">
+                                            Invalid phone number.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Address 1 *</label>
+                                    <input type="text" pInputText formControlName="address_1" required class="form-control" [class.is-invalid]="
+                      p['address_1'].invalid &&
+                      (p['address_1'].dirty || p['address_1'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['address_1'].invalid &&
+                      (p['address_1'].dirty || p['address_1'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['address_1'].errors?.['required']">
+                                            Address 1 is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Address 2 (Optional)</label>
+                                    <input type="text" pInputText formControlName="address_2" class="form-control" />
+                                    <!-- [class.is-invalid]="
+                      p['address_2'].invalid &&
+                      (p['address_2'].dirty || p['address_2'].touched)
+                    " -->
+                                    <!-- <div
+                    *ngIf="
+                      p['address_2'].invalid &&
+                      (p['address_2'].dirty || p['address_2'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="p['address_2'].errors?.['required']">
+                      Address 2 is required.
+                    </div>
+                  </div> -->
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">City *</label>
+                                    <input type="text" pInputText formControlName="city" required class="form-control" [class.is-invalid]="
+                      p['city'].invalid &&
+                      (p['city'].dirty || p['city'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['city'].invalid &&
+                      (p['city'].dirty || p['city'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['city'].errors?.['required']">
+                                            City is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">State *</label>
+                                    <input type="text" pInputText formControlName="state" required class="form-control" [class.is-invalid]="
+                      p['state'].invalid &&
+                      (p['state'].dirty || p['state'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['state'].invalid &&
+                      (p['state'].dirty || p['state'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['state'].errors?.['required']">
+                                            State is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Zip *</label>
+                                    <input type="text" pInputText formControlName="zip_code" required maxlength="10" mask="00000-0000" class="form-control" [class.is-invalid]="
+                      p['zip_code'].invalid &&
+                      (p['zip_code'].dirty || p['zip_code'].touched)
+                    " />
+                                    <div *ngIf="
+                      p['zip_code'].invalid &&
+                      (p['zip_code'].dirty || p['zip_code'].touched)
+                    " class="invalid-feedback">
+                                        <div *ngIf="p['zip_code'].errors?.['required']">
+                                            Zip code is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 mt-md-4">
+                                    <label class="form-label">Status *</label>
+                                    <div class="select_div">
+                                        <p-dropdown placeholder="Select" [options]="stutusArry" optionLabel="label" optionValue="value" formControlName="provider_status" [class.is-invalid]="
+                        p['provider_status'].invalid &&
+                        (p['provider_status'].dirty ||
+                          p['provider_status'].touched)
+                      "></p-dropdown>
+                                        <div *ngIf="
+                        p['provider_status'].invalid &&
+                        (p['provider_status'].dirty ||
+                          p['provider_status'].touched)
+                      " class="invalid-feedback">
+                                            <div *ngIf="p['provider_status'].errors?.['required']">
+                                                Please select provider status.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row text-end mt-5">
+                            <div class="col-md-12">
+                                <div class="form_reset_option">
+                                    <button type="reset" class="btn btn_reset me-md-3" (click)="resetProvidersForm()" [disabled]="this._careMgId ? true : false">
+                    Reset
+                  </button>
+
+                                    <button class="btn btn_next">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="upload_image mt-md-5 text-center img-sec">
+                            <div class="upload_img attach-img">
+                                <img *ngIf="!imgURL" src="../../../../../assets/images/user_img.png" alt="user_img" />
+                                <img [src]="imgURL | safeUrl" *ngIf="
+                    otherImgPath == 'png' ||
+                    otherImgPath == 'jpg' ||
+                    otherImgPath == 'jpeg'
+                  " alt="uploaded doc" />
+                            </div>
+                            <div class="file file--upload mt-5 ms-md-4">
+                                <label for="uploadLead-1">
+                  <img
+                    src="../../../../../assets/images/icons/up_arrow.svg"
+                    alt=""
+                  />
+                  Upload Image
+                </label>
+                                <input #file1 id="uploadLead-1" type="file" (change)="fileChange($event)" multiple accept="image/jpg, image/png, image/jpeg, application/pdf, application/msword, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .cgm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

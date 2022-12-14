@@ -1,0 +1,279 @@
+<div class="d-block download-btn">
+  <!-- <button type="button" class="btn" (click)="createAndDownloadPdf()">
+    Download Report
+  </button> -->
+</div>
+<div class="summary" id="patient-summary">
+  <div class="top_head">
+    <img src="../../../../../../assets/images/icons/logo.svg" alt="" />
+    <p class="sum_head">
+      Last Updated : <span>{{ patientSummary?.last_updated | date }}</span>
+    </p>
+  </div>
+
+ 
+  <div class="row pesnal_info" *ngIf="patientSummaryData.personal_information">
+    <h2 class="mt-1">Personal Information</h2>
+    <div class="col-lg-6 mt-1">
+      <div class="info_text">
+        <p>Name : {{ patientSummaryData?.personal_information?.name }}</p>
+       
+      </div>
+      <div class="info_text">
+        <p>Gender :</p>
+        <span>{{ patientSummaryData?.personal_information?.gender }}</span>
+      </div>
+
+      <div class="info_text">
+        <p>Email ID :</p>
+        <span>{{ patientSummaryData?.personal_information?.email | optionalField }}</span>
+      </div>
+
+      <div class="info_text">
+        <p>Tobacco Use :</p>
+        <span>No</span>
+      </div>
+    </div>
+    <div class="col-lg-6 mt-1">
+      <div class="info_text">
+        <p>Address:</p>
+        <span>{{ patientSummaryData?.personal_information?.address }}<br /> </span>
+      </div>
+      <div class="info_text">
+        <p>Martial Status :</p>
+        <span>N/A</span>
+      </div>
+      <div class="info_text">
+        <p>Cell Phone :</p>
+        <span>{{ patientSummaryData?.personal_information?.cell_phone }}3</span>
+      </div>
+      <div class="info_text">
+        <p>Home Phone :</p>
+        <span>{{ patientSummaryData?.personal_information?.home_phone }}</span>
+      </div>
+
+      <div class="info_text">
+        <p>Beneficiiary Status :</p>
+        <span>{{ patientSummaryData?.personal_information?.beneficiiary_status }}</span>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="table-responsive" *ngIf="patientSummaryData.medication && patientSummaryData.medication.length">
+    <h2 class="mt-1">Medications</h2>
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>S.no</th>
+          <th>Medication Name</th>
+          <th>Dose</th>
+          <th>Type</th>
+          <th>Frequency</th>
+          <th>Prescriber</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of patientSummaryData.medication; let i = index">
+          <td>{{ i }}</td>
+          <td>{{ obj.name }}</td>
+          <td>{{ obj.dose }}</td>
+          <td>{{ obj.type }}</td>
+          <td>{{ obj.frequency }}</td>
+          <td>{{ obj.prescriber }}</td>
+          <td>{{ obj.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+  <div class="row vitals_box" *ngIf="patientSummaryData.vitals">
+    <h2>Vitals</h2>
+    <div class="col-lg-6" *ngIf="patientSummaryData.vitals.bmi && patientSummaryData.vitals.bmi.length ">
+      <h4 class="mt-1">BMI</h4>
+      <div class="vitals" *ngFor="let obj of patientSummaryData.vitals.bmi; let i = index">
+      <div class="row">
+        <div class="col-md-4">
+          Weight :
+        </div>
+        <div class="col-md-4 rightAlign">
+          {{obj.weight}}
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          Height ft :
+        </div>
+        <div class="col-md-4 rightAlign">
+          {{obj.height_ft}}
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          height Inch  :
+        </div>
+        <div class="col-md-4 rightAlign">
+          {{obj.height_inch}}
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6" *ngIf="patientSummaryData.vitals.bloodpressure && patientSummaryData.vitals.bloodpressure.length ">
+      <h4 class="mt-1">Blood Pressure</h4>
+      <div class="vitals" *ngFor="let obj of patientSummaryData.vitals.bloodpressure; let i = index">
+        
+        <div class="row">
+          <div class="col-md-4">
+            Diastolic  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.diastolic}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            Pulse  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.pulse}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            Systolic  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.systolic}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6" *ngIf="patientSummaryData.vitals.cholesterol && patientSummaryData.vitals.cholesterol.length ">
+      <h4 class="mt-1">Cholestrol</h4>
+      <div class="vitals" *ngFor="let obj of patientSummaryData.vitals.cholesterol; let i = index">
+       
+        <div class="row">
+          <div class="col-md-4">
+            hdl  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.hdl}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            ldl  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.ldl}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            Total Cholesterol  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.total_cholesterol}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            Triglycerides  :
+          </div>
+          <div class="col-md-4 rightAlign">
+            {{obj.triglycerides}}
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6" *ngIf="patientSummaryData.vitals.bloodglucose && patientSummaryData.vitals.bloodglucose.length">
+      <h4 class="mt-1">Blood Glucose</h4>
+      <div class="vitals" *ngFor="let obj of patientSummaryData.vitals.bloodglucose; let i = index">
+        <div class="row">
+          <div class="col-md-4">
+            Blood Sugar  :
+          </div>
+          <div class="col-md-2 rightAlign">
+            {{obj.blood_sugar}}
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            Test Type  :
+          </div>
+          <div class="col-md-2 rightAlign">
+            {{obj.test_type}}
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="patientSummaryData.self_management_goals">
+    <div class="col-lg-7">
+      <h2 class="mt-1">Self Management Goals</h2>
+      <div class="self_manage_goal" *ngFor="let goal of patientSummaryData.self_management_goals">
+        <div class="goal_text">
+          <p>Goal Name</p>
+          <h3>{{ goal.goal_name }}</h3>
+        </div>
+        <div class="goal_text">
+          <p>Assigned Date</p>
+          <h6>{{ goal.goal_date | date: "MM-dd-yyyy" }}</h6>
+        </div>
+        <div class="goal_text">
+          <p>Completed</p>
+          <h5>{{ goal.goal_status }}</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5" *ngIf="patientSummaryData.details && patientSummaryData.details.length">
+      <h2 class="mt-1">Details</h2>
+      <div class="self_manage_goal ms-0 mx-4 left_manage">
+        <div class="goal_text">
+          <!-- <p>Next Due Date for Care Manager</p>
+          <h6>{{ patientSummary.due_date | date: "MM-dd-yyyy" }}</h6>
+          <p>Care Manager Name</p>
+          <h6>{{ patientSummary.care_manager_name }}</h6> -->
+          <p class="mt-1">Detail list</p>
+          <h6 *ngFor="let data of patientSummaryData.details">{{ data.detail_list }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

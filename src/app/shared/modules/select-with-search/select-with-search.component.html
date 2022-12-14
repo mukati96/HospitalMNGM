@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+    <p-dropdown [options]="list" [formControlName]="controlName" [readonly]="readonly" [showClear]="false"
+        [filter]="true" [placeholder]="label" [class.is-invalid]="
+        f[controlName].invalid &&
+        (f[controlName].dirty || f[controlName].touched)
+    "
+    (onChange)="onSelectItem($event)">
+        <ng-template pTemplate="filter" let-options="options">
+            <span class="p-input-icon-right" (click)="$event.stopPropagation()">
+                <i [class]="isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-search'"></i>
+                <input type="text" pInputText placeholder="Search" (keyup)="changeValue($event)">
+            </span>
+        </ng-template>
+        <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="list?.length">
+                {{form.get(controlName)?.value[bindKey]}}
+            </div>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+            <div class="country-item">
+                <div>{{item[bindKey]}}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    <div *ngIf="
+      f[controlName].invalid &&
+      (f[controlName].dirty || f[controlName].touched)
+    " class="invalid-feedback">
+        <div *ngIf="f[controlName].errors?.['required']">
+            Above field is required
+        </div>
+    </div>
+</form>

@@ -1,0 +1,441 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="page_content outreach">
+      <div class="row">
+        <div class="col-md-8 left_content_page">
+          <h1>Add Outreach Information</h1>
+          <form [formGroup]="outreachForm" (ngSubmit)="onSubmitOutreach()">
+            <div class="row">
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Patient Id</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  numbersOnly
+                  readonly="true"
+                  formControlName="patient"
+                  required
+                  [class.is-invalid]="
+                    p['patient'].invalid &&
+                    (p['patient'].dirty || p['patient'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['patient'].invalid &&
+                    (p['patient'].dirty || p['patient'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['patient'].errors?.['required']">
+                    Patient Id is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Patient Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  readonly="true"
+                  characterOnly
+                  formControlName="patient_name"
+                  required
+                  [class.is-invalid]="
+                    p['patient_name'].invalid &&
+                    (p['patient_name'].dirty || p['patient_name'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['patient_name'].invalid &&
+                    (p['patient_name'].dirty || p['patient_name'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['patient_name'].errors?.['required']">
+                    Patient Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Contact Date *</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  pInputText
+                  formControlName="contact_date"
+                  required
+                  [ngModel]="currentStringDate"
+                  [class.is-invalid]="
+                    p['contact_date'].invalid &&
+                    (p['contact_date'].dirty || p['contact_date'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['contact_date'].invalid &&
+                    (p['contact_date'].dirty || p['contact_date'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['contact_date'].errors?.['required']">
+                    Contact Date is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-2">
+                <label class="form-label">Schedule Follow-Up Date *</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  pInputText
+                  formControlName="schedule_follow_up_date"
+                  required
+                  [ngModel]="currentStringDate"
+                  [class.is-invalid]="
+                    p['schedule_follow_up_date'].invalid &&
+                    (p['schedule_follow_up_date'].dirty ||
+                      p['schedule_follow_up_date'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['schedule_follow_up_date'].invalid &&
+                    (p['schedule_follow_up_date'].dirty ||
+                      p['schedule_follow_up_date'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="p['schedule_follow_up_date'].errors?.['required']"
+                  >
+                    Follow-Up Date is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Contact Type *</label>
+                <p-dropdown
+                  [options]="outreachContactType"
+                  placeholder="Select"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="contact_type"
+                  [class.is-invalid]="
+                    p['contact_type'].invalid &&
+                    (p['contact_type'].dirty || p['contact_type'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    p['contact_type'].invalid &&
+                    (p['contact_type'].dirty || p['contact_type'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['contact_type'].errors?.['required']">
+                    Contact type is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Resolution/Action *</label>
+                <p-dropdown
+                  [options]="outreachResolution"
+                  placeholder="Select"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="resolution_action"
+                  [class.is-invalid]="
+                    p['resolution_action'].invalid &&
+                    (p['resolution_action'].dirty ||
+                      p['resolution_action'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    p['resolution_action'].invalid &&
+                    (p['resolution_action'].dirty ||
+                      p['resolution_action'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['resolution_action'].errors?.['required']">
+                    Resolution/Action is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Outcome *</label>
+                <p-dropdown
+                  [options]="outreachOutcome"
+                  placeholder="Select"
+                  optionLabel="label"
+                  optionValue="value"
+                  formControlName="outcome"
+                  [class.is-invalid]="
+                    p['outcome'].invalid &&
+                    (p['outcome'].dirty || p['outcome'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    p['outcome'].invalid &&
+                    (p['outcome'].dirty || p['outcome'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['outcome'].errors?.['required']">
+                    Outcome is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Provider </label>
+                <p-dropdown
+                  [options]="outreachProvider"
+                  placeholder="Select"
+                  optionLabel="name"
+                  optionValue="id"
+                  [showClear]="false"
+                  formControlName="provider"
+                  [class.is-invalid]="
+                    p['provider'].invalid &&
+                    (p['provider'].dirty || p['provider'].touched)
+                  "
+                ></p-dropdown>
+                <div
+                  *ngIf="
+                    p['provider'].invalid &&
+                    (p['provider'].dirty || p['provider'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['provider'].errors?.['required']">
+                    Provider is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Care Member </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  formControlName="care_member"
+                  [class.is-invalid]="
+                    p['care_member'].invalid &&
+                    (p['care_member'].dirty || p['care_member'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['care_member'].invalid &&
+                    (p['care_member'].dirty || p['care_member'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['care_member'].errors?.['required']">
+                    Care Member is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 mt-md-3">
+                <label class="form-label">Time Spent *</label>
+                <input
+                  type="time"
+                  step="2"
+                  min="00:00:00"
+                  max="00:59:00"
+                  class="form-control without"
+                  pInputText
+                  formControlName="time_spent"
+                  required
+                  [class.is-invalid]="
+                    p['time_spent'].invalid &&
+                    (p['time_spent'].dirty || p['time_spent'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['time_spent'].invalid &&
+                    (p['time_spent'].dirty || p['time_spent'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['time_spent'].errors?.['required']">
+                    Time Spent is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mt-md-3">
+                <label class="form-label">Notes</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pInputText
+                  characterOnly
+                  formControlName="notes"
+
+                  [class.is-invalid]="
+                    p['notes'].invalid &&
+                    (p['notes'].dirty || p['notes'].touched)
+                  "
+                />
+                <div
+                  *ngIf="
+                    p['notes'].invalid &&
+                    (p['notes'].dirty || p['notes'].touched)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="p['notes'].errors?.['required']">
+                    Notes is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact_information mt-5">
+              <a>Time Period of Care Program</a>
+              <div class="row">
+                <div class="col-lg-3 mt-md-3">
+                  <label class="form-label">Care Program</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    pInputText
+                    characterOnly
+                    formControlName="care_program"
+                    [class.is-invalid]="
+                      p['care_program'].invalid &&
+                      (p['care_program'].dirty || p['care_program'].touched)
+                    "
+                  />
+                  <div
+                    *ngIf="
+                      p['care_program'].invalid &&
+                      (p['care_program'].dirty || p['care_program'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="p['care_program'].errors?.['required']">
+                      Care Program is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 mt-md-3">
+                  <label class="form-label">From Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    pInputText
+                    formControlName="care_program_from_date"
+                    [ngModel]="currentStringDate"
+                    [class.is-invalid]="
+                      p['care_program_from_date'].invalid &&
+                      (p['care_program_from_date'].dirty ||
+                        p['care_program_from_date'].touched)
+                    "
+                  />
+                  <div
+                    *ngIf="
+                      p['care_program_from_date'].invalid &&
+                      (p['care_program_from_date'].dirty ||
+                        p['care_program_from_date'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div
+                      *ngIf="p['care_program_from_date'].errors?.['required']"
+                    >
+                      From Date is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 mt-md-3">
+                  <label class="form-label">End Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    pInputText
+                    formControlName="care_program_to_date"
+                    [ngModel]="currentStringDate"
+                    [class.is-invalid]="
+                      p['care_program_to_date'].invalid &&
+                      (p['care_program_to_date'].dirty ||
+                        p['care_program_to_date'].touched)
+                    "
+                  />
+                  <div
+                    *ngIf="
+                      p['care_program_to_date'].invalid &&
+                      (p['care_program_to_date'].dirty ||
+                        p['care_program_to_date'].touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="p['care_program_to_date'].errors?.['required']">
+                      End Date is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 text-end mt-5">
+                <div class="form_reset_option">
+                  <button
+                    class="btn btn_reset me-md-3"
+                    (click)="resetoutreachForm()"
+                  >
+                    Reset
+                  </button>
+                  <button class="btn btn_next">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <div class="upload_image mt-md-5 text-center img-sec">
+            <div class="upload_img attach-img">
+              <img
+                *ngIf="!imgURL"
+                src="../../../../../assets/images/user_img.png"
+                alt="user_img"
+              />
+              <img
+                [src]="imgURL"
+                *ngIf="
+                  otherImgPath == 'png' ||
+                  otherImgPath == 'jpg' ||
+                  otherImgPath == 'jpeg'
+                "
+                alt="uploaded doc"
+              />
+            </div>
+            <div class="file file--upload mt-4 ms-md-4">
+              <label for="uploadLead-1">
+                <img
+                  src="../../../../../assets/images/icons/up_arrow.svg"
+                  alt=""
+                />
+                Upload Image
+              </label>
+              <input
+                #file1
+                id="uploadLead-1"
+                type="file"
+                (change)="fileChange($event)"
+                multiple
+                accept="image/jpg, image/png, image/jpeg, application/pdf, application/msword, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .cgm"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

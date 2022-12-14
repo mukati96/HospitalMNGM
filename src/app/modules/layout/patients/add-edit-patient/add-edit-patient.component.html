@@ -1,0 +1,606 @@
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="page_content">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="left_content_page">
+            <h1>{{ customText }}</h1>
+            <div class="tab_patient mt-4">
+              <ul class="nav nav-tabs">
+                <div class="row">
+                  <div class="col-md-9">
+                    <li class="nav-item">
+                      <button
+                        class="nav-link"
+                        id="home-tab"
+                        [class.active]="selectTab === 'patiDetail'"
+                        (click)="changeTab('patiDetail')"
+                      >
+                        Patient Details
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link"
+                        [class.active]="selectTab === 'conDetail'"
+                        (click)="changeTab('conDetail')"
+                      >
+                        Contact Details
+                      </button>
+                    </li>
+                  </div>
+
+                  <div class="col-md-3 text-end">
+                    <button class="btn btn_skyehr">
+                      <img
+                        src="../../../../../assets/images/icons/upload.svg"
+                        alt=""
+                      />
+                      Upload EHR
+                    </button>
+                  </div>
+                </div>
+              </ul>
+              <div class="tab-content pt-4">
+                <form [formGroup]="patientForm" (ngSubmit)="onSubmitPatient()">
+                  <div class="content-form" *ngIf="selectTab == 'patiDetail'">
+                    <div class="form_data">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="form-label">Title *</label>
+                          <div class="select_div">
+                            <p-dropdown
+                              [options]="nameTitle"
+                              placeholder="Select"
+                              optionLabel="title"
+                              optionValue="title"
+                              [showClear]="false"
+                              formControlName="title"
+                              [class.is-invalid]="
+                                p['title'].invalid &&
+                                (p['title'].dirty || p['title'].touched)
+                              "
+                            ></p-dropdown>
+                            <app-error
+                              [errLabel]="
+                                patientForm | inputError : 'title' : 'Title'
+                              "
+                            ></app-error>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <label class="form-label">First Name *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            required
+                            formControlName="first_name"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['first_name'].invalid &&
+                              (p['first_name'].dirty || p['first_name'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'first_name' : 'First name'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-md-3">
+                          <label class="form-label">Middle Name</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="middle_name"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['middle_name'].invalid &&
+                              (p['middle_name'].dirty ||
+                                p['middle_name'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'middle_name' : 'Middle name'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-md-3">
+                          <label class="form-label">Last Name *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="last_name"
+                            characterOnly
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['last_name'].invalid &&
+                              (p['last_name'].dirty || p['last_name'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'last_name' : 'Last name'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-md-3 mt-md-4">
+                          <label class="form-label">Date of Birth *</label>
+                          <p-calendar
+                            inputId="basic"
+                            formControlName="dob"
+                            [class.is-invalid]="
+                              p['dob'].invalid &&
+                              (p['dob'].dirty || p['dob'].touched)
+                            "
+                          ></p-calendar>
+                          <app-error
+                            [errLabel]="
+                              patientForm | inputError : 'dob' : 'DOB'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-md-3 mt-md-4">
+                          <label class="form-label">Gender *</label>
+                          <div class="select_div">
+                            <p-dropdown
+                              [options]="userGender"
+                              optionLabel="label"
+                              optionValue="gender"
+                              placeholder="Select"
+                              [showClear]="false"
+                              formControlName="gender"
+                              [class.is-invalid]="
+                                p['gender'].invalid &&
+                                (p['gender'].dirty || p['gender'].touched)
+                              "
+                            ></p-dropdown>
+                            <app-error
+                              [errLabel]="
+                                patientForm | inputError : 'gender' : 'Gender'
+                              "
+                            ></app-error>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">Personal Email ID *</label>
+                          <input
+                            type="email"
+                            pInputText
+                            appLowerCase
+                            formControlName="email"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['email'].invalid &&
+                              (p['email'].dirty || p['email'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm | inputError : 'email' : 'Email'
+                            "
+                          ></app-error>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 class="form_heading mt-3">Provider Informations</h3>
+                    <div class="row mb-5">
+                      <div class="col-6">
+                        <label class="form-label">Primary Provider *</label>
+                        <app-search-with-select-dropdown
+                          [form]="patientForm"
+                          controlName="primary_provider"
+                          [list]="providersArr"
+                          bindKey="id"
+                          displayKey="name"
+                          (applySearch)="getProvidersData($event)"
+                          [isLoading]="isLoadingProviderData"
+                          label="Primary Select"
+                        ></app-search-with-select-dropdown>
+                        <div
+                          *ngIf="
+                            p['primary_provider'].invalid &&
+                            (p['primary_provider'].dirty ||
+                              p['primary_provider'].touched)
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="p['primary_provider'].errors?.['required']"
+                          >
+                            Please select primary provider.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label"
+                          >Secondary Provider (Optional)</label
+                        >
+                        <app-search-with-select-dropdown
+                          bindKey="id"
+                          displayKey="name"
+                          [form]="patientForm"
+                          controlName="secondary_provider"
+                          [list]="providersArr"
+                          (applySearch)="getProvidersData($event)"
+                          [isLoading]="isLoadingProviderData"
+                          label="Secondary Select"
+                        ></app-search-with-select-dropdown>
+                        <div
+                          *ngIf="
+                            p['secondary_provider'].invalid &&
+                            (p['secondary_provider'].dirty ||
+                              p['secondary_provider'].touched)
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div
+                            *ngIf="p['secondary_provider'].errors?.['required']"
+                          >
+                            Please select secondary provider.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 ps-0"></div>
+                      <div class="col-md-6 text-end">
+                        <div class="form_reset_option">
+                          <button
+                            type="button"
+                            class="btn btn_reset me-md-3"
+                            [routerLink]="FULL_ROUTES.PATIENTS"
+                          >
+                            Back
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn_next"
+                            (click)="changeTab('conDetail')"
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="content-form" *ngIf="selectTab == 'conDetail'">
+                    <div class="form_data">
+                      <div class="row">
+                        <div class="col-md-6 ps-0">
+                          <label class="form-label">Address 1 *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            minlength="1"
+                            maxlength="250"
+                            formControlName="address_1"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['address_1'].invalid &&
+                              (p['address_1'].dirty || p['address_1'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'address_1' : 'Address 1'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-md-6 pe-1">
+                          <label class="form-label">Address 2 (Optional)</label>
+                          <input
+                            type="text"
+                            pInputText
+                            minlength="1"
+                            maxlength="250"
+                            formControlName="address_2"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['address_2'].invalid &&
+                              (p['address_2'].dirty || p['address_2'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'address_2' : 'Address 2'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">City *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="city"
+                            characterOnly
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['city'].invalid &&
+                              (p['city'].dirty || p['city'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm | inputError : 'city' : 'City'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">State *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="state"
+                            characterOnly
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['state'].invalid &&
+                              (p['state'].dirty || p['state'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm | inputError : 'state' : 'State'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">Zip Code *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="zip_code"
+                            numbersOnly
+                            maxlength="6"
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['zip_code'].invalid &&
+                              (p['zip_code'].dirty || p['zip_code'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm | inputError : 'zip_code' : 'Zip Code'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">Home Phone *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="home_phone"
+                            numbersOnly
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['home_phone'].invalid &&
+                              (p['home_phone'].dirty || p['home_phone'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'home_phone' : 'Home Phone'
+                            "
+                          ></app-error>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 mt-md-4">
+                          <label class="form-label">Cell Phone *</label>
+                          <input
+                            type="text"
+                            pInputText
+                            maxlength="10"
+                            formControlName="cell_phone"
+                            numbersOnly
+                            class="form-control"
+                            [class.is-invalid]="
+                              p['cell_phone'].invalid &&
+                              (p['cell_phone'].dirty || p['cell_phone'].touched)
+                            "
+                          />
+                          <app-error
+                            [errLabel]="
+                              patientForm
+                                | inputError : 'cell_phone' : 'Cell Phone'
+                            "
+                          ></app-error>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 mt-md-4">
+                          <label class="form-label"
+                            >How would you like to receive the alerts? *</label
+                          >
+                          <div class="select_div">
+                            <p-multiSelect
+                              [options]="communArray"
+                              #receiveAlert
+                              formControlName="communication"
+                              defaultLabel="Select"
+                              optionLabel="communication_type"
+                              optionValue="id"
+                              [showHeader]="false"
+                              [class.is-invalid]="
+                                p['communication'].invalid &&
+                                (p['communication'].dirty ||
+                                  p['communication'].touched)
+                              "
+                            >
+                            </p-multiSelect>
+                            <app-error
+                              [errLabel]="
+                                patientForm
+                                  | inputError
+                                    : 'communication'
+                                    : 'Communication'
+                              "
+                            >
+                            </app-error>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <h3 class="form_heading mt-3">Identifier Informations</h3>
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                        <label class="form-label">Medicare ID</label>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="medicare_id"
+                          class="form-control"
+                          [class.is-invalid]="
+                            p['medicare_id'].invalid &&
+                            (p['medicare_id'].dirty || p['medicare_id'].touched)
+                          "
+                        />
+                        <app-error
+                          [errLabel]="
+                            patientForm
+                              | inputError : 'medicare_id' : 'Medicare ID'
+                          "
+                        ></app-error>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                        <label class="form-label">Medicaid ID</label>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="medicaid_id"
+                          class="form-control"
+                          [class.is-invalid]="
+                            p['medicaid_id'].invalid &&
+                            (p['medicaid_id'].dirty || p['medicaid_id'].touched)
+                          "
+                        />
+                        <app-error
+                          [errLabel]="
+                            patientForm
+                              | inputError : 'medicaid_id' : 'Medicaid ID'
+                          "
+                        ></app-error>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                        <label class="form-label">Primary Issurance</label>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="primary_insurance"
+                          class="form-control"
+                          [class.is-invalid]="
+                            p['primary_insurance'].invalid &&
+                            (p['primary_insurance'].dirty ||
+                              p['primary_insurance'].touched)
+                          "
+                        />
+                        <app-error
+                          [errLabel]="
+                            patientForm
+                              | inputError
+                                : 'primary_insurance'
+                                : 'Primary Issurance'
+                          "
+                        >
+                        </app-error>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 mt-md-3">
+                        <label class="form-label">Secondary Issurance </label>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="secondary_insurance"
+                          class="form-control"
+                          [class.is-invalid]="
+                            p['secondary_insurance'].invalid &&
+                            (p['secondary_insurance'].dirty ||
+                              p['secondary_insurance'].touched)
+                          "
+                        />
+                        <app-error
+                          [errLabel]="
+                            patientForm
+                              | inputError
+                                : 'secondary_insurance'
+                                : 'Secondary Issurance'
+                          "
+                        >
+                        </app-error>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-md-6 ps-0"></div>
+                      <div class="col-md-6 text-end">
+                        <div class="form_reset_option">
+                          <button
+                            type="submit"
+                            class="btn btn_reset me-md-3"
+                            (click)="changeTab('patiDetail')"
+                          >
+                            Back
+                          </button>
+                          <button class="btn btn_next">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="upload_image mt-md-5 text-center img-sec">
+            <div class="upload_img attach-img">
+              <img
+                *ngIf="!imgURL"
+                src="../../../../../assets/images/user_img.png"
+                alt="user_img"
+              />
+              <img [src]="imgURL " *ngIf="imgURL" alt="uploaded doc" />
+            </div>
+            <div class="file file--upload mt-4 ms-md-4">
+              <label for="uploadLead-1">
+                <img
+                  src="../../../../../assets/images/icons/up_arrow.svg"
+                  alt=""
+                />
+                Upload Image
+              </label>
+              <input
+                #file1
+                id="uploadLead-1"
+                type="file"
+                (change)="fileChange($event)"
+                multiple
+                accept="image/jpg, image/png, image/jpeg, application/pdf, application/msword, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, .cgm"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

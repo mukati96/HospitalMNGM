@@ -1,0 +1,108 @@
+.page_content {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 25px;
+  padding-bottom: 105px;
+}
+
+.row.clas_reset {
+  text-align: right;
+  margin-top: 40%;
+}
+
+.creat_hospital {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.add_btn img,
+.remove_btn img {
+  margin-right: 12px;
+}
+
+.add_btn,
+.add_btn:hover {
+  background: #569971;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+  margin-right: 17px;
+}
+
+.remove_btn,
+.remove_btn:hover {
+  background: #c07055;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+}
+
+.gre_btn,
+.gre_btn:hover {
+  background: #6d6f8c;
+  border-radius: 500px;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+}
+
+.cancel_btn,
+.cancel_btn:hover {
+  font-weight: 500;
+  font-size: 14px;
+  color: #5f5bfe;
+}
+.user_content {
+  ::ng-deep.p-dropdown {
+    display: flex !important;
+  }
+}
+
+.branch_content {
+  ::ng-deep.p-dropdown {
+    display: flex;
+  }
+}
+.page_content {
+  ::ng-deep.p-dropdown {
+    display: flex;
+  }
+}
+.img-sec {
+  .attach-img {
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 100%;
+      cursor: pointer;
+      object-fit: cover;
+      background-color: #fff;
+    }
+  }
+}
+.form_reset_option {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  position: relative;
+  top: 65%;
+  transform: translateY(-50%);
+}
+.btn_next:hover{
+  background-color: #6c6e74;
+  color: white;
+}
+
+:host {
+  ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 0.5rem 1.25rem;
+  } 
+}
+

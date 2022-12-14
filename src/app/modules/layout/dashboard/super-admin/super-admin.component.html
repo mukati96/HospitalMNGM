@@ -1,0 +1,199 @@
+<div class="content-wrapper super_admin">
+  <div class="row">
+    <div class="col-lg-8 ps-0">
+      <div class="row tak_box">
+        <div class="col-lg-4 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user1.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>Enrolled Patients</p>
+                  <h3 class="mb-2">{{ _countDetail.patient_total_count }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user4.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>Providers</p>
+                  <h3 class="mb-2">{{ _countDetail.provider_total_count }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex media">
+                <div class="flex-shrink-0">
+                  <img src="../../../../assets/images/icons/user5.svg" class="figure-img img-fluid" alt="" />
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <p>Care managers</p>
+                  <h3 class="mb-2">
+                    {{ _countDetail.care_manager_total_count }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="patients_status">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="add_select_box">
+              <h1 class="heading">Key Stats / KPI’s</h1>
+              <select aria-label="Default select example" class="form-select">
+                <option value="1">Practice</option>
+                <option value="2">Provider</option>
+                <option value="3">Patients</option>
+              </select>
+            </div>
+
+            <div class="key_status">
+              <p><span></span> Alzheimer's</p>
+              <p><span></span> ALS</p>
+              <p><span></span> Arthritis</p>
+              <p><span></span> Asthma</p>
+              <p><span></span> Cancer</p>
+              <p><span></span> Obesity</p>
+              <p><span></span> Diabetes</p>
+              <p><span></span> Cystic Fibrosis</p>
+              <p><span></span> Heart Disease</p>
+              <p><span></span> Osteoporosis</p>
+              <p><span></span>Tobacco Use and Related Conditions</p>
+              <p><span></span> Reflex Sympathetic Dystrophy Syndrome</p>
+            </div>
+          </div>
+          <div class="col-lg-4 doughnut_chart">
+            <app-doughnut-chart [chartData]="_countDetail"></app-doughnut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 duration_stats">
+      <app-chart></app-chart>
+    </div>
+
+    <div class="task_table">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="left_content_page">
+            <h1>Client List </h1>
+          </div>
+        </div>
+        <div class="col-md-8 text-end">
+          <div class="search_bar">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" #searchText placeholder="Search" />
+            <button (click)="filter.toggle($event)">
+              <img src="../../../../../assets/images/icons/filter.svg" alt="" />
+              Filter
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive report_table_resop unassJobsList">
+        <p-table #dt1 [value]="_hospitals" [rows]="10" [showCurrentPageReport]="true"
+          styleClass="p-datatable-sm p-datatable-striped" [resizableColumns]="true"
+          [globalFilterFields]="['hospital_name', 'city', 'id']">
+          <ng-template pTemplate="caption"> </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>S.no</th>
+              <th>Practice Name</th>
+              <th>Practice ID</th>
+              <th>Location</th>
+              <th>Start Date</th>
+              <th>No Of Patients</th>
+              <th>No Of Care Manager</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowIndex="rowIndex" let-hospital>
+            <tr>
+              <td>
+                {{ rowIndex + 1 }}
+              </td>
+              <td>{{ hospital?.hospital_name | titlecase  }}</td>
+              <td>{{ hospital?.id }}</td>
+              <td>{{ hospital?.city  | titlecase}}</td>
+              <td>{{ hospital?.created_at | date : "MM-dd-yyyy" }}</td>
+              <td>{{ hospital?.patients_count }}</td>
+              <td>{{ hospital?.caremanager_count }}</td>
+              <td [ngClass]="{
+                ACTIVE: hospital?.hospital_status === 'ACTIVE',
+                INACTIVE: hospital?.hospital_status === 'INACTIVE',
+                SUSPENDED: hospital?.hospital_status === 'SUSPENDED' }">
+                {{ hospital?.hospital_status === 'INACTIVE' ? 'In-Active' : hospital?.hospital_status  | titlecase }}</td>
+              <td>
+                <img src="../../../../assets/images/icons/eye.svg" (click)="viewHosital(hospital.id)" title="View" />
+                <img src="../../../../assets/images/icons/edit_view.svg" (click)="editHosital(hospital.id)" class="ms-1"
+                  title="Edit" />
+              </td>
+              <!-- <td>
+                  <button
+                    pButton
+                    pRipple
+                    label="Delete"
+                    icon="pi pi-trash"
+                    class="delete_btn"
+                    (click)="deleteHosital(hospital.id)"
+                  ></button>
+                </td> -->
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="go_to_page">
+        <a [routerLink]="FULL_ROUTES.HOSPITALS" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Go
+          to detailed page</a>
+      </div>
+    </div>
+  </div>
+
+  <p-overlayPanel #filter>
+    <ng-template pTemplate>
+      <div class="filter-form">
+        <form [formGroup]="filterGrp" (ngSubmit)="submitFilter($event, filter)">
+          <div class="row dashboard-filter">
+            <div class="p-col-12 p-md-2">
+              <label for="icon">From</label>
+              <p-calendar formControlName="from_date" [showIcon]="true" inputId="icon"
+                [maxDate]="filterGrp.get('to_date')?.value"></p-calendar>
+            </div>
+            <div class="p-col-12 p-md-2">
+              <label for="icon2">To</label>
+              <p-calendar formControlName="to_date" [showIcon]="true" inputId="icon2"
+                [minDate]="filterGrp.get('from_date')?.value"></p-calendar>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button pButton type="button" label="Reset" class="p-button-danger"
+                (click)="clearFilter($event, filter)"></button>
+            </div>
+            <div class="col-6">
+              <button pButton type="submit" label="Submit"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </p-overlayPanel>
+</div>

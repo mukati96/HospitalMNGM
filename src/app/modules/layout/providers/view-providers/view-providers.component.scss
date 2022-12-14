@@ -1,0 +1,369 @@
+.profile_box {
+  background-color: #fff;
+  border-radius: 20px;
+}
+.mar_left {
+  margin-left: 0 !important;
+}
+.nav-pills .nav-link {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 25px;
+  color: #454545;
+  border-radius: 0;
+  padding-left: 0;
+  margin-right: 15px;
+}
+.nav-item {
+  border-bottom: 2px solid rgba(199, 199, 199, 0.51);
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: transparent;
+  color: #5f5bfe;
+  border-bottom: 2px solid #5f5bfe;
+  border-radius: 0;
+}
+.profile_box ul {
+  padding-left: 24px;
+  padding-top: 20px;
+}
+.profile_box form {
+  padding: 0 25px;
+}
+.hospital_profile h1 {
+  font-weight: 600;
+  font-size: 28px;
+  text-transform: capitalize;
+  color: #5f5bfe;
+  margin-top: 10px;
+}
+.hospital_profile button {
+  height: 46px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 100px;
+}
+.hospital_profile button img {
+  margin-right: 3px;
+}
+.hospital_profile .btn1 {
+  background-color: #1ea955;
+}
+.hospital_profile .btn2 {
+  background-color: #ff6b3a;
+  margin-left: 15px;
+}
+.hospital_profile .btn3 {
+  background-color: #5f5bfe;
+  margin: 0 15px;
+}
+.hospital_profile .btn4 {
+  background-color: #59adeb;
+}
+
+.profile_top {
+  margin-bottom: 17px;
+}
+.profile_top img[alt~="user_img"] {
+  width: 190px;
+  height: 190px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+.hospital_profile {
+  margin-bottom: 30px;
+}
+.profile_right {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 25px 25px;
+}
+.profile_right h2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  color: #f95b60;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+.tax_id {
+  display: flex;
+}
+.tax_id p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #848484;
+  margin-bottom: 10px;
+  min-width: 230px;
+}
+.tax_id span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #454545;
+}
+.profile_right .export {
+  float: right;
+  position: relative;
+  bottom: 40px;
+  margin: 0;
+}
+.profile_right_box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+}
+.profile_right_box p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #6d6d6d;
+  margin-bottom: 0px;
+}
+.profile_right_box h3 {
+  font-weight: 600;
+  font-size: 28px;
+  color: #2e5871;
+  margin-bottom: 20px;
+}
+.profile_box .table-responsive {
+  height: 200px;
+}
+.user_content {
+  ::ng-deep.p-dropdown {
+    display: flex;
+  }
+}
+.careManagerButton {
+  background-color: #5f5bfe;
+  border-color: #5f5bfe;
+  border-radius: 20px;
+}
+.providerButton {
+  background-color: #5f5bfe;
+  border-color: #5f5bfe;
+  border-radius: 20px;
+}
+.branchButton {
+  background-color: #1ea955;
+  border-color: #1ea955;
+  border-radius: 20px;
+}
+.adminButton {
+  background-color: #d21da0;
+  border-color: #d21da0;
+  border-radius: 20px;
+}
+.hospital_profile .btn11 {
+  background-color: #1ea955;
+  size: 10px;
+  font-size: 10px;
+  width: 100px;
+  height: 30px;
+}
+.hospital_profile .btn22 {
+  background-color: #ff6b3a;
+  size: 10px;
+  font-size: 10px;
+  width: 100px;
+  height: 30px;
+}
+.hospital_profile .btn33 {
+  background-color: #5f5bfe;
+  size: 10px;
+  font-size: 10px;
+  width: 105px;
+  height: 30px;
+}
+.btn.delete_btn {
+  background-color: #d21da0;
+  color: #fff;
+  padding: 2px 11px;
+  font-size: 13px;
+}
+.btn.edit_btn {
+  background-color: #2196f3;
+  color: #fff;
+  padding: 2px 11px;
+  font-size: 13px;
+}
+.hospital_profile .btn5 {
+  height: 34px;
+  background: #bfcdff;
+  border-radius: 8px;
+  color: #4a64c1;
+}
+.hospital_profile .btn6 {
+  background: #d21da0;
+  margin: 0 15px;
+}
+
+#assignPatient {
+  .modal-dialog {
+    max-width: 770px;
+  }
+  .select_patient {
+    padding: 40px 30px;
+    position: relative;
+    padding-bottom: 20px;
+    h5 {
+      font-weight: 600;
+      font-size: 28px;
+      color: #d21da0;
+    }
+    input {
+      height: 46px;
+      background: #ffffff;
+      border: 2.5px solid rgba(197, 210, 255, 0.19);
+      border-radius: 500px;
+      width: 307px;
+      text-indent: 15px;
+      font-weight: 300;
+      font-size: 14px;
+      outline: none;
+      color: #767676;
+    }
+  }
+  .modal-content {
+    border-radius: 20px;
+    .modal-body {
+      padding: 0;
+      .table-responsive {
+        height: 300px;
+        .form-check-input:checked {
+          background-color: #d21da0 !important;
+          border-color: #d21da0 !important;
+        }
+        // .form-check {
+        //   padding-left: 0;
+        // }
+      }
+      th {
+        font-weight: 600;
+        font-size: 16px;
+        color: #5e5e5e;
+        padding-left: 30px;
+      }
+      td {
+        padding-left: 30px;
+        font-weight: 400;
+        font-size: 13px;
+
+        color: #797979;
+      }
+    }
+    button {
+      height: 46px;
+      background: #d21da0;
+      border-radius: 500px;
+      font-weight: 500;
+      font-size: 14px;
+      color: #ffffff;
+      padding: 0 30px;
+      border: none;
+      margin: 20px;
+      margin-top: 0;
+    }
+  }
+  img {
+    position: absolute;
+    bottom: 35px;
+    right: 60px;
+    cursor: pointer;
+  }
+}
+.countMsg {
+  width: 191px;
+  height: 39px;
+  left: 389px;
+  top: 984px;
+  padding-top: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6b6b6b;
+}
+.paginator {
+  width: 191px;
+  height: 39px;
+  left: 389px;
+  top: 984px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6b6b6b;
+}
+.filter-form {
+  button {
+    height: 40px;
+  }
+  .row {
+    margin-top: 10px;
+    width: 250px;
+  }
+}
+.title {
+  color: #d21da0;
+  font-size: 29px;
+  font-weight: bold;
+}
+.select_patient {
+  img {
+    position: absolute;
+    /* bottom: 232px; */
+    right: 20px;
+    cursor: pointer;
+    top: 23px;
+  }
+}
+
+@media screen and (max-width: 1390px) {
+  .profile_right_box h3 {
+    font-size: 26px;
+  }
+}
+.search_select {
+  border-radius: 100px;
+}
+::ng-deep .p-dialog .p-dialog-header {
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+::ng-deep .p-dialog .p-dialog-footer {
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+::ng-deep .p-dialog-footer {
+  border: none !important;
+}
+
+::ng-deep .p-button-cancel {
+  background: #3ab287;
+  width: 7vw !important;
+  height: 5vh !important;
+  border-radius: 15px;
+  border-color: #3ab287 !important;
+  font-family: "Poppins-SemiBold" !important;
+}
+::ng-deep .p-button-cancel:hover {
+  background: #18a573 !important;
+}
+::ng-deep .p-button-confirm {
+  background: #f78080;
+  width: 7vw !important;
+  height: 5vh !important;
+  border-radius: 15px;
+  border-color: #f78080 !important;
+  font-family: "Poppins-SemiBold" !important;
+}
+::ng-deep .p-button-confirm:hover {
+  background: #f75a5a !important;
+}
+::ng-deep .p-button:focus {
+  box-shadow: none !important;
+}
+::ng-deep .confirm-dialog{
+  font-family: "Poppins-SemiBold" !important;
+}

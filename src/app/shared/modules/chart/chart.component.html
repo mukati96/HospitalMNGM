@@ -1,0 +1,19 @@
+<div class="duration_text">
+  <h1 class="heading mb-0" *ngIf="currentRole === ROLES.CAREMANAGER">Duration Stats</h1>
+  <h1 class="heading mb-0" *ngIf="currentRole === ROLES.SUPERADMIN">Stats</h1>
+  <div class="duration_text">
+    <!-- <p><span></span>Hospitals</p>
+        <p><span></span> Providers</p>
+        <p><span></span> Patients</p> -->
+    <select class="form-select" (change)="sortByDate($event)">
+      <option value="all">All</option>
+      <option value="monthly">Monthly</option>
+      <option value="quaterly">Quarterly</option>
+      <option value="yearly">Yearly</option>
+    </select>
+  </div>
+</div>
+<apx-chart *ngIf="seriesData?.length" #chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+  [colors]="chartOptions.colors" [yaxis]="chartOptions.yaxis" [dataLabels]="chartOptions.dataLabels"
+  [stroke]="chartOptions.stroke" [grid]="chartOptions.grid" [xaxis]="chartOptions.xaxis"
+  [tooltip]="chartOptions.tooltip" [legend]="chartOptions.legend"></apx-chart>

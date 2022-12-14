@@ -1,0 +1,51 @@
+@import "../view-patient.component.scss";
+.goal {
+  font-weight: 700;
+  font-size: 14px;
+  align-items: center;
+  color: #797979 !important;
+}
+.intervention {
+  font-weight: 700;
+  font-size: 14px;
+  align-items: center;
+  color: #f36a6a !important;
+}
+.pending {
+  font-weight: 700;
+  font-size: 13px;
+  align-items: center;
+  color: #f36a6a !important;
+}
+.completed,
+.active {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 160.5%;
+  align-items: center;
+  color: #05a902 !important;
+}
+::ng-deep.recurrence h5 .p-component {
+  margin-left: 5px;
+  outline: none;
+  border: none;
+}
+::ng-deep .recurrence h5 .p-button-label {
+  position: relative;
+  right: 6px;
+  color: #fff;
+}
+.recurrence {
+  ::ng-deep.p-ripple.p-element.p-button.p-togglebutton.p-component {
+    background-color: #f36a6a !important;
+    width: 50px !important;
+    height: 25px !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+  }
+}
+.goal-notes {
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;;
+}

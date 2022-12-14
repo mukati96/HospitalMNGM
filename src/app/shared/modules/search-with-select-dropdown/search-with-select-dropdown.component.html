@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+    <p-dropdown  
+    [optionLabel]="displayKey"
+    [optionValue]="bindKey"
+    [options]="list" [formControlName]="controlName" [readonly]="readonly" [showClear]="false"
+        [filter]="true" [placeholder]="label" [class.is-invalid]="
+        f[controlName].invalid &&
+        (f[controlName].dirty || f[controlName].touched)
+    "
+    (onChange)="onSelectItem($event)">
+        <ng-template pTemplate="filter" let-options="options">
+            <span class="p-input-icon-right" (click)="$event.stopPropagation()">
+                <i [class]="isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-search'"></i>
+                <input type="text" pInputText placeholder="Search" (keyup)="changeValue($event)">
+            </span>
+        </ng-template>
+    </p-dropdown>
+</form>

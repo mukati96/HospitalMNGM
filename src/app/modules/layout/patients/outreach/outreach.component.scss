@@ -1,0 +1,205 @@
+.outreach .dropdown .btn {
+    font-size: 13px;
+    color: #7288ff;
+    font-weight: 600;
+    position: relative;
+    padding: 5px 32px;
+    background-color: #e4e8ff;
+}
+
+.outreach .dropdown .dropdown-toggle::after {
+    position: absolute;
+    content: "";
+    // background-image: url(left_arrow.svg);
+    height: 24px;
+    width: 8px;
+    top: 3px;
+    right: 15px;
+    transform: rotate(-90deg);
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.cont_box {
+    padding: 15px;
+    padding-left: 25px;
+}
+
+.outreach .search_bar {
+    position: relative;
+}
+
+.outreach input {
+    height: 40px;
+    border-radius: 100px;
+}
+
+button.view {
+    border: none;
+    background-color: transparent;
+}
+
+button.edit_btn {
+    border: none;
+    background-color: transparent;
+}
+
+.outreach .search_bar .btn {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.outreach .top_head {
+    padding: 22px;
+}
+
+.outreach th img {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.left_content_page h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #7288ff;
+}
+
+.right_content_page {
+    font-size: 13px;
+    color: #7288ff;
+    font-weight: 600;
+    position: relative;
+    background-color: #e4e8ff;
+}
+
+.outreach td .btn.delete_btn {
+    background-color: #eb1000;
+    color: #fff;
+    padding: 2px 11px;
+    font-size: 13px;
+}
+
+.outreach td .btn.edit_btn {
+    background-color: #2196f3;
+    color: #fff;
+    padding: 2px 11px;
+    font-size: 13px;
+}
+
+::ng-deep .outreach tbody tr td:nth-child(1) {
+    width: 60px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+::ng-deep .outreach tbody tr td:nth-child(2) {
+    width: 150px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+@media screen and (max-device-width: 1440px) {}
+
+.countMsg {
+    width: 191px;
+    height: 39px;
+    left: 389px;
+    top: 984px;
+    padding-top: 32px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160.5%;
+    color: #6b6b6b;
+}
+
+.paginator {
+    width: 191px;
+    height: 39px;
+    left: 389px;
+    top: 984px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160.5%;
+    color: #6b6b6b;
+}
+
+.filter-form {
+    button {
+        height: 40px;
+    }
+    .row {
+        margin-top: 10px;
+        width: 250px;
+    }
+}
+
+tr.ng-star-inserted {
+    font-size: 12px !important;
+}
+
+.outreach th {
+    color: #000;
+    font-size: 12px !important;
+    border: none;
+}
+
+.outreach td {
+    font-size: 12px !important;
+    vertical-align: middle;
+    border: none;
+}
+
+::ng-deep .p-datepicker table th {
+    padding: 0px 9px !important;
+    width: 10px;
+}
+
+::ng-deep .p-datepicker {
+    width: 330px !important;
+}
+
+::ng-deep .p-datepicker table th {
+    padding: 0px 9px !important;
+    width: 10px;
+}
+
+::ng-deep .p-datepicker table td {
+    padding: 6px 7px !important;
+}
+
+::ng-deep .p-datepicker table td>span {
+    font-size: 15px;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin: 0px;
+}
+
+::ng-deep i.p-sortable-column-icon.pi.pi-fw.pi-sort-alt {
+    margin-top: -8px;
+    margin-left: -5px;
+}
+
+::ng-deep .pi-sort-alt:before {
+    font-size: 8px;
+    content: "\e99e";
+}
+
+::ng-deep .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+    color: #1d4ed8;
+    font-size: 10px;
+}
+
+::ng-deep.p-datatable .p-sortable-column:focus {
+    box-shadow: none;
+    outline: 0 none;
+}

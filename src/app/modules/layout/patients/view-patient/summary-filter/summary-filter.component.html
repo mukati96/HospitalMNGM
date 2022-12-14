@@ -1,0 +1,75 @@
+<div
+  class="tab-pane form_field"
+  id="pills-Specific"
+  role="tabpanel"
+  aria-labelledby="pills-Specific-tab"
+>
+  <form class="" action="">
+    <div class="row mb-3">
+      <!-- <div class="col-lg-3 col-md-3">
+                <div class="time-spent" *ngIf="show">
+                    <label class="form-label">Time Spent </label>
+                    <input type="time" id="appt" name="appt" min="00:00" max="59:00" class="form-control"
+                        [(ngModel)]="callTime" [ngModelOptions]="{ standalone: true }" placeholder="Enter minutes" />
+                    <button class="send-btn btn" (click)="callLogs()">Send</button>
+                </div>
+
+                <div class="time_box_div" *ngIf="!show">
+                    <label class="form-label">Time Spent On <span> Vitals</span> </label>
+                    <p>{{ callDuration }}<span> mins</span></p>
+                </div>
+            </div> -->
+      <div class="col-lg-4">
+        <label class="form-label">Select categories to download </label>
+        <div class="select_div">
+          <p-multiSelect
+            [options]="cols"
+            #receiveAlert
+            [(ngModel)]="selectedColumns"
+            [ngModelOptions]="{ standalone: true }"
+            defaultLabel="Select"
+            optionLabel="header"
+            [showHeader]="false"
+            selectedItemsLabel="{0} items selected"
+            (onChange)="changeColumnSel($event)"
+          >
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="row">
+          <div class="pers_info col mt-3">
+            <span
+              *ngFor="let value of selectedColumns"
+              (click)="clearApplyFilter(value)"
+              >{{ value.header }}
+              <img src="../../../../../../assets/images/icons/close.svg" alt=""
+            /></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="print">
+          <img
+            class="pointer"
+            src="../../../../../../assets/images/icons/print1.svg"
+            (click)="downloadPDF.emit(true)"
+            alt=""
+          />
+          <img
+            class="pointer"
+            src="../../../../../../assets/images/icons/print2.svg"
+            (click)="print.emit(true)"
+            alt="print"
+          />
+          <img
+            class="pointer"
+            src="../../../../../../assets/images/icons/print3.svg"
+            (click)="sendEmail.emit(true)"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

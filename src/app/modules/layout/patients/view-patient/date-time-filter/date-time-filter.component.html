@@ -1,0 +1,108 @@
+<div class="tab-pane form_field" id="pills-Specific" role="tabpanel" aria-labelledby="pills-Specific-tab">
+  <div class="row mb-3">
+    <div class="col-lg-4 col-md-4" *ngIf="selectedTab !== 'CALL_LOGS' && hideField">
+      <div class="time-spent" *ngIf="show && hideField">
+        <label class="form-label">Time Spent </label>
+        <input
+          type="time"
+          id="appt"
+          name="appt"
+          step="2"
+          min="00:00:00"
+          max="00:59:00"
+          class="form-control without"
+          [(ngModel)]="callTime"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Enter minutes"
+        />
+        <!-- <button *ngIf="isEditSpentTime" class="send-btn btn" (click)="updateCallLogs()">Update</button> -->
+        <button class="send-btn btn" (click)="callLogs()">Submit</button>
+      </div>
+
+      <div class="time_box_div spentTime" *ngIf="!show">
+        <button  class="edit_btn btn ms-2 me-2" (click)="openSpentTimePopUp()">
+          <img src="../../../../assets/images/icons/edit.svg" title="Edit" alt="" />
+        </button>
+        <label class="form-label">Time Spent On <span> {{ selectedTabName }}</span>
+        </label>
+        <p>{{ callDuration }}<span> mins</span></p>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+      <form [formGroup]="outreachForm" (ngSubmit)="onSubmitSearch()">
+        <div class="row">
+          <div class="col-lg-5">
+            <label class="form-label">From Date</label>
+            <input
+              formControlName="from_date"
+              class="form-control"
+              type="date"
+              placeholder="Select"
+              (change)="changeDate($event,'from_date')"
+              id="dp4"
+            />
+          </div>
+          <div class="col-lg-7">
+            <label class="form-label">To Date</label>
+            <div class="seach_btn">
+              <input
+                formControlName="to_date"
+                type="date"
+                class="form-control"
+                placeholder="Select"
+                (change)="changeDate($event,'to_date')"
+                [class.is-invalid]="DataInvalide"
+              />
+              <button type="submit" class="btn">Search</button>
+            </div>
+            <div class="invalide">{{showErrMsg}}</div>
+          </div>
+          
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+
+ <section class="SpentTime">
+  <p-dialog [(visible)]="isEditSpentTime" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: '30vw',color:'red' }" (onHide)="closeChronicPopUp()" [modal]="true" [draggable]="false" [resizable]="false"
+    [closable]="true" [showHeader]="true" [baseZIndex]="10000"  header="Update Call Spent Time">
+  <ng-template pTemplate="body">
+    <div class="chronic-form">
+      <div class="row" >
+        <div class="time-spent">
+          <label class="form-label">Time Spent </label>
+          <input
+            type="time"
+            id="appt"
+            name="appt"
+            step="2"
+            min="00:00:00"
+            max="00:59:00"
+            class="form-control without"
+            [(ngModel)]="callTime"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Enter minutes"
+          />
+          <!-- <button *ngIf="isEditSpentTime" class="send-btn btn" (click)="updateCallLogs()">Update</button> -->
+        </div>
+        <!-- <div class="col-md-12 text-end">
+          <div class="form_reset_option">
+            <button class="btn btn_next">Save</button>
+          </div>
+        </div> -->
+      </div>
+  </div>
+  </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="col-lg-12 text-end">
+        <button class class="btn btn-primary adminButton btnColor" type="button" (click)="updateCallLogs()">
+          Update
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</section> 

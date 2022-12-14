@@ -1,0 +1,103 @@
+.page_content {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 25px;
+  padding-bottom: 30px;
+}
+.row.clas_reset {
+  text-align: right;
+}
+.creat_hospital {
+  text-align: right;
+  margin-top: 30px;
+}
+.add_btn img,
+.remove_btn img {
+  margin-right: 12px;
+}
+.add_btn,
+.add_btn:hover {
+  background: #569971;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+  margin-right: 17px;
+}
+.remove_btn,
+.remove_btn:hover {
+  background: #c07055;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+}
+.gre_btn,
+.gre_btn:hover {
+  background: #6d6f8c;
+  border-radius: 500px;
+  font-size: 14px;
+  color: #ffffff;
+  width: 161px;
+  height: 46px;
+}
+.cancel_btn,
+.cancel_btn:hover {
+  font-weight: 500;
+  font-size: 14px;
+  color: #5f5bfe;
+}
+.contact_information a {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 160.5%;
+  text-decoration: none;
+  color: #5f5bfe;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #5f5bfe;
+}
+.img-sec {
+  .attach-img {
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 100%;
+      cursor: pointer;
+      object-fit: cover;
+    }
+  }
+}
+::ng-deep .p-dropdown span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6d6d6d;
+}
+
+.outreach input {
+  height: 46px;
+}
+.bg_input {
+  background: #f2f2f2;
+  border: none !important;
+}
+@media only screen and (max-width: 1440px) {
+  .page_content label {
+    font-size: 12px;
+    height: 19px;
+    margin-bottom: 9px;
+  }
+}
+.without::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+.without::-webkit-datetime-edit-hour-field {
+  display: none;
+}
+.without::-webkit-calendar-picker-indicator {
+  display: none;
+}

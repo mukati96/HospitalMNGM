@@ -1,0 +1,23 @@
+.nav-header {
+  background-image: linear-gradient(
+    to right,
+    #edf5ff,
+    #edf5ff,
+    #dfcbff,
+    #edf5ff,
+    #edf5ff
+  );
+}
+
+.main {
+  // overflow-x: hidden;
+  background: transparent;
+  margin-top: 5rem;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+@media (min-width: 992px) {
+  .main {
+    margin-left: 250px;
+  }
+}

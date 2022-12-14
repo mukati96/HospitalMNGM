@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+::ng-deep #jitsi-iframe {
+    overflow: hidden !important;
+    height: 100vh !important;
+}

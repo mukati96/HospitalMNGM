@@ -1,0 +1,308 @@
+.content-wrapper {
+  overflow-x: hidden;
+  background: white;
+  border-radius: 10px;
+  padding: 13px;
+  margin-right: 20px;
+}
+h2 {
+  color: #5f5bfe;
+}
+.rows {
+  margin-top: 3vh;
+  font-size: 2.5vh;
+}
+p {
+  margin-top: 4vh;
+}
+
+strong {
+  color: #5f5bfe;
+}
+.brPopButton {
+  border-radius: 500px;
+  border-color: transparent !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  width: 89px !important;
+  height: 46px !important;
+}
+.p-dialog .p-dialog-content {
+  text-align: center !important;
+}
+
+.add_hospital,
+.add_hospital:hover {
+  background: #fe5b8c;
+  border-radius: 500px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  height: 46px;
+  margin: 0 17px;
+}
+.listChornicalDiseas {
+  font-size: 25px;
+  color: #5f5bfe;
+  font-weight: 600;
+  margin-bottom: 0px;
+  margin-top: 34px;
+  padding-left: 23px;
+}
+
+.chronical_table th {
+  font-weight: 600 !important;
+  color: #454545 !important;
+  border: none;
+}
+.chronical_table td {
+  font-weight: 400 !important;
+  color: #797979 !important;
+  border: none;
+
+  .pointer {
+    color: #3f8ac3;
+  }
+}
+
+.chronical_table td .delete_btn {
+  height: 28px;
+}
+.chronical_table td .edit_btn {
+  background-color: #59adeb !important;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  margin-right: 15px;
+  height: 34px;
+  padding: 0 10px;
+}
+p-tablecheckbox.p-element {
+  margin-right: 10px;
+}
+
+.countMsg {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #6b6b6b;
+  padding-top: 30px;
+  padding-left: 37px;
+}
+::ng-deep .p-checkbox .p-checkbox-box {
+  width: 20px;
+  height: 20px;
+  top: 1px;
+}
+::ng-deep .chronical_table .table-responsive {
+  height: 510px;
+  margin-top: 16px;
+}
+.search_bar {
+  position: relative;
+}
+.search_bar input {
+  height: 46px;
+  border-radius: 100px;
+}
+.search_bar .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.cronic_list {
+  display: flex;
+  align-items: baseline;
+  text-align: end;
+  justify-content: end;
+  padding-right: 20px;
+  margin-top: 25px;
+}
+.cronic_list .export {
+  margin-right: 0 !important;
+}
+.chronical_table td a {
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration-line: underline;
+  color: #3f8ac3;
+  margin-right: 30px;
+  position: relative;
+  bottom: 5px;
+}
+
+#addCronic .add_goal_header {
+  padding: 15px;
+  padding-bottom: 0;
+  display: flex;
+}
+#addCronic .modal-dialog {
+  max-width: 670px;
+}
+#addCronic .modal-content {
+  padding: 20px;
+  border-radius: 20px;
+}
+#addCronic .modal-title,
+#addCronic .goal_text p {
+  color: #5f5bfe;
+}
+#addCronic .add_goal {
+  height: 46px;
+  padding: 0 30px;
+  margin-top: 15px;
+  background: #5f5bfe;
+}
+#addCronic .form-select,
+#addCronic .form-control {
+  font-weight: 400;
+  font-size: 14px;
+
+  color: #6d6d6d;
+}
+#addCronic .modal-content {
+  padding: 20px;
+  border-radius: 20px;
+}
+#addCronic .modal-title {
+  font-weight: 600;
+  font-size: 28px;
+  color: #5f5bfe;
+}
+#addCronic .add_goal {
+  height: 46px;
+  padding: 0 30px;
+  margin-top: 15px;
+  background: #5f5bfe;
+}
+#addCronic .form-select,
+#addCronic .form-control {
+  font-weight: 400;
+  font-size: 14px;
+  color: #6d6d6d;
+}
+#addCronic.addWidth .modal-dialog {
+  max-width: 405px;
+}
+#addCronic .form-control {
+  height: 46px;
+}
+#addCronic textarea.form-control {
+  height: 90px;
+  resize: none;
+}
+.search_input_btn {
+  position: relative;
+}
+.add_goal {
+  background: #5f5bfe;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 30px;
+}
+#addCronic a {
+  font-weight: 500;
+  font-size: 14px;
+  color: #454545;
+  float: left;
+}
+.Addcondition {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.form-check-label {
+  font-size: 12px;
+  color: #454545;
+}
+.form-check-input:checked {
+  background-color: #5f5bfe !important;
+  border-color: #5f5bfe !important;
+  box-shadow: none !important;
+}
+.chronical_table td a {
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 7px 10px !important;
+  position: relative !important;
+  right: 2px;
+}
+
+::ng-deep .cronic_list_page tbody tr td:nth-child(1) {
+  width: 60px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+::ng-deep .cronic_list_page tbody tr td:nth-child(2) {
+  width: 150px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+@media screen and (max-device-width: 1440px) {
+  .export {
+    margin: 0 10px;
+  }
+}
+
+::ng-deep i.p-sortable-column-icon.pi.pi-fw.pi-sort-alt {
+  margin-top: -8px;
+  // margin-left: -5px;
+}
+::ng-deep .pi-sort-alt:before {
+  font-size: 8px;
+  content: "\e99e";
+}
+::ng-deep .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: #1d4ed8;
+  font-size: 10px;
+}
+::ng-deep .p-datatable .p-sortable-column:focus {
+  box-shadow: none;
+  outline: 0 none;
+}
+
+::ng-deep .p-button-cancel {
+  background: #3ab287;
+  width: 7vw !important;
+  height: 5vh !important;
+  border-radius: 15px;
+  border-color: #3ab287 !important;
+  font-family: "Poppins-SemiBold" !important;
+}
+::ng-deep .p-button-cancel:hover{
+  background: #18a573 !important;
+}
+::ng-deep .p-button-confirm {
+  background:   #F78080;
+  width: 7vw !important;
+  height: 5vh !important;
+  border-radius: 15px;
+  border-color: #F78080 !important;
+  font-family: "Poppins-SemiBold" !important;
+}
+::ng-deep .p-button-confirm:hover{
+  background:   #f75a5a !important;
+}
+::ng-deep .p-button:focus{
+  box-shadow:none !important;
+}
+::ng-deep .confirm-dialog{
+  font-family: "Poppins-SemiBold" !important;
+}
+.closePopup{
+  background: none;
+    border: none;
+    font-size: 25px;
+    margin-left: 14px;
+}

@@ -1,0 +1,54 @@
+.duration_text p {
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #454545;
+  margin: 0 5px;
+}
+.duration_text p span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #ff55be;
+  margin-right: 5px;
+}
+.duration_text p:nth-child(2) span {
+  background-color: #55d6ff;
+}
+.duration_text p:nth-child(3) span {
+  background-color: #5f5bfe;
+}
+.duration_stats {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.duration_text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.duration_text select {
+  width: auto;
+  border: none;
+  background-color: #dee7f0;
+  color: #4b7ead;
+  font-size: 15px;
+  font-weight: 600;
+  background-image: url("../../../../assets/images/icons/short_down2.svg");
+}
+.heading {
+  font-size: 24px;
+  color: #5f5bfe;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+@media screen and (max-device-width: 1440px) {
+  // .heading {
+  //   font-size: 25px;
+  // }
+}

@@ -1,0 +1,569 @@
+.content-wrapper {
+  border-radius: 10px;
+  padding: 13px;
+}
+
+.tak_box .card {
+  height: 90px !important;
+  border-radius: 20px;
+  border: none;
+}
+
+.tak_box .media img {
+  width: 40px;
+  margin-top: 7px;
+}
+
+.media p {
+  // margin-bottom: 4px;
+  // font-size: 14px;
+  // line-height: 16px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patients_status {
+  border-radius: 20px;
+  padding: 17px;
+  margin: 15px 0;
+  background-color: #fff;
+}
+
+.heading {
+  font-size: 25px;
+  color: #5f5bfe;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.patient_list {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.patient_list span {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 100px;
+  border: 3px solid #5fb1df;
+  margin-right: 7px;
+}
+
+.tak_box {
+  padding: 0 5px;
+}
+
+.tak_box .col-md-3 {
+  padding: 0 7px;
+}
+
+.tak_box .card-body {
+  padding: 21px 13px;
+}
+
+.duration_stats {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.duration_text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.duration_text select {
+  width: auto;
+  border: none;
+  background-color: #dee7f0;
+  color: #4b7ead;
+  font-size: 15px;
+  font-weight: 600;
+  background-image: url("../../../../../assets/images/icons/short_down2.svg");
+  cursor: pointer;
+}
+
+.task_table {
+  background-color: #fff;
+  padding: 30px 8px 9px;
+  border-radius: 20px;
+}
+
+.edite_td a {
+  color: #4076a9;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.nav-pills .nav-link {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #454545;
+  border-radius: 0;
+  padding-left: 0;
+  margin-right: 15px;
+  position: relative;
+  top: 2px;
+  padding-right: 0px;
+  margin-right: 20px !important;
+  font-family: "Poppins-bold" !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: transparent;
+  color: #5f5bfe;
+  border-bottom: 2px solid #5f5bfe;
+  border-radius: 0;
+}
+
+.task_table ul {
+  margin: 0 15px;
+}
+
+.nav-item {
+  border-bottom: 2px solid rgba(199, 199, 199, 0.51);
+}
+
+.task_table tr {
+  padding: 0 15px;
+}
+
+.diseases {
+  display: flex;
+  align-items: center;
+}
+
+.key_status p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #454545;
+  margin-bottom: 15px;
+  min-width: 30%;
+  float: left;
+  max-width: 50%;
+}
+
+.key_status span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  margin-right: 5px;
+  border: 2px solid #1bd0dc;
+  top: 3px;
+  position: relative;
+  background-color: transparent;
+}
+
+.key_status p:nth-child(2) span {
+  border: 2px solid #dc831b;
+}
+
+.key_status p:nth-child(3) span {
+  border: 2px solid #2e6382;
+}
+
+.key_status p:nth-child(4) span {
+  // background-color: #2e6382;
+  border: 2px solid #5eb1df;
+}
+
+.key_status p:nth-child(5) span {
+  // background-color: #dc831b;
+  border: 2px solid #dc831b;
+}
+
+.key_status p:nth-child(6) span {
+  background-color: #1a6507;
+}
+
+.key_status p:nth-child(7) span {
+  background-color: #501a94;
+}
+
+.key_status p:nth-child(8) span {
+  background-color: #1bdc68;
+}
+
+.key_status p:nth-child(9) span {
+  background-color: #c11bdc;
+}
+
+.key_status p:nth-child(10) span {
+  background-color: #df5e5e;
+}
+
+.key_status p:nth-child(11) span {
+  background-color: #5f5966;
+}
+
+.key_status p:nth-child(12) span {
+  background-color: #5eb1df;
+}
+
+.client_box {
+  display: flex;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+.client_box button {
+  height: 34px;
+  background: rgba(58, 114, 166, 0.17);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  float: right;
+  color: #3a72a6;
+}
+
+.go_to_page {
+  text-align: right;
+  padding-right: 65px;
+}
+
+.go_to_page a {
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration-line: underline;
+  color: #797979;
+}
+
+.duration_text p {
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #454545;
+  margin: 0 5px;
+}
+
+.duration_text p span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #ff55be;
+  margin-right: 5px;
+}
+
+.duration_text p:nth-child(2) span {
+  background-color: #55d6ff;
+}
+
+.duration_text p:nth-child(3) span {
+  background-color: #5f5bfe;
+}
+
+.unassJobsList {
+  padding-top: 10px;
+
+  @media (max-width: 767px) {
+    overflow-x: auto;
+  }
+
+  .secondHeader {
+    th {
+      background-color: transparent !important;
+      border: none !important;
+      font-weight: 600;
+      font-size: 14px;
+
+      @media (max-width: 767px) {
+        font-size: 13px;
+      }
+    }
+  }
+
+  td {
+    border: none !important;
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      background-color: transparent;
+    }
+
+    a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+  }
+}
+
+.table-responsive th {
+  width: 15%;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px !important;
+  line-height: 160.5%;
+  color: #5e5e5e;
+  border: none;
+}
+
+.table-responsive td {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  color: #797979;
+  text-transform: capitalize;
+  vertical-align: middle;
+  border: none;
+
+  .pointer {
+    color: #3f8ac3;
+  }
+}
+
+.table-responsive td .edit_btn {
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  background: #59adeb;
+  border: 1px solid #59adeb;
+  border-radius: 8px;
+  padding: 5px 12px;
+}
+
+.table-responsive td .delete_btn {
+  color: #fff;
+  background: #f78080;
+  border: 1px solid #f78080;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
+.search_select {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  padding-right: 30px;
+}
+
+.search_bar {
+  position: relative;
+}
+
+.search_bar .btn {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+.search_select .search_bar input {
+  width: 225px;
+  height: 46px;
+  background: #ffffff;
+  border: 2.5px solid rgba(197, 210, 255, 0.19);
+  border-radius: 500px;
+}
+
+.search_select select {
+  width: 115px;
+  height: 34px;
+  background-color: rgba(58, 114, 166, 0.17);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #3a72a6;
+  margin-right: 15px;
+  position: relative;
+  top: 5px;
+  background-image: url("../../../../../assets/images/icons/short_down2.svg");
+}
+
+.task_table .table-responsive {
+  height: 460px;
+}
+.search_bar input:hover {
+  padding-right: 42px;
+  font-size: 16px;
+}
+::ng-deep .p-datatable > .p-datatable-wrapper {
+  height: auto !important;
+  overflow: scroll !important;
+}
+.select_option select {
+  border: none;
+  line-height: 15px;
+}
+.select_drop .form-select {
+  border: none;
+  line-height: 20px;
+  top: -5px;
+  padding-left: 0;
+  font-size: 14px;
+  background-image: url("../../../../../assets/images/icons/short_down.svg");
+  background-repeat: no-repeat;
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.select_drop h3 {
+  position: relative;
+  margin-bottom: 0;
+  bottom: 12px;
+}
+@media screen and (max-device-width: 1390px) {
+  .key_status p {
+    min-width: 30%;
+    max-width: 70%;
+    margin-right: 10px;
+  }
+  .nav-pills .nav-link {
+    margin-right: 0;
+    font-size: 13px;
+  }
+  .task_table .nav-pills {
+    margin-right: 0px;
+  }
+  .patients_status {
+    border-radius: 20px;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #fff;
+  }
+  th {
+    font-size: 14px !important;
+  }
+}
+
+@media screen and (max-device-width: 1440px) {
+  .nav-pills .nav-link {
+    margin-right: 0;
+    font-size: 14px;
+    font-family: "Poppins-medium" !important;
+    margin-right: 10px !important;
+  }
+  .duration_text p {
+    font-size: 10px;
+  }
+
+  // .heading {
+  //   font-size: 16px;
+  // }
+  .duration_text p span {
+    width: 6px;
+    height: 6px;
+  }
+
+  .duration_text select,
+  .add_select_box select {
+    font-size: 12px;
+  }
+
+  app-line-chart {
+    position: absolute;
+    bottom: 15px;
+    width: 92%;
+  }
+
+  .search_select .search_bar input {
+    width: 170px;
+  }
+
+  .table-responsive th {
+    font-size: 15px !important;
+  }
+  .select_drop .form-select {
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+  .tak_box .col-md-3 {
+    padding: 0px 3px;
+  }
+
+  .tak_box .card-body {
+    padding: 21px 7px;
+  }
+
+  .media p {
+    font-size: 12px;
+  }
+  .media h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1299px) {
+  .tak_box .col-md-3 {
+    padding: 0px 3px;
+  }
+
+  .tak_box .card-body {
+    padding: 21px 7px;
+  }
+  .media p {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-device-width: 1280px) {
+  .client_box .search_bar input {
+    height: 40px;
+    top: 0px;
+  }
+
+  .duration_text select,
+  .add_select_box select {
+    padding-right: 8px;
+    background-image: none;
+  }
+
+  .key_status p {
+    min-width: 40%;
+    max-width: 100%;
+  }
+}
+.noDataText {
+  align-items: baseline;
+  justify-content: center;
+  padding: 10px 8px 20px;
+  background-color: #ffffff;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.p-dialog .p-dialog-header {
+  padding: 0.5rem !important;
+}
+.countMsg {
+  width: 191px;
+  height: 39px;
+  left: 389px;
+  top: 984px;
+  padding-top: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160.5%;
+  color: #6b6b6b;
+  // padding-right: 100px;
+}
+.countMsg1 {
+  ::ng-deep .p-component {
+    padding-right: 60px !important;
+  }
+}

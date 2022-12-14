@@ -1,0 +1,164 @@
+<div class="content-wrapper cronic_list_page">
+  <div class="row">
+    <div class="col-4">
+      <h1 class="listChornicalDiseas">Chronic Condition List</h1>
+    </div>
+    <div class="col-8">
+      <div class="cronic_list">
+        <button class="export" (click)="exportExcel()">
+          <img src="../../../../assets/images/icons/export.svg" alt="export" />
+          Export as Excel
+        </button>
+        <button type="button" class="btn add_hospital btn_head" data-bs-toggle="modal" data-bs-target="#addCronic"
+          (click)="openChronicInfoPopUp()">
+          <img src="../../../../assets/images/icons/btn1.svg" alt="Image" />&nbsp; Chronic Condition
+        </button>
+        <div class="search_bar">
+          <input pinputtext="" type="text" placeholder="Search" class="p-inputtext p-component p-element" #searchText />
+          <button class="btn">
+            <img src="../../../../assets/images/icons/search.png" alt="Image" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chronical_table">
+      <div class="profile_box table-responsive table_box">
+        <p-table #dt1 dataKey="id" [rows]="10" [value]="chronical_diseas" [showCurrentPageReport]="true"
+          styleClass="p-datatable-sm p-datatable-striped" [resizableColumns]="true" [(selection)]="selectedDisease"
+          (onLazyLoad)="customSort($event)" [lazy]="true">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>S.no</th>
+              <th pSortableColumn="disease_name">
+                Chronical Condition Name<p-sortIcon field="disease_name">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="id">
+                Condition ID <p-sortIcon field="id"> </p-sortIcon>
+              </th>
+              <th>Active Patients</th>
+              <th>Assigned Provider</th>
+              <th>Practice</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-chronical_diseas let-rowIndex="rowIndex">
+            <tr>
+              <td>{{((rowIndex + 1) + (Onpage *10))}}</td>
+              <td>
+                {{ chronical_diseas.disease_name }}
+              </td>
+              <td>{{ chronical_diseas.id }}</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>
+                <!-- <a [routerLink]="FULL_ROUTES.ADD_CHRONIC_DISEAS" class="edit_btn">View</a>
+                <button pButton pRipple label="Edit" data-bs-toggle="modal" data-bs-target="#addCronic"
+                  (click)="editChronicInfo(chronical_diseas)" class="edit_btn">
+                  <img src="../../../../assets/images/icons/edit_view.svg" alt="" />
+                </button> -->
+                <img src="../../../../assets/images/icons/eye.svg" [routerLink]="FULL_ROUTES.ADD_CHRONIC_DISEAS"
+                  title="View" />
+                <img src="../../../../assets/images/icons/edit_view.svg" data-bs-toggle="modal"
+                  data-bs-target="#addCronic" (click)="editChronicInfo(chronical_diseas)" class="ms-1" title="Edit" />
+                <img src="../../../../assets/images/icons/delete.svg" alt="" class="delete_btn ms-1"
+                  (click)="confirm(chronical_diseas.id)" />
+                <!-- <button pButton pRipple label="Delete" class="delete_btn ms-3"
+                  (click)="deleteChronic(chronical_diseas.id)">
+                  <img src="../../../../assets/images/icons/delete.svg" alt="" />
+                </button> -->
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="row">
+        <div class="col countMsg" [innerHTML]="showCountMsg"></div>
+        <div class="col countMsg1 mt-2">
+          <p-paginator [rows]="10" [pageLinkSize]="3" [totalRecords]="totalRecords" (onPageChange)="paginate($event)">
+          </p-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade addWidth" id="addCronic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <form [formGroup]="chronicForm" (ngSubmit)="validateChronicForm()">
+      <div class="modal-content">
+        <div class="add_goal_header">
+          <h5 class="modal-title">
+            {{
+            IsEditMedicationInfo == true
+            ? "Edit Chronic Condition"
+            : "Add Chronic Condition"
+            }}
+          </h5>
+          <button type="button" class="closePopup"  (click)="closePopUp()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Condition Name *</label>
+              <input type="text" placeholder=" " class="form-control" formControlName="disease_name" [class.is-invalid]="
+                  H['disease_name'].invalid &&
+                  (H['disease_name'].dirty || H['disease_name'].touched)
+                " />
+              <div *ngIf="
+                  H['disease_name'].invalid &&
+                  (H['disease_name'].dirty || H['disease_name'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="H['disease_name'].errors?.['required']">
+                  Condition Name is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <label class="form-label">Description *</label>
+              <textarea class="form-control" formControlName="description" [class.is-invalid]="
+                  H['description'].invalid &&
+                  (H['description'].dirty || H['description'].touched)
+                "></textarea>
+              <div *ngIf="
+                  H['description'].invalid &&
+                  (H['description'].dirty || H['description'].touched)
+                " class="invalid-feedback">
+                <div *ngIf="H['description'].errors?.['required']">
+                  Condition Description is required.
+                </div>
+              </div>
+            </div>
+            <div class="Addcondition">
+              <a type="button" data-bs-dismiss="modal">Go Back</a>
+              <button type="submit" class="btn add_goal" *ngIf="IsEditMedicationInfo == false">
+                Add Condition
+              </button>
+              <button *ngIf="IsEditMedicationInfo == true" type="button" class="btn add_goal"
+                (click)="UpdateChronicInfo()">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Confirmation dialog for delete chronic disease -->
+<p-confirmDialog
+  [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+  [style]="{ width: '35vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-cancel"
+  acceptButtonStyleClass="p-button-confirm"
+  styleClass="confirm-dialog">
+</p-confirmDialog>
+

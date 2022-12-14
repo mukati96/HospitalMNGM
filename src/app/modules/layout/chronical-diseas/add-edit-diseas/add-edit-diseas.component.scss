@@ -1,0 +1,123 @@
+.profile_right_box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+}
+.profile_right {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 25px;
+}
+.btn4 {
+  background-color: #59adeb;
+  height: 46px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 100px;
+}
+.hospital_profile {
+  margin: 20px 0;
+}
+.hospital_profile h1 {
+  font-weight: 600;
+  font-size: 28px;
+  text-transform: capitalize;
+  color: #5f5bfe;
+  margin-bottom: 0;
+}
+.profile_right h2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  color: #f95b60;
+  margin-bottom: 15px;
+}
+.tax_id {
+  display: flex;
+}
+.tax_id p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #848484;
+  margin-bottom: 10px;
+  min-width: 120px;
+}
+
+.tax_id span {
+  font-weight: 400;
+  font-size: 14px;
+  color: #454545;
+}
+.profile_right_box p {
+  font-weight: 400;
+  font-size: 14px;
+  color: #6d6d6d;
+  margin-bottom: 0;
+}
+.profile_right_box h3 {
+  font-weight: 600;
+  font-size: 28px;
+  color: #2e5871;
+  margin-bottom: 20px;
+}
+
+.profile_box {
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top: 24px;
+  padding: 30px 0;
+}
+.profile_box td {
+  font-weight: 400;
+  font-size: 13px;
+  color: #797979;
+  border: none;
+  line-height: 35px;
+}
+.profile_box th {
+  font-weight: 600;
+  font-size: 16px;
+  color: #5e5e5e;
+  line-height: 35px;
+}
+.profile_box h1 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 160.5%;
+  color: #5f5bfe;
+  border-bottom: 2px solid #5f5bfe;
+  min-width: 200px;
+  display: inline-block;
+  position: relative;
+  margin-left: 26px;
+  margin-bottom: 30px;
+}
+.profile_box .table-responsive {
+  height: 332px;
+}
+
+img[alt~="chart"] {
+  width: 54%;
+}
+
+// ::ng-deep .croni_condition tbody tr td:nth-child(1) {
+//   width: 60px !important;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   -webkit-line-clamp: 1;
+//   -webkit-box-orient: vertical;
+// }
+// ::ng-deep .croni_condition tbody tr td:nth-child(2) {
+//   width: 150px !important;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: inline-block;
+//   -webkit-line-clamp: 1;
+//   -webkit-box-orient: vertical;
+// }
+@media screen and (max-device-width: 1440px) {
+  img[alt~="chart"] {
+    width: 81%;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="table-responsive pb-3">
+  <table class="table table-striped task_table">
+    <thead>
+      <tr>
+        <th>S.no.</th>
+        <th>Date & Time</th>
+        <th>Time Spent</th>
+        <th>Call Agenda</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Call Details</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="logs && logs.length">
+      <tr *ngFor="let log of logs; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ log?.call_start_datetime | date : "MM-dd-yyyy, hh:mm:ss" }}</td>
+        <td>{{ log?.call_duration | optionalField }} min</td>
+        <td>{{ log?.agenda }}</td>
+        <td>{{ log?.call_type }}</td>
+        <td>{{ log?.call_status }}</td>
+        <td class="edite_td pointer">
+          <a (click)="openPatientSummaryPage.emit(true)"> Patient Summary </a>
+          <!-- <img src="../../../../assets/images/icons/call1.svg" alt="" /> -->
+          <img (click)="initiateCallWithAgenda(log?.agenda)" src="../../../../assets/images/icons/video.svg" alt="video" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
